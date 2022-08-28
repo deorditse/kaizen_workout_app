@@ -2,8 +2,12 @@ import 'package:model/model.dart';
 import '../api/storage_test.dart';
 
 class ImplementationSportsWorkoutDataServices {
-  Future<List<SportsWorkoutModel>> getDataSportsWorkout() async =>
-      await DataListRepository().listSportsWorkout();
+//получаем данные пользователя
+  Future<User> getDataUser() async => await DataListRepository().userData();
 
-  Future<User> getUserData() async => await DataListRepository().userData();
+  //нужно будет выводить по ключам, которые получил от юзера
+  Future<SportsWorkoutModel?> getDataSportWorkout(
+      {required int idWorkout}) async {
+    return await DataListRepository().getDataSportWorkout(idWorkout: idWorkout);
+  }
 }

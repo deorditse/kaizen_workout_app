@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
-import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/admin_horizontal_list_sports_workout/admin_scrollListSportsWorkoutModel.dart';
+import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/admin_horizontal_list_sports_workout/admin_horizontal_list_sports_workout.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/app_bar.dart';
-import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/horizontal_list_sports_workout/scrollListSportsWorkoutModel.dart';
+import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/horizontal_list_sports_workout/horizontal_list_sports_workout.dart';
+import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/join_by_key_widget.dart';
 import 'package:kaizen/packages/ui_layout/style_app/style_text_field.dart';
 
 class BodyHomePage extends StatefulWidget {
@@ -14,8 +15,6 @@ class BodyHomePage extends StatefulWidget {
 }
 
 class _BodyHomePageState extends State<BodyHomePage> {
-  TextEditingController _controller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -31,85 +30,7 @@ class _BodyHomePageState extends State<BodyHomePage> {
                   height: controller.dataSportsWorkoutList.isNotEmpty ? 5 : 30,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                child: Card(
-                  // shadowColor: Colors.,
-                  elevation: 15,
-                  color: Theme.of(context).cardColor,
-
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(22),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20.0),
-                    child: Column(
-                      children: [
-                        Center(
-                          child: Column(
-                            children: [
-                              Text(
-                                'Присоединяйся по ключу',
-                                style: Theme.of(context).textTheme.headline1,
-                              ),
-                              SizedBox(
-                                height: 3,
-                              ),
-                              Text(
-                                'Тренируйся с друзьями или один',
-                                style: Theme.of(context).textTheme.headline3,
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                          child: Column(
-                            children: [
-                              Stack(
-                                children: [
-                                  Align(
-                                    child: TextField(
-                                      controller: _controller,
-                                      onSubmitted: (value) {
-                                        setState(() {
-                                          _controller.text = value;
-                                          print(_controller.text);
-                                        });
-                                      },
-                                      decoration: myStyleTextField(
-                                        context,
-                                        labelText: 'Введите ключ',
-                                        hintText: '123456',
-                                        // helperText: 'Поле для поиска заметок',
-                                      ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.centerRight,
-                                    child: IconButton(
-                                      onPressed: () {
-                                        print('hello сюда закинуть событие');
-                                      },
-                                      icon: Icon(
-                                        Icons.search,
-                                        color: Theme.of(context).primaryColor,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              JoinByKey(),
               Center(
                 child: TextButton(
                   child: Text(
@@ -144,7 +65,11 @@ class _BodyHomePageState extends State<BodyHomePage> {
                   ],
                 ),
               ),
-              ScrollListSportsWorkoutModel(),
+
+              //getBuilder чтобы обновлять данные по мере их получения
+              GetBuilder<ImplementAppStateGetXController>(
+                builder: (_) => const HorizontalListSportsWorkout(),
+              ),
               const SizedBox(
                 height: 30,
               ),
@@ -170,7 +95,7 @@ class _BodyHomePageState extends State<BodyHomePage> {
                   ],
                 ),
               ),
-              AdminScrollListSportsWorkoutModel(),
+              AdminHorizontalListSportsWorkout(),
               SizedBox(
                 height: 100,
               ),

@@ -9,7 +9,7 @@ adminPopupWithUsersInWorkout({
   required Set<User> usersInWorkout,
 }) {
   return Get.defaultDialog(
-  backgroundColor: myDefaultDialogBackground(context),
+    backgroundColor: myDefaultDialogBackground(context),
     titlePadding: EdgeInsets.only(
       top: 20,
     ),

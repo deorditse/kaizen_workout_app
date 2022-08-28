@@ -1,10 +1,7 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/admin_horizontal_list_sports_workout/admin_horizontal_list_sports_workout_model.dart';
-import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/admin_horizontal_list_sports_workout/admin_scrollListSportsWorkoutModel.dart';
-import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/horizontal_list_sports_workout/scrollListSportsWorkoutModel.dart';
+import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/admin_horizontal_list_sports_workout/admin_horizontal_list_sports_workout.dart';
+import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/horizontal_list_sports_workout/horizontal_list_sports_workout.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_profile_page/app_bar_profile.dart';
-import 'package:kaizen/packages/ui_layout/style_app/style_card.dart';
 
 class BodyProfilePage extends StatefulWidget {
   const BodyProfilePage({Key? key}) : super(key: key);
@@ -94,7 +91,7 @@ class _BodyProfilePageState extends State<BodyProfilePage> {
                   style: Theme.of(context).textTheme.headline1,
                 ),
               ),
-              AdminScrollListSportsWorkoutModel(),
+              AdminHorizontalListSportsWorkout(),
               SizedBox(
                 height: 20,
               ),
@@ -106,7 +103,7 @@ class _BodyProfilePageState extends State<BodyProfilePage> {
                   style: Theme.of(context).textTheme.headline1,
                 ),
               ),
-              ScrollListSportsWorkoutModel(),
+              HorizontalListSportsWorkout(),
               SizedBox(
                 height: 120,
               ),

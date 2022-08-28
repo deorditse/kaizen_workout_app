@@ -6,9 +6,11 @@ part of 'sports_workout_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SportsWorkoutModel _$SportsWorkoutModelFromJson(Map<String, dynamic> json) =>
-    SportsWorkoutModel(
+_$_SportsWorkoutModel _$$_SportsWorkoutModelFromJson(
+        Map<String, dynamic> json) =>
+    _$_SportsWorkoutModel(
       idWorkout: json['idWorkout'] as int,
+      adminWorkout: User.fromJson(json['adminWorkout'] as Map<String, dynamic>),
       nameWorkout: json['nameWorkout'] as String,
       usersInWorkout: (json['usersInWorkout'] as List<dynamic>?)
           ?.map((e) => User.fromJson(e as Map<String, dynamic>))
@@ -19,23 +21,23 @@ SportsWorkoutModel _$SportsWorkoutModelFromJson(Map<String, dynamic> json) =>
       firstWorkoutDay: json['firstWorkoutDay'] == null
           ? null
           : DateTime.parse(json['firstWorkoutDay'] as String),
+      lastWorkoutDay: json['lastWorkoutDay'] == null
+          ? null
+          : DateTime.parse(json['lastWorkoutDay'] as String),
       topUsers: (json['topUsers'] as List<dynamic>?)
           ?.map((e) => User.fromJson(e as Map<String, dynamic>))
           .toSet(),
-      adminWorkout: User.fromJson(json['adminWorkout'] as Map<String, dynamic>),
-    )..lastWorkoutDay = json['lastWorkoutDay'] == null
-        ? null
-        : DateTime.parse(json['lastWorkoutDay'] as String);
+    );
 
-Map<String, dynamic> _$SportsWorkoutModelToJson(SportsWorkoutModel instance) =>
+Map<String, dynamic> _$$_SportsWorkoutModelToJson(
+        _$_SportsWorkoutModel instance) =>
     <String, dynamic>{
       'idWorkout': instance.idWorkout,
-      'adminWorkout': instance.adminWorkout.toJson(),
+      'adminWorkout': instance.adminWorkout,
       'nameWorkout': instance.nameWorkout,
-      'usersInWorkout':
-          instance.usersInWorkout?.map((e) => e.toJson()).toList(),
+      'usersInWorkout': instance.usersInWorkout?.toList(),
       'descriptionWorkoutList': instance.descriptionWorkoutList,
       'firstWorkoutDay': instance.firstWorkoutDay?.toIso8601String(),
       'lastWorkoutDay': instance.lastWorkoutDay?.toIso8601String(),
-      'topUsers': instance.topUsers?.map((e) => e.toJson()).toList(),
+      'topUsers': instance.topUsers?.toList(),
     };

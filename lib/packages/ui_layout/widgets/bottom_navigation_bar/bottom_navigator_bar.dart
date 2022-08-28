@@ -34,7 +34,6 @@ class MyBottomNavigatorBar extends StatelessWidget {
             BottomNavigationBarItem(icon: item.icon, label: item.title)
         ],
         onTap: (index) {
-          // tabController.index = index;
           controllerSetting.currentTabIndex.value = index;
         },
         currentIndex: controllerSetting.currentTabIndex.value,

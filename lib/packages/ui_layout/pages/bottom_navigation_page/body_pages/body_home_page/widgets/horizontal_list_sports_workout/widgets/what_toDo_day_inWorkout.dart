@@ -7,26 +7,9 @@ import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_page
 import 'package:kaizen/packages/ui_layout/style_app/style_card.dart';
 import 'package:kaizen/packages/ui_layout/style_app/style_text_field.dart';
 
-class WhatToDoDayinWorkout extends StatelessWidget {
-  WhatToDoDayinWorkout({Key? key, this.descriptionWorkoutList, this.day})
-      : super(key: key);
-
-  String? descriptionWorkoutList;
-  int? day;
-
-  @override
-  Widget build(BuildContext context) {
-    return CardDailyWorkoutSheet(
-      descriptionWorkoutList: descriptionWorkoutList,
-      day: day,
-    );
-  }
-}
-
 class CardDailyWorkoutSheet extends StatefulWidget {
-  CardDailyWorkoutSheet({Key? key, this.descriptionWorkoutList, this.day})
-      : super(key: key);
-  String? descriptionWorkoutList;
+  CardDailyWorkoutSheet({Key? key, this.day, this.index}) : super(key: key);
+  int? index;
   int? day;
 
   @override
@@ -41,7 +24,7 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
     return Padding(
       padding: const EdgeInsets.only(left: 8.0, right: 8),
       child: GestureDetector(
-        onTap: (){
+        onTap: () {
           controllerSetting.currentTabIndex.value = 1;
         },
         child: Column(
@@ -77,15 +60,20 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
                     child: SingleChildScrollView(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: Text(
-                          "Отжаться 50 раз",
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 14,
-                            //fontWeight: FontWeight.bold,
+                        child: GetBuilder<ImplementAppStateGetXController>(
+                          builder: (controllerApp) => Text(
+                            controllerApp.dataSportsWorkoutList
+                                .elementAt(widget.index!)
+                                .descriptionWorkoutList[widget.day!],
+                            // "Отжаться 50 раз",
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontSize: 14,
+                              //fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.left,
+                            overflow: TextOverflow.clip,
                           ),
-                          textAlign: TextAlign.left,
-                          overflow: TextOverflow.clip,
                         ),
                       ),
                     ),

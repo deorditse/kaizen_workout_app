@@ -11,33 +11,43 @@ class ImplementAppStateGetXController extends GetxController {
       ImplementationSportsWorkoutDataServices();
 
   ///
-  List<SportsWorkoutModel> dataSportsWorkoutList = <SportsWorkoutModel>[];
-  User? myUser;
-
-  // @override
-  // void onReady() {
-  //   super.onReady();
-  //   print('onReady_________________________________');
-  // }
+  List<SportsWorkoutModel> dataSportsWorkoutList = [];
+  List<SportsWorkoutModel> dataSportsWorkoutListWhenIAdmin = [];
+  User? myUser; //включает в себя лист с ключами тренировок
 
   @override
   void onInit() {
     super.onInit();
-    getDataSportsWorkoutList(); //сразу инициируем лист данных
+    getMyUser().whenComplete(() {
+      getDataSportWorkout();
+    });
+    //сразу инициируем лист данных
 
     print(
         'onInit_________________________________ImplementAppStateGetXController');
   }
 
-  getDataSportsWorkoutList() {
-    _servicesDataLayout.getDataSportsWorkout().then((value) {
-      dataSportsWorkoutList = value;
-      update();
-    });
+  Future getMyUser() async {
+    //получаю данные пользователя
+    myUser = await _servicesDataLayout.getDataUser();
+    update();
+  }
 
-    _servicesDataLayout.getUserData().then((value) {
-      myUser = value;
-      update();
-    });
+  getDataSportWorkout() async {
+    // достаю каждую тренировку по ее ключу из базы
+    if (myUser != null &&
+        myUser!.listWorkoutKeys != null &&
+        myUser!.listWorkoutKeys!.isNotEmpty) {
+      for (var keyWorkout in myUser!.listWorkoutKeys!) {
+        SportsWorkoutModel? sportWorkout = await _servicesDataLayout
+            .getDataSportWorkout(idWorkout: int.parse(keyWorkout));
+
+        if (sportWorkout != null) {
+          dataSportsWorkoutList.add(sportWorkout);
+          update();
+          print(dataSportsWorkoutList.length);
+        }
+      }
+    }
   }
 }
