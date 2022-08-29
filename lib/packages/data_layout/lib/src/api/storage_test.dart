@@ -15,11 +15,11 @@ class DataListRepository {
         family: 'family',
         numberPhone: 'numberPhone',
         listWorkoutKeys: {
-          '40001',
-          '40002',
-          '40003',
+          '4001',
+          '4002',
+          '4003',
         },
-        listWorkoutKeysWheIAdmin: {'40003'},
+        listWorkoutKeysWheIAdmin: {'4003'},
         //для примера
       ),
     );
