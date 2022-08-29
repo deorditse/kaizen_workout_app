@@ -7,7 +7,7 @@ part of 'user_model.dart';
 // **************************************************************************
 
 _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
-      idUser: json['idUser'] as int,
+      idUser: json['idUser'] as String,
       name: json['name'] as String?,
       email: json['email'] as String?,
       age: json['age'] as int?,
@@ -22,7 +22,7 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
               ?.map((e) => e as String)
               .toSet(),
       myFriends: (json['myFriends'] as List<dynamic>?)
-          ?.map((e) => User.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => e as String)
           .toSet(),
     );
 

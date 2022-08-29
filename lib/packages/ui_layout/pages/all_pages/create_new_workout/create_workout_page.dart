@@ -36,17 +36,14 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
 
     //создадим новую программу тренировок
     sportsWorkoutModel = SportsWorkoutModel(
-      idWorkout: 0,
+      idWorkout: '',
       nameWorkout: '',
       firstWorkoutDay: null,
-      adminWorkout: User(
-        idUser: 0,
+      adminWorkout: NameAndPhotoUser(
+        idUser: '',
         name: 'name',
-        email: 'email',
         photoPath: 'photoPath',
-        age: 1,
         family: 'family',
-        numberPhone: 'numberPhone',
       ),
       descriptionWorkoutList: [],
       topUsers: null,

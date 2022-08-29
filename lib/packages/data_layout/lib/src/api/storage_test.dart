@@ -3,11 +3,11 @@ import 'dart:math';
 import 'package:model/model.dart';
 
 class DataListRepository {
-  Future<User> userData() async {
+  Future<User> userData({required String idUser}) async {
     //имитация задержки получения данных из базы
     return await Future.delayed(Duration(seconds: 2)).then(
       (_) => User(
-        idUser: Random().nextInt(4300),
+        idUser: idUser,
         name: 'Test name ',
         email: 'email',
         photoPath: 'photoPath',
@@ -40,51 +40,39 @@ class DataListRepository {
       (_) => List<SportsWorkoutModel>.generate(
         5,
         (index) => SportsWorkoutModel(
-          idWorkout: index + 1,
+          idWorkout: 'test 33PhNVsd2XI5vVq37A2l',
           nameWorkout: 'Отжимания каждый день $index',
-          usersInWorkout: <User>{
-            User(
-              idUser: index * index,
+          usersInWorkout: <NameAndPhotoUser>{
+            NameAndPhotoUser(
+              idUser: 'test gNe2AwjMJMVJ8OLvFu1T',
               name: 'user 1 name ${index + index * 3}',
-              email: 'email ${index * index}',
               photoPath: 'photoPath ${index * index}',
-              age: index * index + 20,
               family: 'family ${index + index * 3}',
-              numberPhone: 'numberPhone ${index * index}',
             ),
-            User(
-              idUser: index + 2 * index,
+            NameAndPhotoUser(
+              idUser: 'test mEFChkM5ME0WhJljfurm',
               name: 'user 2 name ${index * index}',
-              email: 'email ${index * index}',
               photoPath: 'photoPath ${index + index}',
-              age: index * index + 20,
               family: 'family ${index + index}',
-              numberPhone: 'numberPhone ${index * index}',
             ),
           },
           descriptionWorkoutList: [
             'chekWorkoutList $index, chekWorkoutList $index, chekWorkoutList $index, chekWorkoutList $index',
           ],
           firstWorkoutDay: DateTime.now(),
-          topUsers: <User>{
-            User(
-              idUser: index,
+          topUsers: <NameAndPhotoUser>{
+            NameAndPhotoUser(
+              idUser: 'test id',
               name: 'name $index',
-              email: 'email $index',
               photoPath: 'photoPath $index',
-              age: index + 20,
               family: 'family $index',
-              numberPhone: 'numberPhone $index',
             ),
           },
-          adminWorkout: User(
-            idUser: index,
+          adminWorkout: NameAndPhotoUser(
+            idUser: 'test id admin',
             name: 'adminWorkout  $index',
-            email: 'email $index',
             photoPath: 'photoPath $index',
-            age: index + 10,
             family: 'family $index',
-            numberPhone: 'numberPhone $index',
           ),
         ),
       ),

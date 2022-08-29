@@ -20,15 +20,15 @@ SportsWorkoutModel _$SportsWorkoutModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SportsWorkoutModel {
-  int get idWorkout => throw _privateConstructorUsedError;
-  User get adminWorkout => throw _privateConstructorUsedError;
+  String get idWorkout => throw _privateConstructorUsedError;
+  NameAndPhotoUser get adminWorkout => throw _privateConstructorUsedError;
   String get nameWorkout => throw _privateConstructorUsedError;
-  Set<User>? get usersInWorkout => throw _privateConstructorUsedError;
-  List<String> get descriptionWorkoutList =>
+  Set<NameAndPhotoUser>? get usersInWorkout =>
       throw _privateConstructorUsedError; //лист с программой на каждый день
+  List<String> get descriptionWorkoutList => throw _privateConstructorUsedError;
   DateTime? get firstWorkoutDay => throw _privateConstructorUsedError;
   DateTime? get lastWorkoutDay => throw _privateConstructorUsedError;
-  Set<User>? get topUsers => throw _privateConstructorUsedError;
+  Set<NameAndPhotoUser>? get topUsers => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,16 +42,14 @@ abstract class $SportsWorkoutModelCopyWith<$Res> {
           SportsWorkoutModel value, $Res Function(SportsWorkoutModel) then) =
       _$SportsWorkoutModelCopyWithImpl<$Res>;
   $Res call(
-      {int idWorkout,
-      User adminWorkout,
+      {String idWorkout,
+      NameAndPhotoUser adminWorkout,
       String nameWorkout,
-      Set<User>? usersInWorkout,
+      Set<NameAndPhotoUser>? usersInWorkout,
       List<String> descriptionWorkoutList,
       DateTime? firstWorkoutDay,
       DateTime? lastWorkoutDay,
-      Set<User>? topUsers});
-
-  $UserCopyWith<$Res> get adminWorkout;
+      Set<NameAndPhotoUser>? topUsers});
 }
 
 /// @nodoc
@@ -78,11 +76,11 @@ class _$SportsWorkoutModelCopyWithImpl<$Res>
       idWorkout: idWorkout == freezed
           ? _value.idWorkout
           : idWorkout // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       adminWorkout: adminWorkout == freezed
           ? _value.adminWorkout
           : adminWorkout // ignore: cast_nullable_to_non_nullable
-              as User,
+              as NameAndPhotoUser,
       nameWorkout: nameWorkout == freezed
           ? _value.nameWorkout
           : nameWorkout // ignore: cast_nullable_to_non_nullable
@@ -90,7 +88,7 @@ class _$SportsWorkoutModelCopyWithImpl<$Res>
       usersInWorkout: usersInWorkout == freezed
           ? _value.usersInWorkout
           : usersInWorkout // ignore: cast_nullable_to_non_nullable
-              as Set<User>?,
+              as Set<NameAndPhotoUser>?,
       descriptionWorkoutList: descriptionWorkoutList == freezed
           ? _value.descriptionWorkoutList
           : descriptionWorkoutList // ignore: cast_nullable_to_non_nullable
@@ -106,15 +104,8 @@ class _$SportsWorkoutModelCopyWithImpl<$Res>
       topUsers: topUsers == freezed
           ? _value.topUsers
           : topUsers // ignore: cast_nullable_to_non_nullable
-              as Set<User>?,
+              as Set<NameAndPhotoUser>?,
     ));
-  }
-
-  @override
-  $UserCopyWith<$Res> get adminWorkout {
-    return $UserCopyWith<$Res>(_value.adminWorkout, (value) {
-      return _then(_value.copyWith(adminWorkout: value));
-    });
   }
 }
 
@@ -126,17 +117,14 @@ abstract class _$$_SportsWorkoutModelCopyWith<$Res>
       __$$_SportsWorkoutModelCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int idWorkout,
-      User adminWorkout,
+      {String idWorkout,
+      NameAndPhotoUser adminWorkout,
       String nameWorkout,
-      Set<User>? usersInWorkout,
+      Set<NameAndPhotoUser>? usersInWorkout,
       List<String> descriptionWorkoutList,
       DateTime? firstWorkoutDay,
       DateTime? lastWorkoutDay,
-      Set<User>? topUsers});
-
-  @override
-  $UserCopyWith<$Res> get adminWorkout;
+      Set<NameAndPhotoUser>? topUsers});
 }
 
 /// @nodoc
@@ -165,11 +153,11 @@ class __$$_SportsWorkoutModelCopyWithImpl<$Res>
       idWorkout: idWorkout == freezed
           ? _value.idWorkout
           : idWorkout // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       adminWorkout: adminWorkout == freezed
           ? _value.adminWorkout
           : adminWorkout // ignore: cast_nullable_to_non_nullable
-              as User,
+              as NameAndPhotoUser,
       nameWorkout: nameWorkout == freezed
           ? _value.nameWorkout
           : nameWorkout // ignore: cast_nullable_to_non_nullable
@@ -177,7 +165,7 @@ class __$$_SportsWorkoutModelCopyWithImpl<$Res>
       usersInWorkout: usersInWorkout == freezed
           ? _value._usersInWorkout
           : usersInWorkout // ignore: cast_nullable_to_non_nullable
-              as Set<User>?,
+              as Set<NameAndPhotoUser>?,
       descriptionWorkoutList: descriptionWorkoutList == freezed
           ? _value._descriptionWorkoutList
           : descriptionWorkoutList // ignore: cast_nullable_to_non_nullable
@@ -193,7 +181,7 @@ class __$$_SportsWorkoutModelCopyWithImpl<$Res>
       topUsers: topUsers == freezed
           ? _value._topUsers
           : topUsers // ignore: cast_nullable_to_non_nullable
-              as Set<User>?,
+              as Set<NameAndPhotoUser>?,
     ));
   }
 }
@@ -205,11 +193,11 @@ class _$_SportsWorkoutModel implements _SportsWorkoutModel {
       {required this.idWorkout,
       required this.adminWorkout,
       required this.nameWorkout,
-      final Set<User>? usersInWorkout,
+      final Set<NameAndPhotoUser>? usersInWorkout,
       required final List<String> descriptionWorkoutList,
       required this.firstWorkoutDay,
       this.lastWorkoutDay,
-      final Set<User>? topUsers})
+      final Set<NameAndPhotoUser>? topUsers})
       : _usersInWorkout = usersInWorkout,
         _descriptionWorkoutList = descriptionWorkoutList,
         _topUsers = topUsers;
@@ -218,35 +206,36 @@ class _$_SportsWorkoutModel implements _SportsWorkoutModel {
       _$$_SportsWorkoutModelFromJson(json);
 
   @override
-  final int idWorkout;
+  final String idWorkout;
   @override
-  final User adminWorkout;
+  final NameAndPhotoUser adminWorkout;
   @override
   final String nameWorkout;
-  final Set<User>? _usersInWorkout;
+  final Set<NameAndPhotoUser>? _usersInWorkout;
   @override
-  Set<User>? get usersInWorkout {
+  Set<NameAndPhotoUser>? get usersInWorkout {
     final value = _usersInWorkout;
     if (value == null) return null;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableSetView(value);
   }
 
+//лист с программой на каждый день
   final List<String> _descriptionWorkoutList;
+//лист с программой на каждый день
   @override
   List<String> get descriptionWorkoutList {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_descriptionWorkoutList);
   }
 
-//лист с программой на каждый день
   @override
   final DateTime? firstWorkoutDay;
   @override
   final DateTime? lastWorkoutDay;
-  final Set<User>? _topUsers;
+  final Set<NameAndPhotoUser>? _topUsers;
   @override
-  Set<User>? get topUsers {
+  Set<NameAndPhotoUser>? get topUsers {
     final value = _topUsers;
     if (value == null) return null;
     // ignore: implicit_dynamic_type
@@ -308,34 +297,34 @@ class _$_SportsWorkoutModel implements _SportsWorkoutModel {
 
 abstract class _SportsWorkoutModel implements SportsWorkoutModel {
   factory _SportsWorkoutModel(
-      {required final int idWorkout,
-      required final User adminWorkout,
+      {required final String idWorkout,
+      required final NameAndPhotoUser adminWorkout,
       required final String nameWorkout,
-      final Set<User>? usersInWorkout,
+      final Set<NameAndPhotoUser>? usersInWorkout,
       required final List<String> descriptionWorkoutList,
       required final DateTime? firstWorkoutDay,
       final DateTime? lastWorkoutDay,
-      final Set<User>? topUsers}) = _$_SportsWorkoutModel;
+      final Set<NameAndPhotoUser>? topUsers}) = _$_SportsWorkoutModel;
 
   factory _SportsWorkoutModel.fromJson(Map<String, dynamic> json) =
       _$_SportsWorkoutModel.fromJson;
 
   @override
-  int get idWorkout;
+  String get idWorkout;
   @override
-  User get adminWorkout;
+  NameAndPhotoUser get adminWorkout;
   @override
   String get nameWorkout;
   @override
-  Set<User>? get usersInWorkout;
-  @override
-  List<String> get descriptionWorkoutList;
+  Set<NameAndPhotoUser>? get usersInWorkout;
   @override //лист с программой на каждый день
+  List<String> get descriptionWorkoutList;
+  @override
   DateTime? get firstWorkoutDay;
   @override
   DateTime? get lastWorkoutDay;
   @override
-  Set<User>? get topUsers;
+  Set<NameAndPhotoUser>? get topUsers;
   @override
   @JsonKey(ignore: true)
   _$$_SportsWorkoutModelCopyWith<_$_SportsWorkoutModel> get copyWith =>

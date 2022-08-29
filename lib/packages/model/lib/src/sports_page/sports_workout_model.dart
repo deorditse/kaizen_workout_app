@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:model/src/user/name_and_photo_user/name_and_photo_user.dart';
 import '../../model.dart';
 
 part 'sports_workout_model.g.dart';
@@ -13,15 +14,15 @@ part 'sports_workout_model.freezed.dart';
 @freezed
 class SportsWorkoutModel with _$SportsWorkoutModel {
   factory SportsWorkoutModel({
-    required int idWorkout,
-    required User adminWorkout,
+    required String idWorkout,
+    required NameAndPhotoUser adminWorkout,
     required String nameWorkout,
-    Set<User>? usersInWorkout,
-    required List<String>
-        descriptionWorkoutList, //лист с программой на каждый день
+    Set<NameAndPhotoUser>? usersInWorkout,
+    //лист с программой на каждый день
+    required List<String> descriptionWorkoutList,
     required DateTime? firstWorkoutDay,
     DateTime? lastWorkoutDay,
-    Set<User>? topUsers,
+    Set<NameAndPhotoUser>? topUsers,
   }) = _SportsWorkoutModel;
 
   factory SportsWorkoutModel.fromJson(Map<String, dynamic> json) =>

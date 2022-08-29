@@ -14,7 +14,7 @@ part 'user_model.freezed.dart';
 @freezed
 class User with _$User {
   const factory User({
-    required int idUser,
+    required String idUser,
     required String? name,
     String? email,
     int? age,
@@ -23,7 +23,7 @@ class User with _$User {
     String? numberPhone,
     Set<String>? listWorkoutKeys,
     Set<String>? listWorkoutKeysWheIAdmin,
-    Set<User>? myFriends,
+    Set<String>? myFriends, //храним лист с id юзеров
     // required this.listProgress,
   }) = _User;
 

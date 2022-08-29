@@ -9,11 +9,12 @@ part of 'sports_workout_model.dart';
 _$_SportsWorkoutModel _$$_SportsWorkoutModelFromJson(
         Map<String, dynamic> json) =>
     _$_SportsWorkoutModel(
-      idWorkout: json['idWorkout'] as int,
-      adminWorkout: User.fromJson(json['adminWorkout'] as Map<String, dynamic>),
+      idWorkout: json['idWorkout'] as String,
+      adminWorkout: NameAndPhotoUser.fromJson(
+          json['adminWorkout'] as Map<String, dynamic>),
       nameWorkout: json['nameWorkout'] as String,
       usersInWorkout: (json['usersInWorkout'] as List<dynamic>?)
-          ?.map((e) => User.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => NameAndPhotoUser.fromJson(e as Map<String, dynamic>))
           .toSet(),
       descriptionWorkoutList: (json['descriptionWorkoutList'] as List<dynamic>)
           .map((e) => e as String)
@@ -25,7 +26,7 @@ _$_SportsWorkoutModel _$$_SportsWorkoutModelFromJson(
           ? null
           : DateTime.parse(json['lastWorkoutDay'] as String),
       topUsers: (json['topUsers'] as List<dynamic>?)
-          ?.map((e) => User.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => NameAndPhotoUser.fromJson(e as Map<String, dynamic>))
           .toSet(),
     );
 

@@ -20,29 +20,19 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
-  int get idUser => throw _privateConstructorUsedError;
-
+  String get idUser => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-
   String? get email => throw _privateConstructorUsedError;
-
   int? get age => throw _privateConstructorUsedError;
-
   String? get photoPath => throw _privateConstructorUsedError;
-
   String? get family => throw _privateConstructorUsedError;
-
   String? get numberPhone => throw _privateConstructorUsedError;
-
   Set<String>? get listWorkoutKeys => throw _privateConstructorUsedError;
-
   Set<String>? get listWorkoutKeysWheIAdmin =>
       throw _privateConstructorUsedError;
-
-  Set<User>? get myFriends => throw _privateConstructorUsedError;
+  Set<String>? get myFriends => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
 }
@@ -51,9 +41,8 @@ mixin _$User {
 abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
-
   $Res call(
-      {int idUser,
+      {String idUser,
       String? name,
       String? email,
       int? age,
@@ -62,7 +51,7 @@ abstract class $UserCopyWith<$Res> {
       String? numberPhone,
       Set<String>? listWorkoutKeys,
       Set<String>? listWorkoutKeysWheIAdmin,
-      Set<User>? myFriends});
+      Set<String>? myFriends});
 }
 
 /// @nodoc
@@ -70,7 +59,6 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   _$UserCopyWithImpl(this._value, this._then);
 
   final User _value;
-
   // ignore: unused_field
   final $Res Function(User) _then;
 
@@ -91,7 +79,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       idUser: idUser == freezed
           ? _value.idUser
           : idUser // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -127,7 +115,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       myFriends: myFriends == freezed
           ? _value.myFriends
           : myFriends // ignore: cast_nullable_to_non_nullable
-              as Set<User>?,
+              as Set<String>?,
     ));
   }
 }
@@ -136,10 +124,9 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
 abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$$_UserCopyWith(_$_User value, $Res Function(_$_User) then) =
       __$$_UserCopyWithImpl<$Res>;
-
   @override
   $Res call(
-      {int idUser,
+      {String idUser,
       String? name,
       String? email,
       int? age,
@@ -148,7 +135,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? numberPhone,
       Set<String>? listWorkoutKeys,
       Set<String>? listWorkoutKeysWheIAdmin,
-      Set<User>? myFriends});
+      Set<String>? myFriends});
 }
 
 /// @nodoc
@@ -177,7 +164,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       idUser: idUser == freezed
           ? _value.idUser
           : idUser // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -213,7 +200,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       myFriends: myFriends == freezed
           ? _value._myFriends
           : myFriends // ignore: cast_nullable_to_non_nullable
-              as Set<User>?,
+              as Set<String>?,
     ));
   }
 }
@@ -231,7 +218,7 @@ class _$_User implements _User {
       this.numberPhone,
       final Set<String>? listWorkoutKeys,
       final Set<String>? listWorkoutKeysWheIAdmin,
-      final Set<User>? myFriends})
+      final Set<String>? myFriends})
       : _listWorkoutKeys = listWorkoutKeys,
         _listWorkoutKeysWheIAdmin = listWorkoutKeysWheIAdmin,
         _myFriends = myFriends;
@@ -239,7 +226,7 @@ class _$_User implements _User {
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
   @override
-  final int idUser;
+  final String idUser;
   @override
   final String? name;
   @override
@@ -253,7 +240,6 @@ class _$_User implements _User {
   @override
   final String? numberPhone;
   final Set<String>? _listWorkoutKeys;
-
   @override
   Set<String>? get listWorkoutKeys {
     final value = _listWorkoutKeys;
@@ -263,7 +249,6 @@ class _$_User implements _User {
   }
 
   final Set<String>? _listWorkoutKeysWheIAdmin;
-
   @override
   Set<String>? get listWorkoutKeysWheIAdmin {
     final value = _listWorkoutKeysWheIAdmin;
@@ -272,10 +257,9 @@ class _$_User implements _User {
     return EqualUnmodifiableSetView(value);
   }
 
-  final Set<User>? _myFriends;
-
+  final Set<String>? _myFriends;
   @override
-  Set<User>? get myFriends {
+  Set<String>? get myFriends {
     final value = _myFriends;
     if (value == null) return null;
     // ignore: implicit_dynamic_type
@@ -338,7 +322,7 @@ class _$_User implements _User {
 
 abstract class _User implements User {
   const factory _User(
-      {required final int idUser,
+      {required final String idUser,
       required final String? name,
       final String? email,
       final int? age,
@@ -347,40 +331,30 @@ abstract class _User implements User {
       final String? numberPhone,
       final Set<String>? listWorkoutKeys,
       final Set<String>? listWorkoutKeysWheIAdmin,
-      final Set<User>? myFriends}) = _$_User;
+      final Set<String>? myFriends}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
-  int get idUser;
-
+  String get idUser;
   @override
   String? get name;
-
   @override
   String? get email;
-
   @override
   int? get age;
-
   @override
   String? get photoPath;
-
   @override
   String? get family;
-
   @override
   String? get numberPhone;
-
   @override
   Set<String>? get listWorkoutKeys;
-
   @override
   Set<String>? get listWorkoutKeysWheIAdmin;
-
   @override
-  Set<User>? get myFriends;
-
+  Set<String>? get myFriends;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

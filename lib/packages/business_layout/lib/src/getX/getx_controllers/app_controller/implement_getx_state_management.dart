@@ -18,7 +18,7 @@ class ImplementAppStateGetXController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getMyUser().whenComplete(() {
+    getMyUser(idUser: 'test id').whenComplete(() {
       getDataSportWorkout();
     });
     //сразу инициируем лист данных
@@ -27,9 +27,9 @@ class ImplementAppStateGetXController extends GetxController {
         'onInit_________________________________ImplementAppStateGetXController');
   }
 
-  Future getMyUser() async {
+  Future getMyUser({required String idUser}) async {
     //получаю данные пользователя
-    myUser = await _servicesDataLayout.getDataUser();
+    myUser = await _servicesDataLayout.getDataUser(idUser: idUser);
     update();
   }
 
