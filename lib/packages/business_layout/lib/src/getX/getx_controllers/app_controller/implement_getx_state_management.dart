@@ -18,7 +18,9 @@ class ImplementAppStateGetXController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    //сначала получаю юзера из базы данных по ID
     getMyUser(idUser: 'test id').whenComplete(() {
+      //получаю листы тренировок где участвует пользователь и где он админ
       getDataSportWorkout();
     });
     //сразу инициируем лист данных

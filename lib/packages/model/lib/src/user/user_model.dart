@@ -3,7 +3,6 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:model/src/sports_page/sports_workout_model.dart';
 
 part 'user_model.g.dart';
-
 part 'user_model.freezed.dart';
 
 // flutter pub run build_runner build --delete-conflicting-outputs
