@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:model/src/user/name_and_photo_user/name_and_photo_user.dart';
+
+import '../../model.dart';
 
 part 'sports_workout_model.g.dart';
 

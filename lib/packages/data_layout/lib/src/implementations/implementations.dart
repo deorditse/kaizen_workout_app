@@ -9,7 +9,7 @@ class ImplementationSportsWorkoutDataServices {
   //нужно будет выводить по ключам, которые получил от юзера
   //а также для подключения к новым тренировкам
   Future<SportsWorkoutModel?> getDataSportWorkout(
-      {required int idWorkout}) async {
+      {required String idWorkout}) async {
     return await DataListRepository().getDataSportWorkout(idWorkout: idWorkout);
   }
 }

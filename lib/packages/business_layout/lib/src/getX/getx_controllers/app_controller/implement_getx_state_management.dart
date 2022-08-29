@@ -21,6 +21,7 @@ class ImplementAppStateGetXController extends GetxController {
     //сначала получаю юзера из базы данных по ID
     getMyUser(idUser: 'test id').whenComplete(() {
       //получаю листы тренировок где участвует пользователь и где он админ
+      print('пользователь получен');
       getDataSportWorkout();
     });
     //сразу инициируем лист данных
@@ -42,7 +43,7 @@ class ImplementAppStateGetXController extends GetxController {
         myUser!.listWorkoutKeys!.isNotEmpty) {
       for (var keyWorkout in myUser!.listWorkoutKeys!) {
         SportsWorkoutModel? sportWorkout = await _servicesDataLayout
-            .getDataSportWorkout(idWorkout: int.parse(keyWorkout));
+            .getDataSportWorkout(idWorkout: keyWorkout);
 
         if (sportWorkout != null) {
           dataSportsWorkoutList.add(sportWorkout);

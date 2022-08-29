@@ -6,9 +6,7 @@ import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/model/lib/model.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout/widgets/daily_workout_sheet/what_toDo_EveryDay_inWorkout.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout/widgets/default_dialog_create_key.dart';
-import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/old/style.dart';
 import 'package:kaizen/packages/ui_layout/style_app/style_card.dart';
-import 'package:kaizen/packages/ui_layout/style_app/style_text_field.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class CreateWorkoutPage extends StatefulWidget {

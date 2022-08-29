@@ -14,8 +14,12 @@ class DataListRepository {
         age: 123,
         family: 'family',
         numberPhone: 'numberPhone',
-        listWorkoutKeys: {'1', '2', '3'},
-        listWorkoutKeysWheIAdmin: {'1'},
+        listWorkoutKeys: {
+          '40001',
+          '40002',
+          '40003',
+        },
+        listWorkoutKeysWheIAdmin: {'40003'},
         //для примера
       ),
     );
@@ -23,12 +27,13 @@ class DataListRepository {
 
   //получение тренировки по ключу
   Future<SportsWorkoutModel?> getDataSportWorkout(
-      {required int idWorkout}) async {
+      {required String idWorkout}) async {
     List<SportsWorkoutModel> sportsWorkoutList = await _sportsWorkoutList();
     SportsWorkoutModel? res;
-    for (var element in sportsWorkoutList) {
-      if (element.idWorkout == idWorkout) {
-        res = element;
+    for (var sportWorkout in sportsWorkoutList) {
+      if (sportWorkout.idWorkout == idWorkout) {
+        print('sportWorkout.idWorkout == idWorkout');
+        res = sportWorkout;
         break; //выходим из цикла
       }
     }
@@ -40,17 +45,17 @@ class DataListRepository {
       (_) => List<SportsWorkoutModel>.generate(
         5,
         (index) => SportsWorkoutModel(
-          idWorkout: 'test 33PhNVsd2XI5vVq37A2l',
+          idWorkout: '${4000 + index}',
           nameWorkout: 'Отжимания каждый день $index',
           usersInWorkout: <NameAndPhotoUser>{
             NameAndPhotoUser(
-              idUser: 'test gNe2AwjMJMVJ8OLvFu1T',
+              idUser: 'test/gNe2AwjMJMVJ8OLvFu1T',
               name: 'user 1 name ${index + index * 3}',
               photoPath: 'photoPath ${index * index}',
               family: 'family ${index + index * 3}',
             ),
             NameAndPhotoUser(
-              idUser: 'test mEFChkM5ME0WhJljfurm',
+              idUser: 'test/mEFChkM5ME0WhJljfurm',
               name: 'user 2 name ${index * index}',
               photoPath: 'photoPath ${index + index}',
               family: 'family ${index + index}',
