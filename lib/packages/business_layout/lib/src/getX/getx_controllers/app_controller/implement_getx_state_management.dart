@@ -12,6 +12,7 @@ class ImplementAppStateGetXController extends GetxController {
 
   ///
   List<SportsWorkoutModel> dataSportsWorkoutList = [];
+  Rx<int> indexWorkoutList = 0.obs;
   List<SportsWorkoutModel> dataSportsWorkoutListWhenIAdmin = [];
   User? myUser; //включает в себя лист с ключами тренировок
 
