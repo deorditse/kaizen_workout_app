@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/model/lib/model.dart';
-import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout/widgets/daily_workout_sheet/what_toDo_EveryDay_inWorkout.dart';
-import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout/widgets/default_dialog_create_key.dart';
+import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout_page/widgets/daily_workout_sheet/what_toDo_EveryDay_inWorkout.dart';
+import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout_page/widgets/default_dialog_create_key.dart';
 import 'package:kaizen/packages/ui_layout/style_app/style_card.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
@@ -21,9 +21,8 @@ class CreateWorkoutPage extends StatefulWidget {
 class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
   final controllerSetting = Get.find<ImplementSettingGetXController>();
 
-  final double _sizeBetweenContainer = 20;
-
-  late SportsWorkoutModel sportsWorkoutModel;
+  late SportsWorkoutModel
+      sportsWorkoutModel; //создам пример тренировки, который нужно запорлнить
   DateTime? _dateStart;
   DateTime? _dateEnd;
   bool _togleDateEnd = false;
@@ -47,6 +46,8 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
       topUsers: null,
     );
   }
+
+  final double _sizeBetweenContainer = 20;
 
   @override
   Widget build(BuildContext context) {
@@ -82,12 +83,15 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                          'Шаги:\n\n1. Когда начнем?\n2. Когда закончим?\n3. Что делаем каждый день?\n4. Получаем код доступа к тренировке для друзей'),
+                        'Шаги:\n\n1. Когда начнем?\n2. Когда закончим?\n3. Что делаем каждый день?\n4. Получаем код доступа к тренировке для друзей',
+                        style: Theme.of(context).textTheme.headline2,
+                      ),
                       SizedBox(
                         height: 20,
                       ),
                       Text(
                         '*После создания тренировки вы станете администратором, только у вас будут права редактирования',
+                        style: Theme.of(context).textTheme.headline3,
                       ),
                     ],
                   ),

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kaizen/packages/model/lib/model.dart';
-import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout/widgets/daily_workout_sheet/card_daily_workout_sheet.dart';
 import 'package:kaizen/packages/ui_layout/style_app/style_card.dart';
-import 'package:kaizen/packages/ui_layout/style_app/style_text_field.dart';
 
 class WhatToDoEveryDayinWorkout extends StatelessWidget {
   WhatToDoEveryDayinWorkout({Key? key, required this.sportsWorkoutModel})

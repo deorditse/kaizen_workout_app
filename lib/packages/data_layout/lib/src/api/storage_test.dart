@@ -19,13 +19,15 @@ class DataListRepository {
           '4002',
           '4003',
         },
-        listWorkoutKeysWheIAdmin: {'4003'},
+        listWorkoutKeysWheIAdmin: {
+          '4003',
+        },
         //для примера
       ),
     );
   }
 
-  //получение тренировки по ключу
+  //получение тренировки по ключу из теста
   Future<SportsWorkoutModel?> getDataSportWorkout(
       {required String idWorkout}) async {
     List<SportsWorkoutModel> sportsWorkoutList = await _sportsWorkoutList();

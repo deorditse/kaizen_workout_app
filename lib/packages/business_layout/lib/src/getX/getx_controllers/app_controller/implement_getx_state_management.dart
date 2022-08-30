@@ -23,6 +23,7 @@ class ImplementAppStateGetXController extends GetxController {
       //получаю листы тренировок где участвует пользователь и где он админ
       print('пользователь получен');
       getDataSportWorkout();
+      getDataSportWorkoutWhenIAdmin();
     });
     //сразу инициируем лист данных
 
@@ -49,6 +50,24 @@ class ImplementAppStateGetXController extends GetxController {
           dataSportsWorkoutList.add(sportWorkout);
           update();
           print(dataSportsWorkoutList.length);
+        }
+      }
+    }
+  }
+
+  getDataSportWorkoutWhenIAdmin() async {
+    // достаю каждую тренировку по ее ключу из базы
+    if (myUser != null &&
+        myUser!.listWorkoutKeysWheIAdmin != null &&
+        myUser!.listWorkoutKeysWheIAdmin!.isNotEmpty) {
+      for (var keyWorkout in myUser!.listWorkoutKeysWheIAdmin!) {
+        SportsWorkoutModel? sportWorkout = await _servicesDataLayout
+            .getDataSportWorkout(idWorkout: keyWorkout);
+
+        if (sportWorkout != null) {
+          dataSportsWorkoutListWhenIAdmin.add(sportWorkout);
+          update();
+          print(dataSportsWorkoutListWhenIAdmin.length);
         }
       }
     }
