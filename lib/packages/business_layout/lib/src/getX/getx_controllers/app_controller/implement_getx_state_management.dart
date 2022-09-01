@@ -10,6 +10,8 @@ class ImplementAppStateGetXController extends GetxController {
   final ImplementationSportsWorkoutDataServices _servicesDataLayout =
       ImplementationSportsWorkoutDataServices();
 
+  static ImplementAppStateGetXController instance = Get.find();
+
   ///
   List<SportsWorkoutModel> dataSportsWorkoutList = [];
   Rx<int> indexWorkoutList = 0.obs;

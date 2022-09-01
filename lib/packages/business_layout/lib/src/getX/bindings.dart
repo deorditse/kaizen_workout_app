@@ -6,5 +6,6 @@ class BasicsExampleBinding implements Bindings {
   void dependencies() {
     Get.put(ImplementAppStateGetXController());
     Get.put(ImplementSettingGetXController());
+    Get.put(CalendarControllerGetXState());
   }
 }
