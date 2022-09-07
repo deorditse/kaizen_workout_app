@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:kaizen/consts_app.dart';
-import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/old/style.dart';
-import 'package:kaizen/packages/ui_layout/style_app/style_card.dart';
+import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 
-defaultDialogAllProgramWorkout(
-    {required context, List<String>? descriptionWorkoutList, DateTime? start}) {
+defaultDialogAllProgramWorkout({required context, required indexSportWorkout}) {
+  final sportWorkout = ImplementAppStateGetXController
+      .instance.dataSportsWorkoutList[indexSportWorkout];
   return Get.defaultDialog(
     backgroundColor: myDefaultDialogBackground(context),
     // titlePadding: EdgeInsets.only(
@@ -14,40 +14,58 @@ defaultDialogAllProgramWorkout(
 
     // ),
     title: "Программа тренировок",
-    titleStyle: Theme.of(context).textTheme.headline1,
+    titleStyle: Theme.of(context).textTheme.headline1!,
     // content: Text(usersInWorkout.cast().toList().toString()),
     content: SizedBox(
       height: MediaQuery.of(context).size.height * 0.55,
       width: MediaQuery.of(context).size.width,
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height, //* 0.5,
-              child: ListView.builder(
-                itemCount: 6,
-                itemBuilder: (BuildContext context, int index) => Card(
-                  color: Theme.of(context).cardColor,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 3.0),
-                        child: CircleAvatar(
-                          radius: 22,
-                          backgroundImage: NetworkImage(
-                            'https://picsum.photos/1200/501',
+      child: Container(
+        height: MediaQuery.of(context).size.height, //* 0.5,
+        child: ListView.builder(
+          itemCount: sportWorkout.descriptionWorkoutList.length,
+          itemBuilder: (BuildContext context, int index) {
+            final description = sportWorkout.descriptionWorkoutList[index];
+
+
+            return Card(
+              color: DateTime.now().isUtc
+                  ? Theme.of(context).primaryColor
+                  : Theme.of(context).cardColor,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  // mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CircleAvatar(
+                      backgroundColor:
+                          Theme.of(context).primaryColor.withOpacity(0.7),
+                      radius: 22,
+                      child: FittedBox(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            DateFormat('d MMM').format(sportWorkout
+                                .firstWorkoutDay
+                                .add(Duration(days: index))),
+                            style: Theme.of(context).textTheme.headline2,
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          '${description}' ?? 'нет данных',
+                          style: Theme.of(context).textTheme.headline2,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ],
+            );
+          },
         ),
       ),
     ),

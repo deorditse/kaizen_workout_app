@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/ui_layout/style_app/style_card.dart';
 
 class WhatToDoEveryDayInWorkout extends StatelessWidget {
-  const WhatToDoEveryDayInWorkout({super.key});
+  WhatToDoEveryDayInWorkout({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,25 +14,26 @@ class WhatToDoEveryDayInWorkout extends StatelessWidget {
         color: Theme.of(context).scaffoldBackgroundColor,
       ),
       height: MediaQuery.of(context).size.width / 2,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: 20,
-
-        ///помениять
-        ///todo methhod
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: myStyleContainer(
-                context: context,
-                color: Theme.of(context).cardColor,
-              ),
-              width: MediaQuery.of(context).size.width / 1.5,
-              child: CardDailyWorkoutSheet(
-                index: index,
-              ),
-            ),
+      child: GetBuilder<CalendarControllerGetXState>(
+        builder: (controllerCalendar) {
+          return ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: controllerCalendar.itemCount,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: myStyleContainer(
+                    context: context,
+                    color: Theme.of(context).cardColor,
+                  ),
+                  width: MediaQuery.of(context).size.width / 1.5,
+                  child: CardDailyWorkoutSheet(
+                    index: index,
+                  ),
+                ),
+              );
+            },
           );
         },
       ),
@@ -48,7 +50,7 @@ class CardDailyWorkoutSheet extends StatefulWidget {
 }
 
 class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
-  bool _toggle = false;
+  bool _toggleRepeatToTheEndOfTheList = false;
   bool _togleIsHoliday = false;
 
   @override
@@ -135,10 +137,11 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
               children: [
                 Text('Повторить до конца списка'),
                 Switch(
-                  value: _toggle,
+                  value: _toggleRepeatToTheEndOfTheList,
                   onChanged: (bool value) {
                     setState(() {
-                      _toggle = !_toggle;
+                      _toggleRepeatToTheEndOfTheList =
+                          !_toggleRepeatToTheEndOfTheList;
                     });
                   },
                 ),

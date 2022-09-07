@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 //чтобы зарегистрировать как фабрику для GetIt и обращаться к сервис локатору через  MainSimpleStateManagement
 
 class ImplementSettingGetXController extends GetxController {
+  static ImplementSettingGetXController instance = Get.find();
   Rx<int> currentTabIndex = 0.obs;
 
   bool switchChangeTheme = Get.isDarkMode;

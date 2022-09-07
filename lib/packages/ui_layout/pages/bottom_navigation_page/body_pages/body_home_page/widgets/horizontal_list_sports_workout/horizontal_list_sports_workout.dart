@@ -20,12 +20,8 @@ class HorizontalListSportsWorkout extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: controller.dataSportsWorkoutList.length,
                   itemBuilder: (context, index) {
-                    final countDay = DateTime.now().day -
-                        controller.dataSportsWorkoutList
-                            .elementAt(index)
-                            .firstWorkoutDay!
-                            .day;
-
+                    int? indexInDataSportsWorkoutList =
+                        controller.getDataIndexInDataSportsWorkoutList(index);
                     return Row(
                       children: [
                         Padding(
@@ -40,10 +36,13 @@ class HorizontalListSportsWorkout extends StatelessWidget {
                                   index: index,
                                 ),
                               ),
-                              if (controller.dataSportsWorkoutList
-                                  .elementAt(index)
-                                  .descriptionWorkoutList[countDay]
-                                  .isNotEmpty)
+                              if (indexInDataSportsWorkoutList != null
+                              /*       &&
+                                  controller.dataSportsWorkoutList
+                                      .elementAt(index)
+                                      .descriptionWorkoutList[
+                                          indexInDataSportsWorkoutList].isNotEmpty*/
+                              )
                                 Expanded(
                                   flex: 1,
                                   child: Padding(
@@ -57,8 +56,9 @@ class HorizontalListSportsWorkout extends StatelessWidget {
                                           : MediaQuery.of(context).size.width -
                                               36,
                                       child: CardDailyWorkoutSheet(
-                                        index: index,
-                                        day: countDay,
+                                        indexWorkoutList: index,
+                                        indexDayInListWorkoutDescription:
+                                            indexInDataSportsWorkoutList,
                                       ),
                                     ),
                                   ),

@@ -18,6 +18,8 @@ class ImplementAppStateGetXController extends GetxController {
   List<SportsWorkoutModel> dataSportsWorkoutListWhenIAdmin = [];
   User? myUser; //включает в себя лист с ключами тренировок
 
+  // Rx<int> indexInDataSportsWorkoutList = 0.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -40,7 +42,7 @@ class ImplementAppStateGetXController extends GetxController {
     update();
   }
 
-  getDataSportWorkout() async {
+  Future getDataSportWorkout() async {
     // достаю каждую тренировку по ее ключу из базы
     if (myUser != null &&
         myUser!.listWorkoutKeys != null &&
@@ -58,7 +60,7 @@ class ImplementAppStateGetXController extends GetxController {
     }
   }
 
-  getDataSportWorkoutWhenIAdmin() async {
+  Future getDataSportWorkoutWhenIAdmin() async {
     // достаю каждую тренировку по ее ключу из базы
     if (myUser != null &&
         myUser!.listWorkoutKeysWheIAdmin != null &&
@@ -73,6 +75,26 @@ class ImplementAppStateGetXController extends GetxController {
           print(dataSportsWorkoutListWhenIAdmin.length);
         }
       }
+    }
+  }
+
+  int? getDataIndexInDataSportsWorkoutList(int indexWorkoutList) {
+    try {
+      final firstWorkoutDay =
+          dataSportsWorkoutList[indexWorkoutList].firstWorkoutDay;
+      if (firstWorkoutDay.isBefore(DateTime.now())) {
+        final indexDescript = DateTime.now().difference(firstWorkoutDay).inDays;
+        //проверяю есть ли тренировка на этот день в базе
+        return dataSportsWorkoutList[indexWorkoutList]
+                .descriptionWorkoutList[indexDescript]
+                .isNotEmpty
+            ? indexDescript
+            : null;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      print(error);
     }
   }
 }

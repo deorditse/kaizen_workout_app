@@ -7,21 +7,18 @@ import 'package:model/model.dart';
 //чтобы зарегистрировать как фабрику для GetIt и обращаться к сервис локатору через  MainSimpleStateManagement
 
 class CalendarControllerGetXState extends GetxController {
-  // final ImplementationSportsWorkoutDataServices _servicesDataLayout =
-  //     ImplementationSportsWorkoutDataServices();
   static CalendarControllerGetXState instance =
       Get.find<CalendarControllerGetXState>();
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  bool toggleDateIsEnd = false;
+  bool isHoliday = false;
+  int? itemCount = null;
 
   //пустая тренировка
   SportsWorkoutModel sportWorkoutNewCreate = SportsWorkoutModel(
     idWorkout: '',
     nameWorkout: '',
-    firstWorkoutDay: null,
+    firstWorkoutDay: DateTime.now(),
     lastWorkoutDay: null,
     adminWorkout: NameAndPhotoUser(
       idUser: '',
@@ -33,17 +30,34 @@ class CalendarControllerGetXState extends GetxController {
     topUsers: {},
   );
 
-  addFirstDay(DateTime date) {
+  void addFirstDay(DateTime date) {
     sportWorkoutNewCreate =
         sportWorkoutNewCreate.copyWith(firstWorkoutDay: date);
+    if (sportWorkoutNewCreate.lastWorkoutDay != null) {
+      sportWorkoutNewCreate.firstWorkoutDay.add(const Duration(days: 1));
+      _countDaysWorkout();
+    }
     update();
   }
 
-  bool toggleDateIsEnd = false;
-
-  addLastDay(DateTime? date) {
+  void addLastDay(DateTime? date) {
     sportWorkoutNewCreate =
         sportWorkoutNewCreate.copyWith(lastWorkoutDay: date);
+    _countDaysWorkout();
     update();
+  }
+
+  //считаем разниццу между последним и первым днем
+  void _countDaysWorkout() {
+    try {
+      int? result = sportWorkoutNewCreate.lastWorkoutDay
+          ?.difference(sportWorkoutNewCreate.firstWorkoutDay)
+          .inDays;
+      print(result);
+      itemCount = result;
+      update();
+    } catch (error) {
+      print(error);
+    }
   }
 }

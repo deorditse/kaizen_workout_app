@@ -26,7 +26,7 @@ mixin _$SportsWorkoutModel {
   Set<NameAndPhotoUser>? get usersInWorkout =>
       throw _privateConstructorUsedError; //лист с программой на каждый день
   List<String> get descriptionWorkoutList => throw _privateConstructorUsedError;
-  DateTime? get firstWorkoutDay => throw _privateConstructorUsedError;
+  DateTime get firstWorkoutDay => throw _privateConstructorUsedError;
   DateTime? get lastWorkoutDay => throw _privateConstructorUsedError;
   Set<NameAndPhotoUser>? get topUsers => throw _privateConstructorUsedError;
 
@@ -47,7 +47,7 @@ abstract class $SportsWorkoutModelCopyWith<$Res> {
       String nameWorkout,
       Set<NameAndPhotoUser>? usersInWorkout,
       List<String> descriptionWorkoutList,
-      DateTime? firstWorkoutDay,
+      DateTime firstWorkoutDay,
       DateTime? lastWorkoutDay,
       Set<NameAndPhotoUser>? topUsers});
 }
@@ -96,7 +96,7 @@ class _$SportsWorkoutModelCopyWithImpl<$Res>
       firstWorkoutDay: firstWorkoutDay == freezed
           ? _value.firstWorkoutDay
           : firstWorkoutDay // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
       lastWorkoutDay: lastWorkoutDay == freezed
           ? _value.lastWorkoutDay
           : lastWorkoutDay // ignore: cast_nullable_to_non_nullable
@@ -122,7 +122,7 @@ abstract class _$$_SportsWorkoutModelCopyWith<$Res>
       String nameWorkout,
       Set<NameAndPhotoUser>? usersInWorkout,
       List<String> descriptionWorkoutList,
-      DateTime? firstWorkoutDay,
+      DateTime firstWorkoutDay,
       DateTime? lastWorkoutDay,
       Set<NameAndPhotoUser>? topUsers});
 }
@@ -173,7 +173,7 @@ class __$$_SportsWorkoutModelCopyWithImpl<$Res>
       firstWorkoutDay: firstWorkoutDay == freezed
           ? _value.firstWorkoutDay
           : firstWorkoutDay // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
       lastWorkoutDay: lastWorkoutDay == freezed
           ? _value.lastWorkoutDay
           : lastWorkoutDay // ignore: cast_nullable_to_non_nullable
@@ -230,7 +230,7 @@ class _$_SportsWorkoutModel implements _SportsWorkoutModel {
   }
 
   @override
-  final DateTime? firstWorkoutDay;
+  final DateTime firstWorkoutDay;
   @override
   final DateTime? lastWorkoutDay;
   final Set<NameAndPhotoUser>? _topUsers;
@@ -302,7 +302,7 @@ abstract class _SportsWorkoutModel implements SportsWorkoutModel {
       required final String nameWorkout,
       final Set<NameAndPhotoUser>? usersInWorkout,
       required final List<String> descriptionWorkoutList,
-      required final DateTime? firstWorkoutDay,
+      required final DateTime firstWorkoutDay,
       final DateTime? lastWorkoutDay,
       final Set<NameAndPhotoUser>? topUsers}) = _$_SportsWorkoutModel;
 
@@ -320,7 +320,7 @@ abstract class _SportsWorkoutModel implements SportsWorkoutModel {
   @override //лист с программой на каждый день
   List<String> get descriptionWorkoutList;
   @override
-  DateTime? get firstWorkoutDay;
+  DateTime get firstWorkoutDay;
   @override
   DateTime? get lastWorkoutDay;
   @override

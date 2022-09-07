@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:kaizen/consts_app.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
-import 'package:kaizen/packages/model/lib/model.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout_page/style.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout_page/widgets/daily_workout_sheet/what_toDo_EveryDay_inWorkout.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout_page/widgets/default_dialog_create_key.dart';
@@ -30,12 +30,10 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
       appBar: AppBar(
         // leading: MyLeftDrawer.openLeftDrawer(),
         title: FittedBox(
-            child: const Text(
-          'Создание тренировки',
-        )),
-        // actions: [
-        //   MyEndDrawer.openEndDrawer(),
-        // ],
+          child: const Text(
+            'Создание тренировки',
+          ),
+        ),
       ),
       // endDrawer: MyEndDrawer(),
       body: SingleChildScrollView(
@@ -205,18 +203,18 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
                                     value: CalendarControllerGetXState
                                         .instance.toggleDateIsEnd,
                                     onChanged: (value) {
-                                      setState(() {
-                                        CalendarControllerGetXState
-                                                .instance.toggleDateIsEnd =
-                                            !CalendarControllerGetXState
-                                                .instance.toggleDateIsEnd;
-                                        // _toggleDateIsEnd = !_toggleDateIsEnd;
-                                        value
-                                            ? CalendarControllerGetXState
-                                                .instance
-                                                .addLastDay(null)
-                                            : null;
-                                      });
+                                      setState(
+                                        () {
+                                          CalendarControllerGetXState
+                                                  .instance.toggleDateIsEnd =
+                                              !CalendarControllerGetXState
+                                                  .instance.toggleDateIsEnd;
+                                          if (value) {
+                                            CalendarControllerGetXState.instance
+                                                .addLastDay(null);
+                                          }
+                                        },
+                                      );
                                     },
                                   ),
                                 ],
@@ -236,13 +234,13 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
                                 style: Theme.of(context).textTheme.headline3,
                               ),
                             ),
-                            GestureDetector(
-                              onTap: _showDatePickerEnd,
-                              child: GetBuilder<CalendarControllerGetXState>(
-                                builder: (controllerCalendar) {
-                                  DateTime? _dateEnd = controllerCalendar
-                                      .sportWorkoutNewCreate.lastWorkoutDay;
-                                  return Padding(
+                            GetBuilder<CalendarControllerGetXState>(
+                              builder: (controllerCalendar) {
+                                DateTime? _dateEnd = controllerCalendar
+                                    .sportWorkoutNewCreate.lastWorkoutDay;
+                                return GestureDetector(
+                                  onTap: _showDatePickerEnd,
+                                  child: Padding(
                                     padding: const EdgeInsets.only(right: 8.0),
                                     child: Column(
                                       children: [
@@ -275,9 +273,9 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
                                               ),
                                       ],
                                     ),
-                                  );
-                                },
-                              ),
+                                  ),
+                                );
+                              },
                             ),
                           ],
                         ),
@@ -297,19 +295,39 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '3. Что будем делать каждый день?',
-                        style: Theme.of(context).textTheme.headline1,
-                      ),
-                      Text(
-                        'Администратор (Вы) сможете редактировать программу позже',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      const WhatToDoEveryDayInWorkout(),
-                    ],
+                  child: GetBuilder<CalendarControllerGetXState>(
+                    builder: (controllerCalendar) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '3. Что будем делать каждый день?',
+                            style: Theme.of(context).textTheme.headline1,
+                          ),
+                          Text(
+                            'Администратор (Вы) сможете редактировать программу позже',
+                            style: Theme.of(context).textTheme.headline3,
+                          ),
+                          if (controllerCalendar
+                                      .sportWorkoutNewCreate.lastWorkoutDay !=
+                                  null ||
+                              controllerCalendar.toggleDateIsEnd)
+                            WhatToDoEveryDayInWorkout(),
+                          if (controllerCalendar
+                                      .sportWorkoutNewCreate.lastWorkoutDay ==
+                                  null &&
+                              !controllerCalendar.toggleDateIsEnd)
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                '*в пункте 2 выберите дату окончания тренировки',
+                                style: Theme.of(context).textTheme.headline3,
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                        ],
+                      );
+                    },
                   ),
                 ),
               ),
@@ -319,14 +337,7 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
             ),
             Center(
               child: ElevatedButton(
-                onPressed: () {
-                  Get.snackbar(
-                    'Тренировка создана',
-                    '',
-                    snackPosition: SnackPosition.BOTTOM,
-                  );
-                  defaultDialogAboutSports(context: context);
-                },
+                onPressed: _createWorkout,
                 child: Text('Создать тренировку'),
               ),
             ),
@@ -349,6 +360,11 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
       // maxTime: (DateTime(2040, 1, 1)),
       onChanged: (date) {
         CalendarControllerGetXState.instance.addFirstDay(date);
+        if (CalendarControllerGetXState.instance.sportWorkoutNewCreate.lastWorkoutDay != null) {
+          CalendarControllerGetXState.instance
+              .addLastDay(date.add(const Duration(days: 1)));
+        }
+
       },
       currentTime: DateTime.now(),
       locale: LocaleType.ru,
@@ -360,7 +376,9 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
       theme: myDatePickerTheme(context),
       context,
       showTitleActions: true,
-      minTime: DateTime.now(),
+      minTime: CalendarControllerGetXState
+          .instance.sportWorkoutNewCreate.firstWorkoutDay
+          .add(const Duration(days: 1)),
       // maxTime: (DateTime(2040, 1, 1)),
       onChanged: (date) {
         CalendarControllerGetXState.instance.addLastDay(date);
@@ -368,5 +386,42 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
       currentTime: DateTime.now(),
       locale: LocaleType.ru,
     );
+  }
+
+  void _createWorkout() {
+    if (CalendarControllerGetXState
+                .instance.sportWorkoutNewCreate.lastWorkoutDay ==
+            null &&
+        !CalendarControllerGetXState.instance.toggleDateIsEnd) {
+      Get.snackbar(
+        "",
+        "",
+        backgroundColor: myDefaultDialogBackground(context),
+        messageText: Text(
+          "обязательное поле*",
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.headline2,
+        ),
+        titleText: Text(
+          "В пункте 2 выберите дату окончания тренировки",
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.headline1,
+        ),
+        // messageText: null,
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    } else {
+      Get.snackbar(
+        '',
+        '',
+        titleText: Text(
+          "Тренировка создана",
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.headline1,
+        ),
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      defaultDialogAboutSports(context: context);
+    }
   }
 }

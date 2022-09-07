@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 
 class CardDailyWorkoutSheet extends StatefulWidget {
-  CardDailyWorkoutSheet({Key? key, this.day, this.index}) : super(key: key);
-  int? index;
-  int? day;
+  CardDailyWorkoutSheet({Key? key, required this.indexDayInListWorkoutDescription, required this.indexWorkoutList})
+      : super(key: key);
+  int indexWorkoutList;
+  int indexDayInListWorkoutDescription;
 
   @override
   State<CardDailyWorkoutSheet> createState() => _CardDailyWorkoutSheetState();
@@ -20,6 +21,10 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
       padding: const EdgeInsets.only(left: 8.0, right: 8),
       child: GestureDetector(
         onTap: () {
+          //меняю отслеживание id тренировки
+          ImplementAppStateGetXController.instance.indexWorkoutList.value =
+              widget.indexWorkoutList;
+          //переходим на страницу календаря
           controllerSetting.currentTabIndex.value = 1;
         },
         child: Column(
@@ -27,7 +32,7 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Открыто задание на день ${widget.day! + 1}',
+              'Открыто задание на день',
               style: Theme.of(context).textTheme.headline3,
             ),
             Expanded(
@@ -56,10 +61,14 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: GetBuilder<ImplementAppStateGetXController>(
-                          builder: (controllerApp) => Text(
-                            controllerApp.dataSportsWorkoutList
-                                .elementAt(widget.index!)
-                                .descriptionWorkoutList[widget.day!],
+                            builder: (controllerApp) {
+                          final String descriptionWorkout = controllerApp
+                                  .dataSportsWorkoutList
+                                  .elementAt(widget.indexWorkoutList)
+                                  .descriptionWorkoutList[widget.indexDayInListWorkoutDescription];
+
+                          return Text(
+                            descriptionWorkout,
                             // "Отжаться 50 раз",
                             style: TextStyle(
                               color: Theme.of(context).primaryColor,
@@ -68,8 +77,8 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
                             ),
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.clip,
-                          ),
-                        ),
+                          );
+                        }),
                       ),
                     ),
                   ),

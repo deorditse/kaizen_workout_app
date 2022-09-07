@@ -19,9 +19,7 @@ _$_SportsWorkoutModel _$$_SportsWorkoutModelFromJson(
       descriptionWorkoutList: (json['descriptionWorkoutList'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      firstWorkoutDay: json['firstWorkoutDay'] == null
-          ? null
-          : DateTime.parse(json['firstWorkoutDay'] as String),
+      firstWorkoutDay: DateTime.parse(json['firstWorkoutDay'] as String),
       lastWorkoutDay: json['lastWorkoutDay'] == null
           ? null
           : DateTime.parse(json['lastWorkoutDay'] as String),
@@ -38,7 +36,7 @@ Map<String, dynamic> _$$_SportsWorkoutModelToJson(
       'nameWorkout': instance.nameWorkout,
       'usersInWorkout': instance.usersInWorkout?.toList(),
       'descriptionWorkoutList': instance.descriptionWorkoutList,
-      'firstWorkoutDay': instance.firstWorkoutDay?.toIso8601String(),
+      'firstWorkoutDay': instance.firstWorkoutDay.toIso8601String(),
       'lastWorkoutDay': instance.lastWorkoutDay?.toIso8601String(),
       'topUsers': instance.topUsers?.toList(),
     };

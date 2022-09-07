@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:kaizen/consts_app.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/old/pages/Test_calendars_page/controller/calendar_page_controller.dart';
@@ -29,43 +30,22 @@ class BodySportsPage extends StatelessWidget {
           SliverToBoxAdapter(
             child: GetBuilder<ImplementAppStateGetXController>(
               builder: (_controllerApp) {
-                final sportWorkoutModel =
+                int index = _controllerApp.indexWorkoutList.value;
+                final sportWorkout =
                     _controllerApp.dataSportsWorkoutList.isNotEmpty
-                        ? _controllerApp.dataSportsWorkoutList
-                            .cast()[_controllerApp.indexWorkoutList.value]!
-                        // as SportsWorkoutModel
+                        ? _controllerApp.dataSportsWorkoutList.cast()[index]!
                         : null;
-
-                if (sportWorkoutModel == null) {
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 30.0),
-                    child: Center(
-                        child: Column(
-                      children: [
-                        CircularProgressIndicator(),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            ImplementSettingGetXController _controllerSetting =
-                                Get.find();
-                            _controllerSetting.currentTabIndex.value = 0;
-                          },
-                          child: Text('Выбрать или создать тренировку',
-                              style: Theme.of(context).textTheme.headline2!),
-                        ),
-                      ],
-                    )),
-                  );
+                if (sportWorkout == null) {
+                  return _homePage(context);
                 } else {
+                  final indexInDataSportsWorkoutList =
+                      _controllerApp.getDataIndexInDataSportsWorkoutList(index);
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
                         height: 140,
-                        //flex: 3,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
@@ -83,16 +63,6 @@ class BodySportsPage extends StatelessWidget {
                                 Container(
                                   alignment: Alignment.center,
                                   width: MediaQuery.of(context).size.width,
-                                  // decoration: BoxDecoration(
-                                  // border: Border(
-                                  //   bottom: BorderSide(
-                                  //     width: 1,
-                                  //     color: Colors.lightGreen,
-                                  //     style: BorderStyle.solid,
-                                  //   ),
-                                  // ),
-                                  // color: Colors.green.withOpacity(0.6),
-                                  // ),
                                   child: Padding(
                                     padding:
                                         EdgeInsets.symmetric(horizontal: 10.0),
@@ -122,34 +92,18 @@ class BodySportsPage extends StatelessWidget {
                                       ),
                                       child: GestureDetector(
                                         onTap: () {
-                                          Get.defaultDialog(
-                                            backgroundColor:
-                                                myDefaultDialogBackground(
-                                                    context),
-                                            titlePadding: EdgeInsets.only(
-                                              top: 20,
-                                            ),
-                                            title: "Задача на день",
-                                            content: SingleChildScrollView(
-                                              child: Container(
-                                                padding: EdgeInsets.all(0),
-                                                // height: 350,
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Text(
-                                                    'задача на написать метод поиска дня',
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .headline2,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            titleStyle: Theme.of(context)
-                                                .textTheme
-                                                .headline1,
-                                          );
+                                          if (indexInDataSportsWorkoutList !=
+                                              null) {
+                                            _defaultDialogWithDayProgram(
+                                              context,
+                                              sportWorkoutModelDescription:
+                                                  sportWorkout
+                                                          .descriptionWorkoutList[
+                                                      indexInDataSportsWorkoutList],
+                                              firstWorkoutDay:
+                                                  sportWorkout.firstWorkoutDay,
+                                            );
+                                          }
                                         },
                                         child: Padding(
                                           padding: const EdgeInsets.all(4.0),
@@ -182,7 +136,12 @@ class BodySportsPage extends StatelessWidget {
                                                   padding: const EdgeInsets
                                                       .symmetric(horizontal: 8),
                                                   child: Text(
-                                                    'Сюда выводится описание задачи на день',
+                                                    indexInDataSportsWorkoutList !=
+                                                            null
+                                                        ? sportWorkout
+                                                                .descriptionWorkoutList[
+                                                            indexInDataSportsWorkoutList]
+                                                        : 'нет данных',
                                                     style: TextStyle(
                                                       color: Theme.of(context)
                                                           .primaryColor,
@@ -229,9 +188,9 @@ class BodySportsPage extends StatelessWidget {
                         child: TextButton(
                           onPressed: () {
                             defaultDialogAllProgramWorkout(
-                                context: context,
-                                descriptionWorkoutList: [],
-                                start: null);
+                              context: context,
+                              indexSportWorkout: index,
+                            );
                           },
                           child: Text('Посмотреть программу тренировки'),
                         ),
@@ -254,6 +213,55 @@ class BodySportsPage extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  void _defaultDialogWithDayProgram(context,
+      {String? sportWorkoutModelDescription, required firstWorkoutDay}) {
+    Get.defaultDialog(
+      backgroundColor: myDefaultDialogBackground(context),
+      titlePadding: EdgeInsets.only(
+        top: 20,
+      ),
+      title: "Задача на ${DateFormat('d.MMM').format(DateTime.now())}",
+      content: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(0),
+          // height: 350,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              sportWorkoutModelDescription ?? 'нет данных',
+              style: Theme.of(context).textTheme.headline2,
+            ),
+          ),
+        ),
+      ),
+      titleStyle: Theme.of(context).textTheme.headline1,
+    );
+  }
+
+  Widget _homePage(context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 30.0),
+      child: Center(
+        child: Column(
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(
+              height: 20,
+            ),
+            TextButton(
+              onPressed: () {
+                ImplementSettingGetXController.instance.currentTabIndex.value =
+                    0;
+              },
+              child: Text('Выбрать или создать тренировку',
+                  style: Theme.of(context).textTheme.headline2!),
+            ),
+          ],
+        ),
       ),
     );
   }

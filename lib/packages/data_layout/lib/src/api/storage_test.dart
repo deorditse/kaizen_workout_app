@@ -15,6 +15,7 @@ class DataListRepository {
         family: 'family',
         numberPhone: 'numberPhone',
         listWorkoutKeys: {
+          '4000',
           '4001',
           '4002',
           '4003',
@@ -32,6 +33,7 @@ class DataListRepository {
       {required String idWorkout}) async {
     List<SportsWorkoutModel> sportsWorkoutList = await _sportsWorkoutList();
     SportsWorkoutModel? res;
+
     for (var sportWorkout in sportsWorkoutList) {
       if (sportWorkout.idWorkout == idWorkout) {
         print('sportWorkout.idWorkout == idWorkout');
@@ -39,14 +41,14 @@ class DataListRepository {
         break; //выходим из цикла
       }
     }
+
     return res;
   }
 
   Future<List<SportsWorkoutModel>> _sportsWorkoutList() async {
     return await Future.delayed(Duration(seconds: 2)).then(
-      (_) => List<SportsWorkoutModel>.generate(
-        5,
-        (index) => SportsWorkoutModel(
+      (_) => List<SportsWorkoutModel>.generate(5, (index) {
+        return SportsWorkoutModel(
           idWorkout: '${4000 + index}',
           nameWorkout: 'Отжимания каждый день $index',
           usersInWorkout: <NameAndPhotoUser>{
@@ -64,9 +66,13 @@ class DataListRepository {
             ),
           },
           descriptionWorkoutList: [
-            'chekWorkoutList $index, chekWorkoutList $index, chekWorkoutList $index, chekWorkoutList $index',
+            'отжимания каждый день $index',
+            'тринировка ${index + 1}',
+            'тринировка ${index + 2}',
+            'тринировка ${index + 3}',
           ],
-          firstWorkoutDay: DateTime.now(),
+          firstWorkoutDay: DateTime(2022, 9, index + 2),
+          // lastWorkoutDay: DateTime(2022, 9, index + 5),
           topUsers: <NameAndPhotoUser>{
             NameAndPhotoUser(
               idUser: 'test id',
@@ -81,8 +87,8 @@ class DataListRepository {
             photoPath: 'photoPath $index',
             family: 'family $index',
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

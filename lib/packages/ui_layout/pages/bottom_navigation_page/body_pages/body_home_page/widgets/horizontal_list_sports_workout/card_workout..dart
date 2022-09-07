@@ -89,17 +89,22 @@ class WorkoutCard extends StatelessWidget {
                       Expanded(
                         child: Column(
                           children: [
-                            sportWorkout.lastWorkoutDay != null
-                                ? Text(
-                                    'Длительность бессрочно',
-                                    style:
-                                        Theme.of(context).textTheme.headline3,
-                                  )
-                                : Text(
-                                    'Длительность дней ${sportWorkout.lastWorkoutDay?.day ?? 50 - sportWorkout.firstWorkoutDay!.day}',
-                                    style:
-                                        Theme.of(context).textTheme.headline3,
-                                  ),
+                            if (sportWorkout.firstWorkoutDay
+                                .isAfter(DateTime.now()))
+                              Text(
+                                sportWorkout.lastWorkoutDay == null
+                                    ? 'длительность бессрочно'
+                                    : 'длительность ${sportWorkout.lastWorkoutDay!.difference(sportWorkout.firstWorkoutDay).inDays} дней',
+                                style: Theme.of(context).textTheme.headline3,
+                              ),
+                            if (sportWorkout.firstWorkoutDay
+                                .isBefore(DateTime.now()))
+                              Text(
+                                sportWorkout.lastWorkoutDay == null
+                                    ? 'длительность бессрочно'
+                                    : 'идет с ${DateFormat('d MMM y').format(sportWorkout.firstWorkoutDay)}',
+                                style: Theme.of(context).textTheme.headline3,
+                              ),
                             SizedBox(
                               height: 3,
                             ),
@@ -113,21 +118,22 @@ class WorkoutCard extends StatelessWidget {
                               child: Container(
                                 decoration: myStyleContainer(
                                     context: context,
-                                    color: Theme.of(context).primaryColor),
+                                    color: sportWorkout.firstWorkoutDay
+                                            .isAfter(DateTime.now())
+                                        ? Theme.of(context)
+                                            .primaryColor
+                                            .withOpacity(0.4)
+                                        : Theme.of(context).primaryColor),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      'Начало: ',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline3!
-                                          .copyWith(
-                                              color:
-                                                  Theme.of(context).cardColor),
-                                    ),
-                                    Text(
-                                      '${DateFormat('d MMM y').format(sportWorkout.firstWorkoutDay!)}',
+                                      sportWorkout.firstWorkoutDay
+                                              .isAfter(DateTime.now())
+                                          ? 'старт ${DateFormat('d MMM y').format(sportWorkout.firstWorkoutDay)}'
+                                          : sportWorkout.lastWorkoutDay == null
+                                              ? 'пройдено дней ${DateTime.now().difference(sportWorkout.firstWorkoutDay).inDays + 1} / начато ${DateFormat('d MMM y').format(sportWorkout.firstWorkoutDay)}'
+                                              : 'прогресс: ${DateTime.now().difference(sportWorkout.firstWorkoutDay).inDays + 1}/${sportWorkout.lastWorkoutDay!.difference(sportWorkout.firstWorkoutDay).inDays}',
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline3!

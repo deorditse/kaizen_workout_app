@@ -21,7 +21,6 @@ class _BodyHomePageState extends State<BodyHomePage> {
     return CustomScrollView(
       slivers: [
         const MySliverHomeAppBar(),
-        // MyHomeAppBar(),
         SliverToBoxAdapter(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,9 +96,9 @@ class _BodyHomePageState extends State<BodyHomePage> {
                 ),
               ),
               AdminHorizontalListSportsWorkout(),
-              SizedBox(
-                height: 100,
-              ),
+              // SizedBox(
+              //   height: 100,
+              // ),
             ],
           ),
         ),

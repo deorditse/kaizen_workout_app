@@ -1,31 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kaizen/consts_app.dart';
 
-snackBarAddSelectSay() {
+snackBarAddSelectSay(context) {
   return Get.snackbar("Еще один шаг выполнен!", "",
       duration: Duration(milliseconds: 1900),
-      backgroundColor: Colors.black45,
+      backgroundColor: myDefaultDialogBackground(context),
       snackPosition: SnackPosition.BOTTOM,
-      titleText: const Text(
+      titleText: Text(
         "Еще один шаг выполнен!",
         textAlign: TextAlign.center,
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
+        style: Theme.of(context).textTheme.headline1,
       ),
       messageText: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
           text: 'Отлично! Это было',
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-          ),
+          style: Theme.of(context).textTheme.headline2,
           children: <TextSpan>[
             TextSpan(
-              text: "456789",
+              text: " 456 ",
               //${myListPageController.valueSelectDays.value} ",
               style: TextStyle(
                   color: Colors.yellow,
@@ -34,10 +28,7 @@ snackBarAddSelectSay() {
             ),
             TextSpan(
               text: 'выполнение',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-              ),
+              style: Theme.of(context).textTheme.headline2,
             ),
           ],
         ),
