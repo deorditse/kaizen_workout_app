@@ -65,32 +65,35 @@ class CalendarControllerGetXState extends GetxController {
     }
   }
 
-  void updateTaskForTheDay({required indexDay, required String value}) {
+  void updateTaskForTheDay({
+    required indexDay,
+    required String value,
+    bool? togleIsHoliday,
+    bool? toggleRepeatToTheEndOfTheList,
+  }) {
     try {
       // sportWorkoutNewCreate.descriptionWorkoutList.elementAt(indexDay) == value;
+
+      // if (indexDay == 0 && togleIsHoliday != true) {
+      //   descriptionWorkoutList =
+      //       List.generate(itemCount ?? 100, (index) => value);
+      //   update();
+      //   return;
+      // }
+      if (togleIsHoliday != null && togleIsHoliday) {
+        descriptionWorkoutList[indexDay] = value;
+        update();
+        return;
+      }
+      if (toggleRepeatToTheEndOfTheList != null &&
+          toggleRepeatToTheEndOfTheList) {
+        update();
+        return;
+      }
       descriptionWorkoutList[indexDay] = value;
       update();
-
-      if (indexDay == 0) {
-        descriptionWorkoutList =
-            List.generate(itemCount ?? 100, (index) => value);
-        update();
-      }
     } catch (e) {
       print('ошибка из updateTaskForTheDay ${e}');
-    }
-  }
-
-  String? taskForTheDay({required int indexDay}) {
-    try {
-      if (descriptionWorkoutList[indexDay] != null &&
-          descriptionWorkoutList[indexDay]!.isNotEmpty) {
-        return descriptionWorkoutList[indexDay];
-      } else {
-        return null;
-      }
-    } catch (e) {
-      print(e);
     }
   }
 

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/main_bottom_menu_sceleton.dart';
+import 'package:kaizen/packages/ui_layout/widgets/my_snack_bar_button.dart';
 import '../views/login_page.dart';
 
 class EmailAuthController extends GetxController {
@@ -36,10 +37,9 @@ class EmailAuthController extends GetxController {
       await auth.createUserWithEmailAndPassword(
           email: email, password: password);
     } catch (firebaseAuthException) {
-      Get.snackbar(
-        "Register error $firebaseAuthException",
-        firebaseAuthException.toString(),
-        snackPosition: SnackPosition.BOTTOM,
+      mySnackBarButton(
+        title: "Register error $firebaseAuthException",
+        message: firebaseAuthException.toString(),
       );
       print(firebaseAuthException.toString());
     }
@@ -49,11 +49,11 @@ class EmailAuthController extends GetxController {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
     } catch (firebaseAuthException) {
-      Get.snackbar(
-        "Login error $firebaseAuthException",
-        firebaseAuthException.toString(),
-        snackPosition: SnackPosition.BOTTOM,
+      mySnackBarButton(
+        title: "Login error $firebaseAuthException",
+        message: firebaseAuthException.toString(),
       );
+
       print(firebaseAuthException.toString());
     }
   }

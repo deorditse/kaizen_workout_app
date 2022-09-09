@@ -21,7 +21,6 @@ TableBasicsController myListPageController = Get.find<TableBasicsController>();
 class TableComplexExampleState extends State<TableComplexExample> {
   TableBasicsController colorController = Get.find<TableBasicsController>();
 
-
   final ValueNotifier<DateTime> _focusedDay = ValueNotifier(DateTime.now());
 
   static Set<DateTime> selectedDays = LinkedHashSet<DateTime>(
@@ -188,45 +187,48 @@ class TableComplexExampleState extends State<TableComplexExample> {
 
           print("active day");
         });
-        Get.snackbar("Еще один шаг выполнен!", "",
-            duration: Duration(milliseconds: 1900),
-            backgroundColor: Colors.black45,
-            snackPosition: SnackPosition.BOTTOM,
-            titleText: const Text(
-              "Еще один шаг выполнен!",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+        Get.snackbar(
+          "Еще один шаг выполнен!",
+          "",
+          duration: Duration(milliseconds: 1900),
+          backgroundColor: Colors.black45,
+          snackPosition: SnackPosition.BOTTOM,
+          titleText: const Text(
+            "Еще один шаг выполнен!",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
             ),
-            messageText: RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                text: 'Отлично! Это было',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                ),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: " ${myListPageController.valueSelectDays.value} ",
-                    style: TextStyle(
-                        color: Colors.yellow,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  TextSpan(
-                    text: 'выполнение',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                    ),
-                  ),
-                ],
+          ),
+          messageText: RichText(
+            textAlign: TextAlign.center,
+            text: TextSpan(
+              text: 'Отлично! Это было',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
               ),
-            ));
+              children: <TextSpan>[
+                TextSpan(
+                  text: " ${myListPageController.valueSelectDays.value} ",
+                  style: TextStyle(
+                      color: Colors.yellow,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
+                TextSpan(
+                  text: 'выполнение',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
       }
     }
 

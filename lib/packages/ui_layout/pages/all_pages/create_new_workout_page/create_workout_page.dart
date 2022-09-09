@@ -9,6 +9,7 @@ import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout_pag
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout_page/widgets/default_dialog_create_key.dart';
 import 'package:kaizen/packages/ui_layout/style_app/style_card.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:kaizen/packages/ui_layout/widgets/my_snack_bar_button.dart';
 
 class CreateWorkoutPage extends StatefulWidget {
   static const id = '/news_page';
@@ -118,33 +119,16 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
                 .instance.sportWorkoutNewCreate.lastWorkoutDay ==
             null &&
         !CalendarControllerGetXState.instance.toggleDateIsEnd) {
-      Get.snackbar(
-        "",
-        "",
-        backgroundColor: myDefaultDialogBackground(context),
-        messageText: Text(
-          "обязательное поле*",
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headline2,
-        ),
-        titleText: Text(
-          "В пункте 2 выберите дату окончания тренировки",
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headline1,
-        ),
-        // messageText: null,
-        snackPosition: SnackPosition.BOTTOM,
+      mySnackBarButton(
+        context: context,
+        title: "обязательное поле*",
+        message: "В пункте 2 выберите дату окончания тренировки",
       );
     } else {
-      Get.snackbar(
-        '',
-        '',
-        titleText: Text(
-          "Тренировка создана",
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headline1,
-        ),
-        snackPosition: SnackPosition.BOTTOM,
+      mySnackBarButton(
+        context: context,
+        title: "Тренировка создана",
+        message: '',
       );
       defaultDialogAboutSports(context: context);
 

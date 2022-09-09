@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/ui_layout/style_app/style_card.dart';
+import 'package:kaizen/packages/ui_layout/widgets/my_snack_bar_button.dart';
 
 class WhatToDoEveryDayInWorkout extends StatelessWidget {
   const WhatToDoEveryDayInWorkout({super.key});
@@ -78,9 +79,24 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
                 splashRadius: 1000,
                 value: _togleIsHoliday,
                 onChanged: (bool? value) {
-                  setState(() {
-                    _togleIsHoliday = !_togleIsHoliday!;
-                  });
+                  setState(
+                    () {
+                      _togleIsHoliday = !_togleIsHoliday;
+                      value == true
+                          ? CalendarControllerGetXState.instance
+                              .updateTaskForTheDay(
+                              indexDay: widget.index,
+                              value: 'Выходной',
+                              togleIsHoliday: true,
+                            )
+                          : null;
+                      // CalendarControllerGetXState.instance
+                      //         .updateTaskForTheDay(
+                      //         indexDay: widget.index,
+                      //         value: 'Задания на день не добавлено',
+                      //       );
+                    },
+                  );
                 },
               ),
             ],
@@ -90,19 +106,24 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
               builder: (controllerCalendar) {
                 return GestureDetector(
                   onTap: () {
-                    if (CalendarControllerGetXState
-                                .instance.descriptionWorkoutList[0] ==
+                    if (_togleIsHoliday) {
+                      mySnackBarButton(
+                        context: context,
+                        title: 'Выходной',
+                        message:
+                            'Чтобы отредактировать тренировку выключите check выходной',
+                      );
+                    } else if (_toggleRepeatToTheEndOfTheList) {
+                    } else if (controllerCalendar.descriptionWorkoutList[0] ==
                             null &&
                         widget.index != 0) {
-                      Get.snackbar(
-                        '!!!',
-                        'Начните заполнение с первого дня тренировки',
-                        snackPosition: SnackPosition.BOTTOM,
+                      mySnackBarButton(
+                        context: context,
+                        title: '!!!',
+                        message: 'Начните заполнение с первого дня тренировки',
                       );
                     } else {
-                      _togleIsHoliday
-                          ? null
-                          : _methodDialog(context, indexDay: widget.index);
+                      _methodDialog(context, indexDay: widget.index);
                     }
                   },
                   child: Container(
@@ -131,7 +152,9 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
                             child: Text(
-                              "${controllerCalendar.taskForTheDay(indexDay: widget.index) ?? 'задания на день не добавлено'}",
+                              controllerCalendar
+                                      .descriptionWorkoutList[widget.index] ??
+                                  'Задания на день не добавлено',
                               style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontSize: 14,
@@ -191,7 +214,6 @@ _methodDialog(context, {required int indexDay}) {
           controller: _controllerTexr,
           textInputAction: TextInputAction.done,
           onChanged: (value) {
-            _controllerTexr.text = value;
             CalendarControllerGetXState.instance
                 .updateTaskForTheDay(indexDay: indexDay, value: value);
           },
@@ -209,7 +231,6 @@ _methodDialog(context, {required int indexDay}) {
           ),
           keyboardType: TextInputType.text,
           cursorColor: Theme.of(context).primaryColor,
-
           style: Theme.of(context).textTheme.headline1,
           textCapitalization: TextCapitalization.sentences,
           //Заглавные для предложения
