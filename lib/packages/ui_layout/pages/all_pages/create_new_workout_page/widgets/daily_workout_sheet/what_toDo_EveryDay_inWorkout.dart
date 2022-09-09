@@ -18,7 +18,7 @@ class WhatToDoEveryDayInWorkout extends StatelessWidget {
         builder: (controllerCalendar) {
           return ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: controllerCalendar.itemCount,
+            itemCount: controllerCalendar.itemCount, //may by null
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -120,7 +120,7 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
                             child: Text(
-                              "${controllerCalendar.taskForTheDay(indexDay: widget.index) ?? 'заполните данные на день'}",
+                              "${controllerCalendar.taskForTheDay(indexDay: widget.index) ?? 'задания на день не добавлено'}",
                               style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontSize: 14,
@@ -187,7 +187,9 @@ _methodDialog(context, {required int indexDay}) {
           decoration: InputDecoration(
             fillColor: Theme.of(context).cardColor.withOpacity(0.75),
             filled: true,
-            hintText: 'Подробно опишите задание на этот день тренировки',
+            hintText: CalendarControllerGetXState
+                    .instance.descriptionWorkoutList[indexDay] ??
+                'Подробно опишите задание на этот день тренировки',
             border: InputBorder.none,
             hintStyle: Theme.of(context).textTheme.headline2,
           ),

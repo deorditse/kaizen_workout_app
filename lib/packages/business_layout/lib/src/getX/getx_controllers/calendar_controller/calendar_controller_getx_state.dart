@@ -13,6 +13,8 @@ class CalendarControllerGetXState extends GetxController {
   bool toggleDateIsEnd = false;
   bool isHoliday = false;
   int? itemCount = null;
+
+  //создаю лист тренировки который можно редактировать и потом при нажатии на кнопку создать тренировку копирую его в sportWorkoutNewCreate
   List<String?> descriptionWorkoutList = [];
 
   //пустая тренировка
@@ -68,6 +70,12 @@ class CalendarControllerGetXState extends GetxController {
       // sportWorkoutNewCreate.descriptionWorkoutList.elementAt(indexDay) == value;
       descriptionWorkoutList[indexDay] = value;
       update();
+
+      if (indexDay == 0) {
+        descriptionWorkoutList =
+            List.generate(itemCount ?? 100, (index) => value);
+        update();
+      }
     } catch (e) {
       print('ошибка из updateTaskForTheDay ${e}');
     }
@@ -87,12 +95,11 @@ class CalendarControllerGetXState extends GetxController {
   }
 
   void _createDescriptionWorkoutList() {
-    descriptionWorkoutList = List.generate(itemCount ?? 10, (index) => null);
-    print(descriptionWorkoutList);
+    descriptionWorkoutList = List.generate(itemCount ?? 100, (_) => null);
     update();
   }
 
-  void createSportWorkout() {
+  void createSportWorkoutButtonTap() {
     sportWorkoutNewCreate = sportWorkoutNewCreate.copyWith(
         descriptionWorkoutList: descriptionWorkoutList);
     update();
