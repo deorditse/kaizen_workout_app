@@ -25,7 +25,8 @@ mixin _$SportsWorkoutModel {
   String get nameWorkout => throw _privateConstructorUsedError;
   Set<NameAndPhotoUser>? get usersInWorkout =>
       throw _privateConstructorUsedError; //лист с программой на каждый день
-  List<String> get descriptionWorkoutList => throw _privateConstructorUsedError;
+  List<String?> get descriptionWorkoutList =>
+      throw _privateConstructorUsedError;
   DateTime get firstWorkoutDay => throw _privateConstructorUsedError;
   DateTime? get lastWorkoutDay => throw _privateConstructorUsedError;
   Set<NameAndPhotoUser>? get topUsers => throw _privateConstructorUsedError;
@@ -46,7 +47,7 @@ abstract class $SportsWorkoutModelCopyWith<$Res> {
       NameAndPhotoUser adminWorkout,
       String nameWorkout,
       Set<NameAndPhotoUser>? usersInWorkout,
-      List<String> descriptionWorkoutList,
+      List<String?> descriptionWorkoutList,
       DateTime firstWorkoutDay,
       DateTime? lastWorkoutDay,
       Set<NameAndPhotoUser>? topUsers});
@@ -92,7 +93,7 @@ class _$SportsWorkoutModelCopyWithImpl<$Res>
       descriptionWorkoutList: descriptionWorkoutList == freezed
           ? _value.descriptionWorkoutList
           : descriptionWorkoutList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String?>,
       firstWorkoutDay: firstWorkoutDay == freezed
           ? _value.firstWorkoutDay
           : firstWorkoutDay // ignore: cast_nullable_to_non_nullable
@@ -121,7 +122,7 @@ abstract class _$$_SportsWorkoutModelCopyWith<$Res>
       NameAndPhotoUser adminWorkout,
       String nameWorkout,
       Set<NameAndPhotoUser>? usersInWorkout,
-      List<String> descriptionWorkoutList,
+      List<String?> descriptionWorkoutList,
       DateTime firstWorkoutDay,
       DateTime? lastWorkoutDay,
       Set<NameAndPhotoUser>? topUsers});
@@ -169,7 +170,7 @@ class __$$_SportsWorkoutModelCopyWithImpl<$Res>
       descriptionWorkoutList: descriptionWorkoutList == freezed
           ? _value._descriptionWorkoutList
           : descriptionWorkoutList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String?>,
       firstWorkoutDay: firstWorkoutDay == freezed
           ? _value.firstWorkoutDay
           : firstWorkoutDay // ignore: cast_nullable_to_non_nullable
@@ -194,7 +195,7 @@ class _$_SportsWorkoutModel implements _SportsWorkoutModel {
       required this.adminWorkout,
       required this.nameWorkout,
       final Set<NameAndPhotoUser>? usersInWorkout,
-      required final List<String> descriptionWorkoutList,
+      required final List<String?> descriptionWorkoutList,
       required this.firstWorkoutDay,
       this.lastWorkoutDay,
       final Set<NameAndPhotoUser>? topUsers})
@@ -221,10 +222,10 @@ class _$_SportsWorkoutModel implements _SportsWorkoutModel {
   }
 
 //лист с программой на каждый день
-  final List<String> _descriptionWorkoutList;
+  final List<String?> _descriptionWorkoutList;
 //лист с программой на каждый день
   @override
-  List<String> get descriptionWorkoutList {
+  List<String?> get descriptionWorkoutList {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_descriptionWorkoutList);
   }
@@ -301,7 +302,7 @@ abstract class _SportsWorkoutModel implements SportsWorkoutModel {
       required final NameAndPhotoUser adminWorkout,
       required final String nameWorkout,
       final Set<NameAndPhotoUser>? usersInWorkout,
-      required final List<String> descriptionWorkoutList,
+      required final List<String?> descriptionWorkoutList,
       required final DateTime firstWorkoutDay,
       final DateTime? lastWorkoutDay,
       final Set<NameAndPhotoUser>? topUsers}) = _$_SportsWorkoutModel;
@@ -318,7 +319,7 @@ abstract class _SportsWorkoutModel implements SportsWorkoutModel {
   @override
   Set<NameAndPhotoUser>? get usersInWorkout;
   @override //лист с программой на каждый день
-  List<String> get descriptionWorkoutList;
+  List<String?> get descriptionWorkoutList;
   @override
   DateTime get firstWorkoutDay;
   @override

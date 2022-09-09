@@ -29,8 +29,8 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
     return Scaffold(
       appBar: AppBar(
         // leading: MyLeftDrawer.openLeftDrawer(),
-        title: FittedBox(
-          child: const Text(
+        title: const FittedBox(
+          child: Text(
             'Создание тренировки',
           ),
         ),
@@ -43,295 +43,19 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
             SizedBox(
               height: _sizeBetweenContainer / 2,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: myStyleContainer(
-                  context: context,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    ExpansionTile(
-                      title: Center(
-                        child: Text(
-                          'Шаги',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline1!
-                              .copyWith(color: Theme.of(context).primaryColor),
-                        ),
-                      ),
-                      // initiallyExpanded: true,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0,
-                          ),
-                          child: Text(
-                            '1. Когда начнем тренировку?\n2. Когда закончим?\n3. Что делаем каждый день?\n4. Получаем код доступа к тренировке для друзей',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline2!
-                                .copyWith(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        // SizedBox(
-                        //   height: 20,
-                        // ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            '*После создания тренировки вы станете администратором, только у вас будут права редактирования',
-                            style: Theme.of(context).textTheme.headline3,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            _steps(),
             SizedBox(
               height: _sizeBetweenContainer,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Container(
-                decoration: myStyleContainer(
-                  context: context,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '1. Когда начинаем?',
-                            style: Theme.of(context).textTheme.headline1,
-                          ),
-                          Text(
-                            'Первый день тренировки',
-                            style: Theme.of(context).textTheme.headline3,
-                          ),
-                        ],
-                      ),
-                      GestureDetector(
-                        onTap: _showDatePickerStart,
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: GetBuilder<CalendarControllerGetXState>(
-                            builder: (controllerCalendar) {
-                              DateTime? _dateStart = controllerCalendar
-                                  .sportWorkoutNewCreate.firstWorkoutDay;
-                              return Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 4.0),
-                                    child: FaIcon(
-                                      FontAwesomeIcons.calendar,
-                                      color: Theme.of(context).primaryColor,
-                                    ),
-                                  ),
-                                  _dateStart != null
-                                      ? FittedBox(
-                                          child: Text(
-                                            DateFormat('d MMM y')
-                                                .format(_dateStart),
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline2,
-                                          ),
-                                        )
-                                      : FittedBox(
-                                          child: Text(
-                                            'выбрать дату',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline3,
-                                          ),
-                                        ),
-                                ],
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            _whenWeStart(),
             SizedBox(
               height: _sizeBetweenContainer,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Container(
-                decoration: myStyleContainer(
-                  context: context,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                '2. Когда закончим?',
-                                style: Theme.of(context).textTheme.headline1,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    'бессрочно',
-                                    style:
-                                        Theme.of(context).textTheme.headline3,
-                                  ),
-                                  Switch(
-                                    value: CalendarControllerGetXState
-                                        .instance.toggleDateIsEnd,
-                                    onChanged: (value) {
-                                      setState(
-                                        () {
-                                          CalendarControllerGetXState
-                                                  .instance.toggleDateIsEnd =
-                                              !CalendarControllerGetXState
-                                                  .instance.toggleDateIsEnd;
-                                          if (value) {
-                                            CalendarControllerGetXState.instance
-                                                .addLastDay(null);
-                                          }
-                                        },
-                                      );
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          Divider(),
-                        ],
-                      ),
-                      if (!CalendarControllerGetXState.instance.toggleDateIsEnd)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                'Последний день тренировки\nвключительно',
-                                style: Theme.of(context).textTheme.headline3,
-                              ),
-                            ),
-                            GetBuilder<CalendarControllerGetXState>(
-                              builder: (controllerCalendar) {
-                                DateTime? _dateEnd = controllerCalendar
-                                    .sportWorkoutNewCreate.lastWorkoutDay;
-                                return GestureDetector(
-                                  onTap: _showDatePickerEnd,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 4.0),
-                                          child: FaIcon(
-                                            FontAwesomeIcons.calendar,
-                                            color:
-                                                Theme.of(context).primaryColor,
-                                          ),
-                                        ),
-                                        _dateEnd != null
-                                            ? FittedBox(
-                                                child: Text(
-                                                  DateFormat('d MMM y')
-                                                      .format(_dateEnd),
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .headline2,
-                                                ),
-                                              )
-                                            : FittedBox(
-                                                child: Text(
-                                                  'выбрать дату',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .headline3,
-                                                ),
-                                              ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            _whenWeEnd(),
             SizedBox(
               height: _sizeBetweenContainer,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Container(
-                decoration: myStyleContainer(
-                  context: context,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GetBuilder<CalendarControllerGetXState>(
-                    builder: (controllerCalendar) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '3. Что будем делать каждый день?',
-                            style: Theme.of(context).textTheme.headline1,
-                          ),
-                          Text(
-                            'Администратор (Вы) сможете редактировать программу позже',
-                            style: Theme.of(context).textTheme.headline3,
-                          ),
-                          if (controllerCalendar
-                                      .sportWorkoutNewCreate.lastWorkoutDay !=
-                                  null ||
-                              controllerCalendar.toggleDateIsEnd)
-                            WhatToDoEveryDayInWorkout(),
-                          if (controllerCalendar
-                                      .sportWorkoutNewCreate.lastWorkoutDay ==
-                                  null &&
-                              !controllerCalendar.toggleDateIsEnd)
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                '*в пункте 2 выберите дату окончания тренировки',
-                                style: Theme.of(context).textTheme.headline3,
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                        ],
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ),
+            _whatWillWeDoEveryDay(),
             SizedBox(
               height: _sizeBetweenContainer,
             ),
@@ -360,11 +84,12 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
       // maxTime: (DateTime(2040, 1, 1)),
       onChanged: (date) {
         CalendarControllerGetXState.instance.addFirstDay(date);
-        if (CalendarControllerGetXState.instance.sportWorkoutNewCreate.lastWorkoutDay != null) {
+        if (CalendarControllerGetXState
+                .instance.sportWorkoutNewCreate.lastWorkoutDay !=
+            null) {
           CalendarControllerGetXState.instance
               .addLastDay(date.add(const Duration(days: 1)));
         }
-
       },
       currentTime: DateTime.now(),
       locale: LocaleType.ru,
@@ -422,6 +147,292 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
         snackPosition: SnackPosition.BOTTOM,
       );
       defaultDialogAboutSports(context: context);
+
+      ///ToDo: create new sportWorkout in DB
     }
+  }
+
+  Widget _oldDayIn() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Text(
+            'Последний день тренировки\nвключительно',
+            style: Theme.of(context).textTheme.headline3,
+          ),
+        ),
+        GetBuilder<CalendarControllerGetXState>(
+          builder: (controllerCalendar) {
+            DateTime? _dateEnd =
+                controllerCalendar.sportWorkoutNewCreate.lastWorkoutDay;
+            return GestureDetector(
+              onTap: _showDatePickerEnd,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 4.0),
+                      child: FaIcon(
+                        FontAwesomeIcons.calendar,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                    _dateEnd != null
+                        ? FittedBox(
+                            child: Text(
+                              DateFormat('d MMM y').format(_dateEnd),
+                              style: Theme.of(context).textTheme.headline2,
+                            ),
+                          )
+                        : FittedBox(
+                            child: Text(
+                              'выбрать дату',
+                              style: Theme.of(context).textTheme.headline3,
+                            ),
+                          ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  _steps() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: myStyleContainer(
+          context: context,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ExpansionTile(
+              title: Center(
+                child: Text(
+                  'Шаги',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline1!
+                      .copyWith(color: Theme.of(context).primaryColor),
+                ),
+              ),
+              // initiallyExpanded: true,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8.0,
+                  ),
+                  child: Text(
+                    '1. Когда начнем тренировку?\n2. Когда закончим?\n3. Что делаем каждый день?\n4. Получаем код доступа к тренировке для друзей',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline2!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                // SizedBox(
+                //   height: 20,
+                // ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    '*После создания тренировки вы станете администратором, только у вас будут права редактирования',
+                    style: Theme.of(context).textTheme.headline3,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _whenWeStart() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Container(
+        decoration: myStyleContainer(
+          context: context,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '1. Когда начинаем?',
+                    style: Theme.of(context).textTheme.headline1,
+                  ),
+                  Text(
+                    'Первый день тренировки',
+                    style: Theme.of(context).textTheme.headline3,
+                  ),
+                ],
+              ),
+              GestureDetector(
+                onTap: _showDatePickerStart,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: GetBuilder<CalendarControllerGetXState>(
+                    builder: (controllerCalendar) {
+                      DateTime? _dateStart = controllerCalendar
+                          .sportWorkoutNewCreate.firstWorkoutDay;
+                      return Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 4.0),
+                            child: FaIcon(
+                              FontAwesomeIcons.calendar,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+                          _dateStart != null
+                              ? FittedBox(
+                                  child: Text(
+                                    DateFormat('d MMM y').format(_dateStart),
+                                    style:
+                                        Theme.of(context).textTheme.headline2,
+                                  ),
+                                )
+                              : FittedBox(
+                                  child: Text(
+                                    'выбрать дату',
+                                    style:
+                                        Theme.of(context).textTheme.headline3,
+                                  ),
+                                ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  _whenWeEnd() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Container(
+        decoration: myStyleContainer(
+          context: context,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '2. Когда закончим?',
+                        style: Theme.of(context).textTheme.headline1,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            'бессрочно',
+                            style: Theme.of(context).textTheme.headline3,
+                          ),
+                          Switch(
+                            value: CalendarControllerGetXState
+                                .instance.toggleDateIsEnd,
+                            onChanged: (value) {
+                              setState(
+                                () {
+                                  CalendarControllerGetXState
+                                          .instance.toggleDateIsEnd =
+                                      !CalendarControllerGetXState
+                                          .instance.toggleDateIsEnd;
+                                  if (value) {
+                                    CalendarControllerGetXState.instance
+                                        .addLastDay(null);
+                                  }
+                                },
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Divider(),
+                ],
+              ),
+              if (!CalendarControllerGetXState.instance.toggleDateIsEnd)
+                _oldDayIn(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  _whatWillWeDoEveryDay() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Container(
+        decoration: myStyleContainer(
+          context: context,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GetBuilder<CalendarControllerGetXState>(
+            builder: (controllerCalendar) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '3. Что будем делать каждый день?',
+                    style: Theme.of(context).textTheme.headline1,
+                  ),
+                  Text(
+                    'Администратор (Вы) сможете редактировать программу позже',
+                    style: Theme.of(context).textTheme.headline3,
+                  ),
+                  if (controllerCalendar.sportWorkoutNewCreate.lastWorkoutDay !=
+                          null ||
+                      controllerCalendar.toggleDateIsEnd)
+                    //создания листа с карточками дней
+                    WhatToDoEveryDayInWorkout(),
+                  if (controllerCalendar.sportWorkoutNewCreate.lastWorkoutDay ==
+                          null &&
+                      !controllerCalendar.toggleDateIsEnd)
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        '*в пункте 2 выберите дату окончания тренировки',
+                        style: Theme.of(context).textTheme.headline3,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                ],
+              );
+            },
+          ),
+        ),
+      ),
+    );
   }
 }

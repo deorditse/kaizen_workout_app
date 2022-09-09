@@ -62,13 +62,13 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: GetBuilder<ImplementAppStateGetXController>(
                             builder: (controllerApp) {
-                          final String descriptionWorkout = controllerApp
+                          final String? descriptionWorkout = controllerApp
                                   .dataSportsWorkoutList
                                   .elementAt(widget.indexWorkoutList)
                                   .descriptionWorkoutList[widget.indexDayInListWorkoutDescription];
 
                           return Text(
-                            descriptionWorkout,
+                            descriptionWorkout ?? 'нет данных',
                             // "Отжаться 50 раз",
                             style: TextStyle(
                               color: Theme.of(context).primaryColor,

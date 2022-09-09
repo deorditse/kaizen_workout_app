@@ -13,6 +13,7 @@ class CalendarControllerGetXState extends GetxController {
   bool toggleDateIsEnd = false;
   bool isHoliday = false;
   int? itemCount = null;
+  List<String?> descriptionWorkoutList = [];
 
   //пустая тренировка
   SportsWorkoutModel sportWorkoutNewCreate = SportsWorkoutModel(
@@ -55,9 +56,45 @@ class CalendarControllerGetXState extends GetxController {
           .inDays;
       print(result);
       itemCount = result;
+      _createDescriptionWorkoutList();
       update();
     } catch (error) {
       print(error);
     }
+  }
+
+  void updateTaskForTheDay({required indexDay, required String value}) {
+    try {
+      // sportWorkoutNewCreate.descriptionWorkoutList.elementAt(indexDay) == value;
+      descriptionWorkoutList[indexDay] = value;
+      update();
+    } catch (e) {
+      print('ошибка из updateTaskForTheDay ${e}');
+    }
+  }
+
+  String? taskForTheDay({required int indexDay}) {
+    try {
+      if (descriptionWorkoutList[indexDay] != null &&
+          descriptionWorkoutList[indexDay]!.isNotEmpty) {
+        return descriptionWorkoutList[indexDay];
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void _createDescriptionWorkoutList() {
+    descriptionWorkoutList = List.generate(itemCount ?? 10, (index) => null);
+    print(descriptionWorkoutList);
+    update();
+  }
+
+  void createSportWorkout() {
+    sportWorkoutNewCreate = sportWorkoutNewCreate.copyWith(
+        descriptionWorkoutList: descriptionWorkoutList);
+    update();
   }
 }

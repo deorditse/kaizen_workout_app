@@ -17,7 +17,7 @@ _$_SportsWorkoutModel _$$_SportsWorkoutModelFromJson(
           ?.map((e) => NameAndPhotoUser.fromJson(e as Map<String, dynamic>))
           .toSet(),
       descriptionWorkoutList: (json['descriptionWorkoutList'] as List<dynamic>)
-          .map((e) => e as String)
+          .map((e) => e as String?)
           .toList(),
       firstWorkoutDay: DateTime.parse(json['firstWorkoutDay'] as String),
       lastWorkoutDay: json['lastWorkoutDay'] == null

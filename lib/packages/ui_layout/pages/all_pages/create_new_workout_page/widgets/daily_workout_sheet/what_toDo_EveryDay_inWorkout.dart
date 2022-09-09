@@ -4,7 +4,7 @@ import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/ui_layout/style_app/style_card.dart';
 
 class WhatToDoEveryDayInWorkout extends StatelessWidget {
-  WhatToDoEveryDayInWorkout({super.key});
+  const WhatToDoEveryDayInWorkout({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -86,49 +86,56 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
             ],
           ),
           Expanded(
-            child: GestureDetector(
-              onTap: () {
-                _methodDialog(context);
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(10),
-                    bottomRight: Radius.circular(10),
-                  ),
-                ),
-                child: Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Colors.green.withOpacity(0.1),
-                    border: Border(
-                      top: BorderSide.none,
-                      left: BorderSide(
-                          width: 4.0, color: Theme.of(context).primaryColor),
-                      right: BorderSide.none,
-                      bottom: BorderSide.none,
+            child: GetBuilder<CalendarControllerGetXState>(
+              builder: (controllerCalendar) {
+                return GestureDetector(
+                  onTap: () {
+                    _togleIsHoliday
+                        ? null
+                        : _methodDialog(context, indexDay: widget.index);
+                  },
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
                     ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: SingleChildScrollView(
+                    child: Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.green.withOpacity(0.1),
+                        border: Border(
+                          top: BorderSide.none,
+                          left: BorderSide(
+                              width: 4.0,
+                              color: Theme.of(context).primaryColor),
+                          right: BorderSide.none,
+                          bottom: BorderSide.none,
+                        ),
+                      ),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: Text(
-                          "{myListPageController.myStringMessageTextFieldDown.value}",
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 14,
-                            //fontWeight: FontWeight.bold,
+                        padding: const EdgeInsets.all(4.0),
+                        child: SingleChildScrollView(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: Text(
+                              "${controllerCalendar.taskForTheDay(indexDay: widget.index) ?? 'заполните данные на день'}",
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 14,
+                                //fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.left,
+                              overflow: TextOverflow.clip,
+                            ),
                           ),
-                          textAlign: TextAlign.left,
-                          overflow: TextOverflow.clip,
                         ),
                       ),
                     ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ),
           FittedBox(
@@ -154,7 +161,7 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
   }
 }
 
-_methodDialog(context) {
+_methodDialog(context, {required int indexDay}) {
   return Get.defaultDialog(
     backgroundColor: Theme.of(context).primaryColor.withOpacity(0.7),
     titlePadding: EdgeInsets.only(
@@ -169,17 +176,8 @@ _methodDialog(context) {
           autofocus: true,
           textInputAction: TextInputAction.done,
           onChanged: (value) {
-            // setState(() {
-            //   myListPageController
-            //       .myStringMessageTextFieldDown
-            //       .value = value;
-            //
-            //   SaveSharedPrefObject
-            //       .saveTextFieldDown(
-            //       myListPageController
-            //           .indexMyArrayBody.value,
-            //       value);
-            // });
+            CalendarControllerGetXState.instance
+                .updateTaskForTheDay(indexDay: indexDay, value: value);
           },
           onSubmitted: (_) {
             Get.close(1);

@@ -86,8 +86,8 @@ class ImplementAppStateGetXController extends GetxController {
         final indexDescript = DateTime.now().difference(firstWorkoutDay).inDays;
         //проверяю есть ли тренировка на этот день в базе
         return dataSportsWorkoutList[indexWorkoutList]
-                .descriptionWorkoutList[indexDescript]
-                .isNotEmpty
+                    .descriptionWorkoutList[indexDescript] !=
+                null
             ? indexDescript
             : null;
       } else {

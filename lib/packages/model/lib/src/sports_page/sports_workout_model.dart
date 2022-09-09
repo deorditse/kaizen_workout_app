@@ -19,7 +19,7 @@ class SportsWorkoutModel with _$SportsWorkoutModel {
     required String nameWorkout,
     Set<NameAndPhotoUser>? usersInWorkout,
     //лист с программой на каждый день
-    required List<String> descriptionWorkoutList,
+    required List<String?> descriptionWorkoutList,
     required DateTime firstWorkoutDay,
     DateTime? lastWorkoutDay,
     Set<NameAndPhotoUser>? topUsers,
