@@ -90,9 +90,20 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
               builder: (controllerCalendar) {
                 return GestureDetector(
                   onTap: () {
-                    _togleIsHoliday
-                        ? null
-                        : _methodDialog(context, indexDay: widget.index);
+                    if (CalendarControllerGetXState
+                                .instance.descriptionWorkoutList[0] ==
+                            null &&
+                        widget.index != 0) {
+                      Get.snackbar(
+                        '!!!',
+                        'Начните заполнение с первого дня тренировки',
+                        snackPosition: SnackPosition.BOTTOM,
+                      );
+                    } else {
+                      _togleIsHoliday
+                          ? null
+                          : _methodDialog(context, indexDay: widget.index);
+                    }
                   },
                   child: Container(
                     decoration: const BoxDecoration(
@@ -162,20 +173,25 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
 }
 
 _methodDialog(context, {required int indexDay}) {
+  TextEditingController _controllerTexr = TextEditingController(
+      text: CalendarControllerGetXState
+          .instance.descriptionWorkoutList[indexDay]);
   return Get.defaultDialog(
     backgroundColor: Theme.of(context).primaryColor.withOpacity(0.7),
-    titlePadding: EdgeInsets.only(
+    titlePadding: const EdgeInsets.only(
       top: 20,
     ),
     title: "Описание задачи на день",
     content: SingleChildScrollView(
       child: Container(
-        padding: EdgeInsets.all(0),
+        padding: const EdgeInsets.all(0),
         height: MediaQuery.of(context).size.width,
         child: TextField(
           autofocus: true,
+          controller: _controllerTexr,
           textInputAction: TextInputAction.done,
           onChanged: (value) {
+            _controllerTexr.text = value;
             CalendarControllerGetXState.instance
                 .updateTaskForTheDay(indexDay: indexDay, value: value);
           },
@@ -187,9 +203,7 @@ _methodDialog(context, {required int indexDay}) {
           decoration: InputDecoration(
             fillColor: Theme.of(context).cardColor.withOpacity(0.75),
             filled: true,
-            hintText: CalendarControllerGetXState
-                    .instance.descriptionWorkoutList[indexDay] ??
-                'Подробно опишите задание на этот день тренировки',
+            hintText: 'Подробно опишите задание на этот день тренировки',
             border: InputBorder.none,
             hintStyle: Theme.of(context).textTheme.headline2,
           ),
