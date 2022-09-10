@@ -1,4 +1,5 @@
-import 'package:business_layout/src/getX/getx_controllers/calendar_controller/default_dialog_create_key.dart';
+import 'package:business_layout/src/getX/getx_controllers/calendar_controller/widgets/default_dialog_create_key.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:model/model.dart';
 import 'package:style_app/style_app.dart';
@@ -112,10 +113,24 @@ class CalendarControllerGetXState extends GetxController {
               'Заполните каждый день тренировки или нажмите повторить до конца списка',
         );
       } else {
-        defaultDialogAboutSports(context: context);
         sportWorkoutNewCreate = sportWorkoutNewCreate.copyWith(
             descriptionWorkoutList: descriptionWorkoutList);
         update();
+
+        //тренировка создана
+        defaultDialogAboutSports(
+            context: context, idWorkout: sportWorkoutNewCreate.idWorkout);
+
+        //test
+        Get.defaultDialog(
+            content: Container(
+          height: MediaQuery.of(context).size.height * 0.7,
+          child: SingleChildScrollView(
+            child: Text(
+              sportWorkoutNewCreate.toString(),
+            ),
+          ),
+        ));
 
         ///ToDo: create send workout in DB
       }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:style_app/style_app.dart';
 
-defaultDialogAboutSports({required context}) {
+defaultDialogAboutSports({required context, String? idWorkout}) {
   return Get.defaultDialog(
     // titlePadding: EdgeInsets.only(top: 0),
     //  contentPadding: EdgeInsets.only(top: 15),
@@ -35,7 +35,7 @@ defaultDialogAboutSports({required context}) {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Text(
-            '123456',
+            idWorkout ?? 'нет данных',
             style: Theme.of(context).textTheme.headline1!.copyWith(
                   color: Theme.of(context).primaryColor,
                   fontSize: 28,
