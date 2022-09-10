@@ -9,7 +9,6 @@ Widget JoinByKey() {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18.0),
         child: Card(
-          // shadowColor: Colors.,
           elevation: 15,
           color: Theme.of(context).cardColor,
 

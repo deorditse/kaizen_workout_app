@@ -125,19 +125,21 @@ class WorkoutCard extends StatelessWidget {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      sportWorkout.firstWorkoutDay
-                                              .isAfter(DateTime.now())
-                                          ? 'старт ${DateFormat('d MMM y').format(sportWorkout.firstWorkoutDay)}'
-                                          : sportWorkout.lastWorkoutDay == null
-                                              ? 'пройдено дней ${DateTime.now().difference(sportWorkout.firstWorkoutDay).inDays + 1} / начато ${DateFormat('d MMM y').format(sportWorkout.firstWorkoutDay)}'
-                                              : 'прогресс: ${DateTime.now().difference(sportWorkout.firstWorkoutDay).inDays + 1}/${sportWorkout.lastWorkoutDay!.difference(sportWorkout.firstWorkoutDay).inDays}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline3!
-                                          .copyWith(
-                                              color:
-                                                  Theme.of(context).cardColor),
+                                    FittedBox(
+                                      child: Text(
+                                        sportWorkout.firstWorkoutDay
+                                                .isAfter(DateTime.now())
+                                            ? 'старт ${DateFormat('d MMM y').format(sportWorkout.firstWorkoutDay)}'
+                                            : sportWorkout.lastWorkoutDay == null
+                                                ? 'пройдено дней ${DateTime.now().difference(sportWorkout.firstWorkoutDay).inDays + 1} / начато ${DateFormat('d.MM.y').format(sportWorkout.firstWorkoutDay)}'
+                                                : 'прогресс: ${DateTime.now().difference(sportWorkout.firstWorkoutDay).inDays + 1}/${sportWorkout.lastWorkoutDay!.difference(sportWorkout.firstWorkoutDay).inDays}',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline3!
+                                            .copyWith(
+                                                color:
+                                                    Theme.of(context).cardColor),
+                                      ),
                                     ),
                                   ],
                                 ),

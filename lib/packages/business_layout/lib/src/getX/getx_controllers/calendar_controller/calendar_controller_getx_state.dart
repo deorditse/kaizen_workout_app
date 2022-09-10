@@ -99,7 +99,7 @@ class CalendarControllerGetXState extends GetxController {
   }
 
   void _createDescriptionWorkoutList() {
-    descriptionWorkoutList = List.generate(itemCount ?? 100, (_) => null);
+    descriptionWorkoutList = List.generate(itemCount ?? 1, (_) => null);
     update();
   }
 

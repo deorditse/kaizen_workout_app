@@ -21,20 +21,27 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
   final controllerSetting = Get.find<ImplementSettingGetXController>();
 
   final double _sizeBetweenContainer = 20;
+  String createIdWorkout = '322456';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         // leading: MyLeftDrawer.openLeftDrawer(),
-        title: const FittedBox(
+        title: FittedBox(
           child: Padding(
             padding: EdgeInsets.only(right: 8.0),
             child: Text(
-              'Создание тренировки id: 322456',
+              'Создание тренировки id: $createIdWorkout',
             ),
           ),
         ),
+        // actions: [
+        //   FittedBox(child: Padding(
+        //     padding: const EdgeInsets.only(right: 8.0),
+        //     child: IconButton(onPressed: () {}, icon: FaIcon(FontAwesomeIcons.battleNet)),
+        //   )),
+        // ],
       ),
       // endDrawer: MyEndDrawer(),
       body: SingleChildScrollView(
@@ -43,10 +50,11 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: _sizeBetweenContainer / 2,
-              ),
               _steps(),
+              SizedBox(
+                height: _sizeBetweenContainer *1.5,
+              ),
+              _nameWorkout(idWorkout: createIdWorkout, context: context),
               SizedBox(
                 height: _sizeBetweenContainer,
               ),
@@ -69,7 +77,7 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
                 ),
               ),
               SizedBox(
-                height: 120,
+                height: _sizeBetweenContainer * 2.5,
               ),
             ],
           ),
@@ -187,47 +195,39 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
     return Container(
       decoration: myStyleContainer(
         context: context,
+        color: Theme.of(context).scaffoldBackgroundColor,
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: ExpansionTile(
+        expandedAlignment: Alignment.center,
+        title: Center(
+          child:
+              Text('Инструкция', style: Theme.of(context).textTheme.headline2!
+                  // .copyWith(color: Theme.of(context).primaryColor),
+                  ),
+        ),
+        // initiallyExpanded: true,
         children: [
-          ExpansionTile(
-            expandedAlignment: Alignment.center,
-            title: Center(
-              child: Text(
-                'Шаги',
-                style: Theme.of(context)
-                    .textTheme
-                    .headline1!
-                    .copyWith(color: Theme.of(context).primaryColor),
-              ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8.0,
             ),
-            // initiallyExpanded: true,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8.0,
-                ),
-                child: Text(
-                  '1. Выбираем дату начала тренировки\n2. Выбираем дату окончания тренировки\n3. Что делаем каждый день?\n4. Получаем код доступа к тренировке для друзей',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline2!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ),
-              // SizedBox(
-              //   height: 20,
-              // ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  '*После создания тренировки вы станете администратором, только у вас будут права редактирования',
-                  style: Theme.of(context).textTheme.headline3,
-                ),
-              ),
-            ],
+            child: Text(
+              '1. Выбрать дату начала тренировки;\n2. Выбрать дату окончания тренировки;\n3. Что делать каждый день?;\n4. Получить код доступа к тренировке для присоединения друзей.',
+              style: Theme.of(context)
+                  .textTheme
+                  .headline2!
+                  .copyWith(fontWeight: FontWeight.bold),
+            ),
+          ),
+          // SizedBox(
+          //   height: 20,
+          // ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              '*После создания тренировки вы станете администратором, только у вас будут права редактирования',
+              style: Theme.of(context).textTheme.headline3,
+            ),
           ),
         ],
       ),
@@ -399,6 +399,28 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
               ],
             );
           },
+        ),
+      ),
+    );
+  }
+
+  Widget _nameWorkout({required String idWorkout, required context}) {
+    TextEditingController _controller =
+        TextEditingController(text: 'тренировка $idWorkout');
+
+    return Padding(
+      padding: const EdgeInsets.all(6.0),
+      child: TextField(
+        controller: _controller,
+        onSubmitted: (value) {
+          _controller.text = value;
+        },
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.headline2,
+        decoration: myStyleTextField(
+          context,
+          labelText: 'Название тренировки',
+          hintText: 'Введите название',
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
 
@@ -13,12 +14,12 @@ class WhatToDoEveryDayInWorkout extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         color: Theme.of(context).scaffoldBackgroundColor,
       ),
-      height: MediaQuery.of(context).size.width / 2,
+      height: MediaQuery.of(context).size.width / 1.7,
       child: GetBuilder<CalendarControllerGetXState>(
         builder: (controllerCalendar) {
           return ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: controllerCalendar.itemCount, //may by null
+            itemCount: controllerCalendar.itemCount ?? 1, //may by null
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -27,9 +28,11 @@ class WhatToDoEveryDayInWorkout extends StatelessWidget {
                     context: context,
                     color: Theme.of(context).cardColor,
                   ),
-                  width: MediaQuery.of(context).size.width / 1.5,
+                  width: controllerCalendar.itemCount != null
+                      ? MediaQuery.of(context).size.width / 1.5
+                      : MediaQuery.of(context).size.width / 1.14,
                   child: CardDailyWorkoutSheet(
-                    index: index,
+                    index: controllerCalendar.itemCount != null ? index : 0,
                   ),
                 ),
               );
@@ -61,45 +64,73 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Text(
-                  'День ${widget.index + 1}',
-                  style: Theme.of(context).textTheme.headline2,
-                ),
-              ),
-              Text(
-                'выходной',
-                style: Theme.of(context).textTheme.headline3,
-              ),
-              Checkbox(
-                splashRadius: 1000,
-                value: _togleIsHoliday,
-                onChanged: (bool? value) {
-                  setState(
-                    () {
-                      _togleIsHoliday = !_togleIsHoliday;
-                      value == true
-                          ? CalendarControllerGetXState.instance
-                              .updateTaskForTheDay(
-                              indexDay: widget.index,
-                              value: 'Выходной',
-                              togleIsHoliday: true,
-                            )
-                          : CalendarControllerGetXState.instance
-                              .updateTaskForTheDay(
-                              indexDay: widget.index,
-                              value: null,
-                            );
-                    },
-                  );
-                },
-              ),
-            ],
+          Flexible(
+            flex: 1,
+            child: Column(
+              children: [
+                if (CalendarControllerGetXState.instance.itemCount == null)
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'Задача на каждый день',
+                            style: Theme.of(context).textTheme.headline2,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                if (CalendarControllerGetXState.instance.itemCount != null)
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          '${DateFormat('d MMM y').format(DateTime.now().add(Duration(days: widget.index)))}',
+                          style: Theme.of(context).textTheme.headline2,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'выходной',
+                              style: Theme.of(context).textTheme.headline3,
+                            ),
+                            Checkbox(
+                              splashRadius: 1000,
+                              value: _togleIsHoliday,
+                              onChanged: (bool? value) {
+                                setState(
+                                  () {
+                                    _togleIsHoliday = !_togleIsHoliday;
+                                    value == true
+                                        ? CalendarControllerGetXState.instance
+                                            .updateTaskForTheDay(
+                                            indexDay: widget.index,
+                                            value: 'Выходной',
+                                            togleIsHoliday: true,
+                                          )
+                                        : CalendarControllerGetXState.instance
+                                            .updateTaskForTheDay(
+                                            indexDay: widget.index,
+                                            value: null,
+                                          );
+                                  },
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
           ),
           Expanded(
+            flex: 3,
             child: GetBuilder<CalendarControllerGetXState>(
               builder: (controllerCalendar) {
                 return GestureDetector(
@@ -148,17 +179,35 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
                         child: SingleChildScrollView(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Text(
-                              controllerCalendar
-                                      .descriptionWorkoutList[widget.index] ??
-                                  'Задания на день не добавлено',
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                                fontSize: 14,
-                                //fontWeight: FontWeight.bold,
-                              ),
-                              textAlign: TextAlign.left,
-                              overflow: TextOverflow.clip,
+                            child: Column(
+                              children: [
+                                controllerCalendar.toggleDateIsEnd
+                                    ? Text(
+                                        controllerCalendar
+                                                    .descriptionWorkoutList[
+                                                widget.index] ??
+                                            'Нажмите и добавьте задание на все дни',
+                                        style: TextStyle(
+                                          color: Theme.of(context).primaryColor,
+                                          fontSize: 14,
+                                        ),
+                                        textAlign: TextAlign.left,
+                                        overflow: TextOverflow.clip,
+                                      )
+                                    : Text(
+                                        controllerCalendar
+                                                    .descriptionWorkoutList[
+                                                widget.index] ??
+                                            'Задание на день не добавлено',
+                                        // 'Нажмите и добавьте задание на все дни',
+                                        style: TextStyle(
+                                          color: Theme.of(context).primaryColor,
+                                          fontSize: 14,
+                                        ),
+                                        textAlign: TextAlign.left,
+                                        overflow: TextOverflow.clip,
+                                      )
+                              ],
                             ),
                           ),
                         ),
@@ -169,48 +218,66 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
               },
             ),
           ),
-          FittedBox(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Flexible(
+            flex: 1,
+            child: Column(
               children: [
-                Text('Повторить до конца списка'),
-                Switch(
-                  value: _toggleRepeatToTheEndOfTheList,
-                  onChanged: (bool value) {
-                    setState(
-                      () {
-                        if (!_togleIsHoliday) {
-                          _toggleRepeatToTheEndOfTheList =
-                              !_toggleRepeatToTheEndOfTheList;
+                if (CalendarControllerGetXState.instance.itemCount != null &&
+                    CalendarControllerGetXState
+                            .instance.descriptionWorkoutList.length >
+                        1)
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        FittedBox(
+                          child: Text('Повторить до конца списка'),
+                        ),
+                        FittedBox(
+                          child: Switch(
+                            value: _toggleRepeatToTheEndOfTheList,
+                            onChanged: (bool value) {
+                              setState(
+                                () {
+                                  if (!_togleIsHoliday) {
+                                    _toggleRepeatToTheEndOfTheList =
+                                        !_toggleRepeatToTheEndOfTheList;
 
-                          if (value) {
-                            CalendarControllerGetXState.instance
-                                .updateTaskForTheDay(
-                              indexDay: widget.index,
-                              value: CalendarControllerGetXState.instance
-                                  .descriptionWorkoutList[widget.index],
-                              toggleRepeatToTheEndOfTheList: true,
-                              repeatWithIndex: widget.index,
-                            );
-                            mySnackBarButton(
-                              context: context,
-                              title: 'Повтор до конца списка',
-                              message: '',
-                            );
-                          }
+                                    if (value) {
+                                      CalendarControllerGetXState.instance
+                                          .updateTaskForTheDay(
+                                        indexDay: widget.index,
+                                        value: CalendarControllerGetXState
+                                                .instance
+                                                .descriptionWorkoutList[
+                                            widget.index],
+                                        toggleRepeatToTheEndOfTheList: true,
+                                        repeatWithIndex: widget.index,
+                                      );
+                                      mySnackBarButton(
+                                        context: context,
+                                        title: 'Повтор до конца списка',
+                                        message: '',
+                                      );
+                                    }
 
-                          return;
-                        } else {
-                          mySnackBarButton(
-                            context: context,
-                            title: 'Выключите выходной',
-                            message: 'Чтобы повторить до конца списка',
-                          );
-                        }
-                      },
-                    );
-                  },
-                ),
+                                    return;
+                                  } else {
+                                    mySnackBarButton(
+                                      context: context,
+                                      title: 'Выключите выходной',
+                                      message:
+                                          'Чтобы повторить до конца списка',
+                                    );
+                                  }
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
               ],
             ),
           ),
@@ -229,7 +296,9 @@ _methodDialog(context, {required int indexDay}) {
     titlePadding: const EdgeInsets.only(
       top: 20,
     ),
-    title: "Описание задачи на день",
+    title: !CalendarControllerGetXState.instance.toggleDateIsEnd
+        ? "Описание задачи на день"
+        : "Описание задачи на все дни",
     content: SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.all(0),
@@ -250,7 +319,9 @@ _methodDialog(context, {required int indexDay}) {
           decoration: InputDecoration(
             fillColor: Theme.of(context).cardColor.withOpacity(0.75),
             filled: true,
-            hintText: 'Подробно опишите задание на этот день тренировки',
+            hintText: !CalendarControllerGetXState.instance.toggleDateIsEnd
+                ? 'Подробно опишите задание на этот день тренировки'
+                : 'Подробно опишите задание на все дни тренировок',
             border: InputBorder.none,
             hintStyle: Theme.of(context).textTheme.headline2,
           ),
