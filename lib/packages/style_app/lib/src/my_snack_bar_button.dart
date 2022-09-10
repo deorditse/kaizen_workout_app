@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kaizen/packages/style_app/lib/src/consts_app.dart';
+import 'package:style_app/style_app.dart';
 
 mySnackBarButton({
   BuildContext? context,
@@ -10,7 +10,8 @@ mySnackBarButton({
   Get.snackbar(
     "",
     "",
-    backgroundColor: myDefaultDialogBackground(context),
+    backgroundColor:
+        context != null ? myDefaultDialogBackground(context) : null,
     messageText: Text(
       message,
       textAlign: TextAlign.center,

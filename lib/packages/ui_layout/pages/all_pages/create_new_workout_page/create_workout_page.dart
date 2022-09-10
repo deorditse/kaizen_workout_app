@@ -6,9 +6,8 @@ import 'package:kaizen/packages/style_app/lib/style_app.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout_page/style.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout_page/widgets/daily_workout_sheet/what_toDo_EveryDay_inWorkout.dart';
-import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout_page/widgets/default_dialog_create_key.dart';
+import 'package:kaizen/packages/business_layout/lib/src/getX/getx_controllers/calendar_controller/default_dialog_create_key.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-
 
 class CreateWorkoutPage extends StatefulWidget {
   static const id = '/news_page';
@@ -124,13 +123,8 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
         message: "В пункте 2 выберите дату окончания тренировки",
       );
     } else {
-      mySnackBarButton(
-        context: context,
-        title: "Тренировка создана",
-        message: '',
-      );
-      defaultDialogAboutSports(context: context);
-      CalendarControllerGetXState.instance.createSportWorkoutButtonTap();
+      CalendarControllerGetXState.instance
+          .createSportWorkoutButtonTap(context: context);
     }
   }
 

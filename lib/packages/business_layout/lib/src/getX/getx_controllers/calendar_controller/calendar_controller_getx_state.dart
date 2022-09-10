@@ -1,6 +1,7 @@
-import 'package:data_layout/data_layout.dart';
+import 'package:business_layout/src/getX/getx_controllers/calendar_controller/default_dialog_create_key.dart';
 import 'package:get/get.dart';
 import 'package:model/model.dart';
+import 'package:style_app/style_app.dart';
 
 //каждый раз при изменении запускать кодогенерацию
 //для запуска кодогенерации flutter packages pub run build_runner build --delete-conflicting-outputs
@@ -101,14 +102,22 @@ class CalendarControllerGetXState extends GetxController {
     update();
   }
 
-  void createSportWorkoutButtonTap() {
+  void createSportWorkoutButtonTap({required context}) {
     try {
       if (descriptionWorkoutList.contains(null)) {
-        print('не все поля заполнены');
+        mySnackBarButton(
+          context: context,
+          title: "Не все дни заполнены",
+          message:
+              'Заполните каждый день тренировки или нажмите повторить до конца списка',
+        );
       } else {
+        defaultDialogAboutSports(context: context);
         sportWorkoutNewCreate = sportWorkoutNewCreate.copyWith(
             descriptionWorkoutList: descriptionWorkoutList);
         update();
+
+        ///ToDo: create send workout in DB
       }
     } catch (error) {
       print('ошибка из createSportWorkoutButtonTap ${error}');
