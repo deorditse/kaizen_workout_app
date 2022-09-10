@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kaizen/packages/ui_layout/style_app/style_card.dart';
+import 'package:kaizen/packages/style_app/lib/style_app.dart';
 
 Widget statisticsWorkout() {
   return Builder(

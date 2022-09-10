@@ -22,7 +22,8 @@ dependencies:
     path: lib/packages/business_layout
   model:
     path: lib/packages/model
-
+  style_app:
+    path: lib/packages/style_app
 
   dio: ^4.0.6
   font_awesome_flutter: ^10.1.0

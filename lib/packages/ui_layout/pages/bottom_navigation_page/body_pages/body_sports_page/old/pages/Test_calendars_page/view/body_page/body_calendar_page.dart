@@ -1,10 +1,8 @@
 import 'package:get/get.dart';
+import 'package:kaizen/packages/style_app/lib/style_app.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/old/pages/Test_calendars_page/view/body_page/home_bottom_menu/home_bottomNavigationBar.dart';
-import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/old/style.dart';
-import 'package:kaizen/packages/ui_layout/style_app/style_card.dart';
 import '../../../../storage/SharedPreferences/DataFromSharedPreference.dart';
 import '../../../../storage/SharedPreferences/my_shared_preferences.dart';
-import '../../../../storage/hive/hive_date_for_button_menu.dart';
 import 'package:flutter/material.dart';
 import '../../controller/calendar_page_controller.dart';
 import 'complex_example.dart';

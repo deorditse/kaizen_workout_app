@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
-import 'package:kaizen/packages/ui_layout/style_app/style_card.dart';
-import 'package:kaizen/packages/ui_layout/widgets/my_snack_bar_button.dart';
+import 'package:kaizen/packages/style_app/lib/style_app.dart';
 
 class WhatToDoEveryDayInWorkout extends StatelessWidget {
   const WhatToDoEveryDayInWorkout({super.key});
@@ -89,12 +88,11 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
                               value: 'Выходной',
                               togleIsHoliday: true,
                             )
-                          : null;
-                      // CalendarControllerGetXState.instance
-                      //         .updateTaskForTheDay(
-                      //         indexDay: widget.index,
-                      //         value: 'Задания на день не добавлено',
-                      //       );
+                          : CalendarControllerGetXState.instance
+                              .updateTaskForTheDay(
+                              indexDay: widget.index,
+                              value: null,
+                            );
                     },
                   );
                 },
@@ -113,7 +111,6 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
                         message:
                             'Чтобы отредактировать тренировку выключите check выходной',
                       );
-                    } else if (_toggleRepeatToTheEndOfTheList) {
                     } else if (controllerCalendar.descriptionWorkoutList[0] ==
                             null &&
                         widget.index != 0) {
@@ -180,10 +177,38 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
                 Switch(
                   value: _toggleRepeatToTheEndOfTheList,
                   onChanged: (bool value) {
-                    setState(() {
-                      _toggleRepeatToTheEndOfTheList =
-                          !_toggleRepeatToTheEndOfTheList;
-                    });
+                    setState(
+                      () {
+                        if (!_togleIsHoliday) {
+                          _toggleRepeatToTheEndOfTheList =
+                              !_toggleRepeatToTheEndOfTheList;
+
+                          if (value) {
+                            CalendarControllerGetXState.instance
+                                .updateTaskForTheDay(
+                              indexDay: widget.index,
+                              value: CalendarControllerGetXState.instance
+                                  .descriptionWorkoutList[widget.index],
+                              toggleRepeatToTheEndOfTheList: true,
+                              repeatWithIndex: widget.index,
+                            );
+                            mySnackBarButton(
+                              context: context,
+                              title: 'Повтор до конца списка',
+                              message: '',
+                            );
+                          }
+
+                          return;
+                        } else {
+                          mySnackBarButton(
+                            context: context,
+                            title: 'Выключите выходной',
+                            message: 'Чтобы повторить до конца списка',
+                          );
+                        }
+                      },
+                    );
                   },
                 ),
               ],

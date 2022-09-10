@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:kaizen/packages/style_app/lib/style_app.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/main_bottom_menu_sceleton.dart';
-import 'package:kaizen/packages/ui_layout/widgets/my_snack_bar_button.dart';
 import '../views/login_page.dart';
 
 class EmailAuthController extends GetxController {

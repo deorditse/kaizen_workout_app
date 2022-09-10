@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
-import 'package:kaizen/packages/ui_layout/style_app/style_text_field.dart';
-
-import '../controller/email_auth_controller.dart';
+import 'package:kaizen/packages/style_app/lib/style_app.dart';
 import '../utils/validate_email.dart';
-import 'login_form.dart';
 
 class RegisterForm extends StatefulWidget {
   RegisterForm({Key? key}) : super(key: key);

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:kaizen/packages/ui_layout/pages/all_pages/authentication_page/controller/google_auth_controller.dart';
-import 'package:kaizen/packages/ui_layout/style_app/style_text_field.dart';
-
+import 'package:kaizen/packages/style_app/lib/style_app.dart';
 import '../controller/email_auth_controller.dart';
 import '../utils/validate_email.dart';
 

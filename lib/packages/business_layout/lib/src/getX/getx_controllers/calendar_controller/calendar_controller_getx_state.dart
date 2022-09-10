@@ -61,33 +61,32 @@ class CalendarControllerGetXState extends GetxController {
       _createDescriptionWorkoutList();
       update();
     } catch (error) {
-      print(error);
+      print('ошибка из _countDaysWorkout ${error}');
     }
   }
 
   void updateTaskForTheDay({
     required indexDay,
-    required String value,
+    String? value,
     bool? togleIsHoliday,
     bool? toggleRepeatToTheEndOfTheList,
+    int? repeatWithIndex,
   }) {
     try {
-      // sportWorkoutNewCreate.descriptionWorkoutList.elementAt(indexDay) == value;
-
-      // if (indexDay == 0 && togleIsHoliday != true) {
-      //   descriptionWorkoutList =
-      //       List.generate(itemCount ?? 100, (index) => value);
-      //   update();
-      //   return;
-      // }
       if (togleIsHoliday != null && togleIsHoliday) {
         descriptionWorkoutList[indexDay] = value;
         update();
         return;
       }
       if (toggleRepeatToTheEndOfTheList != null &&
-          toggleRepeatToTheEndOfTheList) {
-        update();
+          toggleRepeatToTheEndOfTheList &&
+          repeatWithIndex != null) {
+        for (repeatWithIndex;
+            repeatWithIndex! < descriptionWorkoutList.length;
+            repeatWithIndex++) {
+          descriptionWorkoutList[repeatWithIndex] = value;
+          update();
+        }
         return;
       }
       descriptionWorkoutList[indexDay] = value;
@@ -103,8 +102,16 @@ class CalendarControllerGetXState extends GetxController {
   }
 
   void createSportWorkoutButtonTap() {
-    sportWorkoutNewCreate = sportWorkoutNewCreate.copyWith(
-        descriptionWorkoutList: descriptionWorkoutList);
-    update();
+    try {
+      if (descriptionWorkoutList.contains(null)) {
+        print('не все поля заполнены');
+      } else {
+        sportWorkoutNewCreate = sportWorkoutNewCreate.copyWith(
+            descriptionWorkoutList: descriptionWorkoutList);
+        update();
+      }
+    } catch (error) {
+      print('ошибка из createSportWorkoutButtonTap ${error}');
+    }
   }
 }

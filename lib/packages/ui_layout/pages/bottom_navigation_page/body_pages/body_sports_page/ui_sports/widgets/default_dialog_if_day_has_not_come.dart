@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:kaizen/consts_app.dart';
-import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/old/style.dart';
+import 'package:kaizen/packages/style_app/lib/style_app.dart';
 
 defaultDialogIfDayHasNotCome({required selectedDay, required context}) {
   return Get.defaultDialog(

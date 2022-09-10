@@ -1,9 +1,9 @@
 # This is a generated file; do not edit or check into version control.
-firebase_auth=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.7.0/
-firebase_auth_web=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-4.3.0/
-firebase_core=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.21.1/
+firebase_auth=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.8.0/
+firebase_auth_web=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-4.4.0/
+firebase_core=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.22.0/
 firebase_core_web=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.7.2/
-flutter_native_splash=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/flutter_native_splash-2.2.8/
+flutter_native_splash=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/flutter_native_splash-2.2.9/
 google_sign_in=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/google_sign_in-5.4.1/
 google_sign_in_android=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/google_sign_in_android-6.1.0/
 google_sign_in_ios=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/google_sign_in_ios-5.5.0/
@@ -13,9 +13,9 @@ path_provider_android=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/p
 path_provider_ios=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.11/
 path_provider_linux=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.7/
 path_provider_macos=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.6/
-path_provider_windows=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.1.2/
+path_provider_windows=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.1.3/
 shared_preferences=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/shared_preferences-2.0.15/
-shared_preferences_android=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/shared_preferences_android-2.0.12/
+shared_preferences_android=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/shared_preferences_android-2.0.13/
 shared_preferences_ios=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/shared_preferences_ios-2.1.1/
 shared_preferences_linux=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/shared_preferences_linux-2.1.1/
 shared_preferences_macos=/Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/shared_preferences_macos-2.0.4/

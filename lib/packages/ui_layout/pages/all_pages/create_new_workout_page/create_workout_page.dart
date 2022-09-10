@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:kaizen/consts_app.dart';
+import 'package:kaizen/packages/style_app/lib/style_app.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout_page/style.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout_page/widgets/daily_workout_sheet/what_toDo_EveryDay_inWorkout.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout_page/widgets/default_dialog_create_key.dart';
-import 'package:kaizen/packages/ui_layout/style_app/style_card.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:kaizen/packages/ui_layout/widgets/my_snack_bar_button.dart';
+
 
 class CreateWorkoutPage extends StatefulWidget {
   static const id = '/news_page';
@@ -131,8 +130,7 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
         message: '',
       );
       defaultDialogAboutSports(context: context);
-
-      ///ToDo: create new sportWorkout in DB
+      CalendarControllerGetXState.instance.createSportWorkoutButtonTap();
     }
   }
 

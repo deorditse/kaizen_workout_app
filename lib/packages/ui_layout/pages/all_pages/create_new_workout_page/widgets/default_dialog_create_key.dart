@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:kaizen/consts_app.dart';
+import 'package:kaizen/packages/style_app/lib/style_app.dart';
 
 defaultDialogAboutSports({required context}) {
   return Get.defaultDialog(
