@@ -9,7 +9,7 @@ import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout_pag
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class CreateWorkoutPage extends StatefulWidget {
-  static const id = '/news_page';
+  static const id = '/create_workout_page';
 
   CreateWorkoutPage({Key? key}) : super(key: key);
 
@@ -43,7 +43,7 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
               SizedBox(
                 height: _sizeBetweenContainer,
               ),
-              _whenWeStart(),
+              _whenWeStart(context: context),
               SizedBox(
                 height: _sizeBetweenContainer,
               ),
@@ -51,7 +51,7 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
               SizedBox(
                 height: _sizeBetweenContainer,
               ),
-              _whatWillWeDoEveryDay(),
+              _whatWillWeDoEveryDay(context: context),
               SizedBox(
                 height: _sizeBetweenContainer,
               ),
@@ -224,7 +224,7 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
     );
   }
 
-  _whenWeStart() {
+  _whenWeStart({required context}) {
     return Container(
       decoration: myStyleContainer(
         context: context,
@@ -348,7 +348,7 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
     );
   }
 
-  _whatWillWeDoEveryDay() {
+  _whatWillWeDoEveryDay({required context}) {
     return Container(
       decoration: myStyleContainer(
         context: context,
