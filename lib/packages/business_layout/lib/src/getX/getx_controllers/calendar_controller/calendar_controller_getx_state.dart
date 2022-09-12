@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:model/model.dart';
+import 'package:model/model.dart';
 import 'package:style_app/style_app.dart';
 import '../../../../business_layout.dart';
 import 'widgets/default_dialog_create_key.dart';
@@ -20,76 +21,79 @@ class CalendarControllerGetXState extends GetxController {
     initializedCreateNewWorkout();
   }
 
-  initializedCreateNewWorkout() async {
-    await _createIdWorkout();
-  }
-
-  int idWorkout = 0000;
+  String idWorkout = '0000';
+  String nameWorkout = 'тренировка';
+  DateTime firstWorkoutDay = DateTime.now();
+  DateTime? lastWorkoutDay;
   bool toggleDateIsEnd = false;
   bool isHoliday = false;
-  int? itemCount = null;
-
-  //создаю лист тренировки который можно редактировать и потом при нажатии на кнопку создать тренировку копирую его в sportWorkoutNewCreate
+  int? itemCount;
+  late NameAndPhotoUser adminWorkout;
   List<String?> descriptionWorkoutListFromCreatePage = [];
 
   //пустая тренировка
-  SportsWorkoutModel sportWorkoutNewCreate = SportsWorkoutModel(
-    idWorkout: '',
-    nameWorkout: '',
-    firstWorkoutDay: DateTime.now(),
-    lastWorkoutDay: null,
-    adminWorkout: NameAndPhotoUser(
-      idUser: '',
-      name: '',
-      photoPath: '',
-      family: '',
-    ),
-    descriptionWorkoutList: [],
-    topUsers: {},
-  );
+  late SportsWorkoutModel _sportWorkoutNewCreate;
 
-  void addFirstDay(DateTime date) {
-    //сразу добавлю id и пользователя
+  initializedCreateNewWorkout() async {
+    //сразу добавлю id тренировки и пользователя - будет администратором
+
+    await _createIdWorkout();
+
     final _dataUser = ImplementAppStateGetXController.instance.myUser;
-    NameAndPhotoUser _myUserAdmin = NameAndPhotoUser(
+    adminWorkout = NameAndPhotoUser(
+      //упрощенная модель юзера для предварительного просмотра
       idUser: _dataUser!.idUser,
       name: _dataUser.name ?? 'no name',
       photoPath: _dataUser.photoPath,
       family: _dataUser.family,
     );
 
-    sportWorkoutNewCreate = sportWorkoutNewCreate.copyWith(
-      firstWorkoutDay: date,
-      idWorkout: idWorkout.toString(),
-      adminWorkout: _myUserAdmin,
+    //пустая тренировка
+    _sportWorkoutNewCreate = SportsWorkoutModel(
+      idWorkout: idWorkout,
+      nameWorkout: nameWorkout,
+      firstWorkoutDay: firstWorkoutDay,
+      lastWorkoutDay: lastWorkoutDay,
+      adminWorkout: adminWorkout,
+      descriptionWorkoutList: descriptionWorkoutListFromCreatePage,
     );
+  }
 
-    if (sportWorkoutNewCreate.lastWorkoutDay != null) {
-      sportWorkoutNewCreate.firstWorkoutDay.add(const Duration(days: 1));
+  void addFirstDay(DateTime date) {
+    firstWorkoutDay = date;
+    update();
+    if (lastWorkoutDay != null) {
+      firstWorkoutDay.add(const Duration(days: 1));
+      update();
       _countDaysWorkout();
     }
-    update();
   }
 
   void addLastDay(DateTime? date) {
-    sportWorkoutNewCreate =
-        sportWorkoutNewCreate.copyWith(lastWorkoutDay: date);
-    _countDaysWorkout();
+    lastWorkoutDay = date;
     update();
+    _countDaysWorkout();
   }
 
   //считаем разниццу между последним и первым днем
   void _countDaysWorkout() {
     try {
-      int? result = sportWorkoutNewCreate.lastWorkoutDay
-          ?.difference(sportWorkoutNewCreate.firstWorkoutDay)
-          .inDays;
+      int? result = lastWorkoutDay?.difference(firstWorkoutDay).inDays;
       print(result);
       itemCount = result;
       _createDescriptionWorkoutList();
       update();
     } catch (error) {
-      print('ошибка из _countDaysWorkout ${error}');
+      print('ошибка из _countDaysWorkout $error');
+    }
+  }
+
+  void updateNameWorkout({String? newNameSportWorkout}) {
+    try {
+      nameWorkout = newNameSportWorkout ?? nameWorkout;
+      update();
+    } catch (error) {
+      print('ошибка из updateNameWorkout $error');
     }
   }
 
@@ -130,6 +134,18 @@ class CalendarControllerGetXState extends GetxController {
     update();
   }
 
+  _updateAllDataInSportWorkoutNewCreate() {
+    _sportWorkoutNewCreate = _sportWorkoutNewCreate.copyWith(
+      idWorkout: idWorkout,
+      nameWorkout: nameWorkout,
+      firstWorkoutDay: firstWorkoutDay,
+      lastWorkoutDay: lastWorkoutDay,
+      adminWorkout: adminWorkout,
+      descriptionWorkoutList: descriptionWorkoutListFromCreatePage,
+    );
+    update();
+  }
+
   Future<void> createNewSportWorkoutFromCreateWorkoutPage(
       {required context}) async {
     try {
@@ -141,13 +157,9 @@ class CalendarControllerGetXState extends GetxController {
               'Заполните каждый день тренировки или нажмите повторить до конца списка',
         );
       } else {
-        sportWorkoutNewCreate = sportWorkoutNewCreate.copyWith(
-            descriptionWorkoutList: descriptionWorkoutListFromCreatePage);
-        update();
-
         //тренировка создана
         defaultDialogAboutSports(
-            context: context, idWorkout: sportWorkoutNewCreate.idWorkout);
+            context: context, idWorkout: _sportWorkoutNewCreate.idWorkout);
 
         //test
         Get.defaultDialog(
@@ -155,18 +167,20 @@ class CalendarControllerGetXState extends GetxController {
           height: MediaQuery.of(context).size.height * 0.7,
           child: SingleChildScrollView(
             child: Text(
-              sportWorkoutNewCreate.toString(),
+              _sportWorkoutNewCreate.toString(),
             ),
           ),
         ));
 
+        //обновляю данные в sportWorkoutNewCreate
+        _updateAllDataInSportWorkoutNewCreate();
         //добавляю тренировку в свой лист тренировок и сохраняю в базу данных
         ImplementAppStateGetXController.instance
             .addNewWorkoutInDataSportWorkoutList(
-                sportsWorkoutModel: sportWorkoutNewCreate);
+                sportsWorkoutModel: _sportWorkoutNewCreate);
         //save NewSportWorkoutInDataBase
         await _saveNewSportWorkoutInDataBase(
-            sportsWorkoutModel: sportWorkoutNewCreate);
+            sportsWorkoutModel: _sportWorkoutNewCreate);
       }
     } catch (error) {
       print('ошибка из createSportWorkoutButtonTap ${error}');
@@ -181,7 +195,8 @@ class CalendarControllerGetXState extends GetxController {
   }
 
   Future<void> _createIdWorkout() async {
-    idWorkout = 0007;
+    idWorkout = '0007';
+    nameWorkout = '$nameWorkout $idWorkout';
     update();
   }
 }

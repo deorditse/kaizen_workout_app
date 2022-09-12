@@ -21,28 +21,12 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
   final controllerSetting = Get.find<ImplementSettingGetXController>();
 
   final double _sizeBetweenContainer = 20;
-  String createIdWorkout = '322456';
+  String createIdWorkout = CalendarControllerGetXState.instance.idWorkout;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // leading: MyLeftDrawer.openLeftDrawer(),
-        title: FittedBox(
-          child: Padding(
-            padding: EdgeInsets.only(right: 8.0),
-            child: Text(
-              'Создание тренировки id: $createIdWorkout',
-            ),
-          ),
-        ),
-        // actions: [
-        //   FittedBox(child: Padding(
-        //     padding: const EdgeInsets.only(right: 8.0),
-        //     child: IconButton(onPressed: () {}, icon: FaIcon(FontAwesomeIcons.battleNet)),
-        //   )),
-        // ],
-      ),
+      appBar: _appBarCreatePage(),
       // endDrawer: MyEndDrawer(),
       body: SingleChildScrollView(
         child: Padding(
@@ -52,7 +36,7 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
             children: [
               _steps(),
               SizedBox(
-                height: _sizeBetweenContainer *1.5,
+                height: _sizeBetweenContainer * 1.5,
               ),
               _nameWorkout(idWorkout: createIdWorkout, context: context),
               SizedBox(
@@ -96,9 +80,7 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
       // maxTime: (DateTime(2040, 1, 1)),
       onChanged: (date) {
         CalendarControllerGetXState.instance.addFirstDay(date);
-        if (CalendarControllerGetXState
-                .instance.sportWorkoutNewCreate.lastWorkoutDay !=
-            null) {
+        if (CalendarControllerGetXState.instance.lastWorkoutDay != null) {
           CalendarControllerGetXState.instance
               .addLastDay(date.add(const Duration(days: 1)));
         }
@@ -113,8 +95,7 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
       theme: myDatePickerTheme(context),
       context,
       showTitleActions: true,
-      minTime: CalendarControllerGetXState
-          .instance.sportWorkoutNewCreate.firstWorkoutDay
+      minTime: CalendarControllerGetXState.instance.firstWorkoutDay
           .add(const Duration(days: 1)),
       // maxTime: (DateTime(2040, 1, 1)),
       onChanged: (date) {
@@ -126,20 +107,21 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
   }
 
   void _createWorkout() {
-    if (CalendarControllerGetXState
-                .instance.sportWorkoutNewCreate.lastWorkoutDay ==
-            null &&
-        !CalendarControllerGetXState.instance.toggleDateIsEnd) {
-      mySnackBarButton(
-        context: context,
-        title: "обязательное поле*",
-        message: "В пункте 2 выберите дату окончания тренировки",
-      );
-    } else {
-
-      //добавляем тренировку в список тренировок и в БД
-      CalendarControllerGetXState.instance
-          .createNewSportWorkoutFromCreateWorkoutPage(context: context);
+    try {
+      if (CalendarControllerGetXState.instance.lastWorkoutDay == null &&
+          !CalendarControllerGetXState.instance.toggleDateIsEnd) {
+        mySnackBarButton(
+          context: context,
+          title: "обязательное поле*",
+          message: "В пункте 2 выберите дату окончания тренировки",
+        );
+      } else {
+        //добавляем тренировку в список тренировок и в БД
+        CalendarControllerGetXState.instance
+            .createNewSportWorkoutFromCreateWorkoutPage(context: context);
+      }
+    } catch (error) {
+      print('error from _createWorkout $error');
     }
   }
 
@@ -155,8 +137,7 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
         ),
         GetBuilder<CalendarControllerGetXState>(
           builder: (controllerCalendar) {
-            DateTime? _dateEnd =
-                controllerCalendar.sportWorkoutNewCreate.lastWorkoutDay;
+            DateTime? _dateEnd = controllerCalendar.lastWorkoutDay;
             return GestureDetector(
               onTap: _showDatePickerEnd,
               child: Padding(
@@ -266,8 +247,7 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
                 padding: const EdgeInsets.only(right: 8.0),
                 child: GetBuilder<CalendarControllerGetXState>(
                   builder: (controllerCalendar) {
-                    DateTime? _dateStart = controllerCalendar
-                        .sportWorkoutNewCreate.firstWorkoutDay;
+                    DateTime? _dateStart = controllerCalendar.firstWorkoutDay;
                     return Column(
                       children: [
                         Padding(
@@ -382,13 +362,11 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
                   'Администратор (Вы) сможете редактировать программу позже',
                   style: Theme.of(context).textTheme.headline3,
                 ),
-                if (controllerCalendar.sportWorkoutNewCreate.lastWorkoutDay !=
-                        null ||
+                if (controllerCalendar.lastWorkoutDay != null ||
                     controllerCalendar.toggleDateIsEnd)
                   //создания листа с карточками дней
                   WhatToDoEveryDayInWorkout(),
-                if (controllerCalendar.sportWorkoutNewCreate.lastWorkoutDay ==
-                        null &&
+                if (controllerCalendar.lastWorkoutDay == null &&
                     !controllerCalendar.toggleDateIsEnd)
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -407,15 +385,18 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
   }
 
   Widget _nameWorkout({required String idWorkout, required context}) {
+    final controllerCalendar = CalendarControllerGetXState.instance;
     TextEditingController _controller =
-        TextEditingController(text: 'тренировка $idWorkout');
+        TextEditingController(text: controllerCalendar.nameWorkout);
 
     return Padding(
       padding: const EdgeInsets.all(6.0),
       child: TextField(
         controller: _controller,
-        onSubmitted: (value) {
-          _controller.text = value;
+        onChanged: (value) {
+          //обновление имени тренировки
+          CalendarControllerGetXState.instance
+              .updateNameWorkout(newNameSportWorkout: value);
         },
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.headline2,
@@ -425,6 +406,26 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
           hintText: 'Введите название',
         ),
       ),
+    );
+  }
+
+  AppBar _appBarCreatePage() {
+    return AppBar(
+      // leading: MyLeftDrawer.openLeftDrawer(),
+      title: FittedBox(
+        child: Padding(
+          padding: EdgeInsets.only(right: 8.0),
+          child: Text(
+            'Создание тренировки id: $createIdWorkout',
+          ),
+        ),
+      ),
+      // actions: [
+      //   FittedBox(child: Padding(
+      //     padding: const EdgeInsets.only(right: 8.0),
+      //     child: IconButton(onPressed: () {}, icon: FaIcon(FontAwesomeIcons.battleNet)),
+      //   )),
+      // ],
     );
   }
 }
