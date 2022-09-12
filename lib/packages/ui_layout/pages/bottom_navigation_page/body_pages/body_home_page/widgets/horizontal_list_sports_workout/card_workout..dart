@@ -64,28 +64,34 @@ class WorkoutCard extends StatelessWidget {
     );
   }
 
-  _photoListUsersInWorkout({required constrains, required sportWorkout}) {
+  _photoListUsersInWorkout(
+      {required constrains, required sportWorkout, required context}) {
     return SizedBox(
       height: constrains.maxHeight / 7,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: sportWorkout.usersInWorkout?.length ?? 0,
-        itemBuilder: (context, index) => Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 4.0),
-              child: CircleAvatar(
-                radius: constrains.maxHeight / 12,
-                backgroundImage: const NetworkImage(
-                  'https://picsum.photos/1200/501',
-                ),
+      child: sportWorkout.usersInWorkout != null
+          ? ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: sportWorkout.usersInWorkout.length,
+              itemBuilder: (context, index) => Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 4.0),
+                    child: CircleAvatar(
+                      radius: constrains.maxHeight / 12,
+                      backgroundImage: const NetworkImage(
+                        'https://picsum.photos/1200/501',
+                      ),
+                    ),
+                  ),
+                  if (index == sportWorkout.usersInWorkout!.length - 1)
+                    Icon(Icons.arrow_forward_ios),
+                ],
               ),
+            )
+          : Text(
+              'no users',
+              style: Theme.of(context).textTheme.headline3,
             ),
-            if (index == sportWorkout.usersInWorkout!.length - 1)
-              Icon(Icons.arrow_forward_ios),
-          ],
-        ),
-      ),
     );
   }
 
@@ -225,6 +231,7 @@ class WorkoutCard extends StatelessWidget {
                 _photoListUsersInWorkout(
                   constrains: constrains,
                   sportWorkout: sportWorkout,
+                  context: context,
                 ),
                 // Icon(Icons.arrow_forward_ios),
               ],
