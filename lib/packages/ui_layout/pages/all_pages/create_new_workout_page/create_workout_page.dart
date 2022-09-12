@@ -136,8 +136,10 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
         message: "В пункте 2 выберите дату окончания тренировки",
       );
     } else {
+
+      //добавляем тренировку в список тренировок и в БД
       CalendarControllerGetXState.instance
-          .createSportWorkoutButtonTap(context: context);
+          .createNewSportWorkoutFromCreateWorkoutPage(context: context);
     }
   }
 

@@ -24,7 +24,7 @@ class ImplementAppStateGetXController extends GetxController {
   void onInit() {
     super.onInit();
     //сначала получаю юзера из базы данных по ID
-    getMyUser(idUser: 'test id').whenComplete(() {
+    getMyUser(idUser: 'test id ___ test').whenComplete(() {
       //получаю листы тренировок где участвует пользователь и где он админ
       print('пользователь получен');
       getDataSportWorkout();
@@ -42,39 +42,28 @@ class ImplementAppStateGetXController extends GetxController {
     update();
   }
 
+  ///work with dataSportsWorkoutList
+
   Future getDataSportWorkout() async {
     // достаю каждую тренировку по ее ключу из базы
-    if (myUser != null &&
-        myUser!.listWorkoutKeys != null &&
-        myUser!.listWorkoutKeys!.isNotEmpty) {
-      for (var keyWorkout in myUser!.listWorkoutKeys!) {
-        SportsWorkoutModel? sportWorkout = await _servicesDataLayout
-            .getDataSportWorkout(idWorkout: keyWorkout);
 
-        if (sportWorkout != null) {
-          dataSportsWorkoutList.add(sportWorkout);
-          update();
-          print(dataSportsWorkoutList.length);
+    try {
+      if (myUser != null &&
+          myUser!.listWorkoutKeys != null &&
+          myUser!.listWorkoutKeys!.isNotEmpty) {
+        for (var keyWorkout in myUser!.listWorkoutKeys!) {
+          SportsWorkoutModel? sportWorkout = await _servicesDataLayout
+              .getDataSportWorkout(idWorkout: keyWorkout);
+
+          if (sportWorkout != null) {
+            dataSportsWorkoutList.add(sportWorkout);
+            update();
+            print(dataSportsWorkoutList.length);
+          }
         }
       }
-    }
-  }
-
-  Future getDataSportWorkoutWhenIAdmin() async {
-    // достаю каждую тренировку по ее ключу из базы
-    if (myUser != null &&
-        myUser!.listWorkoutKeysWheIAdmin != null &&
-        myUser!.listWorkoutKeysWheIAdmin!.isNotEmpty) {
-      for (var keyWorkout in myUser!.listWorkoutKeysWheIAdmin!) {
-        SportsWorkoutModel? sportWorkout = await _servicesDataLayout
-            .getDataSportWorkout(idWorkout: keyWorkout);
-
-        if (sportWorkout != null) {
-          dataSportsWorkoutListWhenIAdmin.add(sportWorkout);
-          update();
-          print(dataSportsWorkoutListWhenIAdmin.length);
-        }
-      }
+    } catch (error) {
+      print('error from getDataSportWorkout $error');
     }
   }
 
@@ -95,6 +84,40 @@ class ImplementAppStateGetXController extends GetxController {
       }
     } catch (error) {
       print(error);
+    }
+  }
+
+ void addNewWorkoutInDataSportWorkoutList(
+      {required SportsWorkoutModel sportsWorkoutModel})  {
+    try {
+       dataSportsWorkoutList.add(sportsWorkoutModel);
+      update();
+    } catch (error) {
+      print('error from addNewWorkoutInDataSportWorkoutList $error');
+    }
+  }
+
+  ///work with dataSportsWorkoutListWhenIAdmin - если пользователь админ
+
+  Future getDataSportWorkoutWhenIAdmin() async {
+    // достаю каждую тренировку по ее ключу из базы
+    try {
+      if (myUser != null &&
+          myUser!.listWorkoutKeysWheIAdmin != null &&
+          myUser!.listWorkoutKeysWheIAdmin!.isNotEmpty) {
+        for (var keyWorkout in myUser!.listWorkoutKeysWheIAdmin!) {
+          SportsWorkoutModel? sportWorkout = await _servicesDataLayout
+              .getDataSportWorkout(idWorkout: keyWorkout);
+
+          if (sportWorkout != null) {
+            dataSportsWorkoutListWhenIAdmin.add(sportWorkout);
+            update();
+            print(dataSportsWorkoutListWhenIAdmin.length);
+          }
+        }
+      }
+    } catch (error) {
+      print('error from getDataSportWorkout $error');
     }
   }
 }

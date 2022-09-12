@@ -6,7 +6,6 @@ import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/horizontal_list_sports_workout/widgets/popup_with_users_in_workout.dart';
 
-
 class WorkoutCard extends StatelessWidget {
   WorkoutCard({Key? key, required this.index}) : super(key: key);
 
@@ -36,191 +35,22 @@ class WorkoutCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            FittedBox(
-                              child: Text(
-                                'Ключ \n${sportWorkout.idWorkout}',
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Expanded(
-                              flex: 3,
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Text(
-                                  sportWorkout.nameWorkout.toString(),
-                                  style: Theme.of(context).textTheme.headline2,
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: FittedBox(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    controllerSetting.currentTabIndex.value = 2;
-                                  },
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      FaIcon(
-                                        FontAwesomeIcons.message,
-                                        color: Theme.of(context).primaryColor,
-                                      ),
-                                      Text('Group chat'),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                        child: _keyNameAndCgat(
+                          context: context,
+                          sportWorkout: sportWorkout,
                         ),
                       ),
                       Expanded(
-                        child: Column(
-                          children: [
-                            if (sportWorkout.firstWorkoutDay
-                                .isAfter(DateTime.now()))
-                              Text(
-                                sportWorkout.lastWorkoutDay == null
-                                    ? 'длительность бессрочно'
-                                    : 'длительность ${sportWorkout.lastWorkoutDay!.difference(sportWorkout.firstWorkoutDay).inDays} дней',
-                                style: Theme.of(context).textTheme.headline3,
-                              ),
-                            if (sportWorkout.firstWorkoutDay
-                                .isBefore(DateTime.now()))
-                              Text(
-                                sportWorkout.lastWorkoutDay == null
-                                    ? 'длительность бессрочно'
-                                    : 'идет с ${DateFormat('d MMM y').format(sportWorkout.firstWorkoutDay)}',
-                                style: Theme.of(context).textTheme.headline3,
-                              ),
-                            SizedBox(
-                              height: 3,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                //меняю отслеживание id тренировки
-                                controllerApp.indexWorkoutList.value = index;
-                                //переходим на страницу календаря
-                                controllerSetting.currentTabIndex.value = 1;
-                              },
-                              child: Container(
-                                decoration: myStyleContainer(
-                                    context: context,
-                                    color: sportWorkout.firstWorkoutDay
-                                            .isAfter(DateTime.now())
-                                        ? Theme.of(context)
-                                            .primaryColor
-                                            .withOpacity(0.4)
-                                        : Theme.of(context).primaryColor),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    FittedBox(
-                                      child: Text(
-                                        sportWorkout.firstWorkoutDay
-                                                .isAfter(DateTime.now())
-                                            ? 'старт ${DateFormat('d MMM y').format(sportWorkout.firstWorkoutDay)}'
-                                            : sportWorkout.lastWorkoutDay == null
-                                                ? 'пройдено дней ${DateTime.now().difference(sportWorkout.firstWorkoutDay).inDays + 1} / начато ${DateFormat('d.MM.y').format(sportWorkout.firstWorkoutDay)}'
-                                                : 'прогресс: ${DateTime.now().difference(sportWorkout.firstWorkoutDay).inDays + 1}/${sportWorkout.lastWorkoutDay!.difference(sportWorkout.firstWorkoutDay).inDays}',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline3!
-                                            .copyWith(
-                                                color:
-                                                    Theme.of(context).cardColor),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
+                        child: _centralContentWithStatusData(
+                          sportWorkout: sportWorkout,
+                          context: context,
                         ),
                       ),
                       Expanded(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: GestureDetector(
-                                onTap: () {
-                                  popupWithUsersInWorkout(
-                                    context: context,
-                                    index: index,
-                                    isAdmin: false,
-                                  );
-                                },
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Участников ${sportWorkout.usersInWorkout?.length}',
-                                      style:
-                                          Theme.of(context).textTheme.headline3,
-                                    ),
-                                    SizedBox(
-                                      height: 3,
-                                    ),
-                                    Container(
-                                      height: constrains.maxHeight / 7,
-                                      child: ListView.builder(
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount:
-                                            sportWorkout.usersInWorkout?.length,
-                                        itemBuilder: (context, index) => Row(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 4.0),
-                                              child: CircleAvatar(
-                                                radius:
-                                                    constrains.maxHeight / 12,
-                                                backgroundImage: NetworkImage(
-                                                  'https://picsum.photos/1200/501',
-                                                ),
-                                              ),
-                                            ),
-                                            if (index ==
-                                                sportWorkout.usersInWorkout!
-                                                        .length -
-                                                    1)
-                                              Icon(Icons.arrow_forward_ios),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    // Icon(Icons.arrow_forward_ios),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                //меняю отслеживание id тренировки
-                                controllerApp.indexWorkoutList.value = index;
-                                //переходим на страницу календаря
-                                controllerSetting.currentTabIndex.value = 1;
-                              },
-                              child: FittedBox(
-                                child: Text(
-                                  'к тренировке',
-                                  style: Theme.of(context).textTheme.headline3,
-                                ),
-                              ),
-                            ),
-                          ],
+                        child: _rowWithListUsersAndButton(
+                          context: context,
+                          sportWorkout: sportWorkout,
+                          constrains: constrains,
                         ),
                       ),
                     ],
@@ -231,6 +61,192 @@ class WorkoutCard extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  _photoListUsersInWorkout({required constrains, required sportWorkout}) {
+    return SizedBox(
+      height: constrains.maxHeight / 7,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: sportWorkout.usersInWorkout?.length,
+        itemBuilder: (context, index) => Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 4.0),
+              child: CircleAvatar(
+                radius: constrains.maxHeight / 12,
+                backgroundImage: NetworkImage(
+                  'https://picsum.photos/1200/501',
+                ),
+              ),
+            ),
+            if (index == sportWorkout.usersInWorkout!.length - 1)
+              Icon(Icons.arrow_forward_ios),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _keyNameAndCgat({required context, required sportWorkout}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        FittedBox(
+          child: Text(
+            'Ключ \n${sportWorkout.idWorkout}',
+          ),
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        Expanded(
+          flex: 3,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Text(
+              sportWorkout.nameWorkout.toString(),
+              style: Theme.of(context).textTheme.headline2,
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        Expanded(
+          flex: 1,
+          child: FittedBox(
+            child: GestureDetector(
+              onTap: () {
+                controllerSetting.currentTabIndex.value = 2;
+              },
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.message,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  Text('Group chat'),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  _centralContentWithStatusData({required sportWorkout, required context}) {
+    return Column(
+      children: [
+        if (sportWorkout.firstWorkoutDay.isAfter(DateTime.now()))
+          Text(
+            sportWorkout.lastWorkoutDay == null
+                ? 'длительность бессрочно'
+                : 'длительность ${sportWorkout.lastWorkoutDay!.difference(sportWorkout.firstWorkoutDay).inDays} дней',
+            style: Theme.of(context).textTheme.headline3,
+          ),
+        if (sportWorkout.firstWorkoutDay.isBefore(DateTime.now()))
+          Text(
+            sportWorkout.lastWorkoutDay == null
+                ? 'длительность бессрочно'
+                : 'идет с ${DateFormat('d MMM y').format(sportWorkout.firstWorkoutDay)}',
+            style: Theme.of(context).textTheme.headline3,
+          ),
+        SizedBox(
+          height: 3,
+        ),
+        GestureDetector(
+          onTap: () {
+            //меняю отслеживание id тренировки
+            ImplementAppStateGetXController.instance.indexWorkoutList.value =
+                index;
+            //переходим на страницу календаря
+            controllerSetting.currentTabIndex.value = 1;
+          },
+          child: Container(
+            decoration: myStyleContainer(
+                context: context,
+                color: sportWorkout.firstWorkoutDay.isAfter(DateTime.now())
+                    ? Theme.of(context).primaryColor.withOpacity(0.4)
+                    : Theme.of(context).primaryColor),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FittedBox(
+                  child: Text(
+                    sportWorkout.firstWorkoutDay.isAfter(DateTime.now())
+                        ? 'старт ${DateFormat('d MMM y').format(sportWorkout.firstWorkoutDay)}'
+                        : sportWorkout.lastWorkoutDay == null
+                            ? 'пройдено дней ${DateTime.now().difference(sportWorkout.firstWorkoutDay).inDays + 1} / начато ${DateFormat('d.MM.y').format(sportWorkout.firstWorkoutDay)}'
+                            : 'прогресс: ${DateTime.now().difference(sportWorkout.firstWorkoutDay).inDays + 1}/${sportWorkout.lastWorkoutDay!.difference(sportWorkout.firstWorkoutDay).inDays}',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline3!
+                        .copyWith(color: Theme.of(context).cardColor),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  _rowWithListUsersAndButton(
+      {required context, required sportWorkout, required constrains}) {
+    return Row(
+      children: [
+        Expanded(
+          flex: 2,
+          child: GestureDetector(
+            onTap: () {
+              popupWithUsersInWorkout(
+                context: context,
+                index: index,
+                isAdmin: false,
+              );
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  'Участников ${sportWorkout.usersInWorkout?.length}',
+                  style: Theme.of(context).textTheme.headline3,
+                ),
+                SizedBox(
+                  height: 3,
+                ),
+                _photoListUsersInWorkout(
+                  constrains: constrains,
+                  sportWorkout: sportWorkout,
+                ),
+                // Icon(Icons.arrow_forward_ios),
+              ],
+            ),
+          ),
+        ),
+        TextButton(
+          onPressed: () {
+            //меняю отслеживание id тренировки
+            ImplementAppStateGetXController.instance.indexWorkoutList.value =
+                index;
+            //переходим на страницу календаря
+            controllerSetting.currentTabIndex.value = 1;
+          },
+          child: FittedBox(
+            child: Text(
+              'к тренировке',
+              style: Theme.of(context).textTheme.headline3,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

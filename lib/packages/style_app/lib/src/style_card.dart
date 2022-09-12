@@ -5,10 +5,11 @@ BoxDecoration myStyleContainer({
   color,
   borderRadius,
 }) {
+
   return BoxDecoration(
     color: color ?? Theme.of(context).cardColor,
     borderRadius: borderRadius ?? BorderRadius.circular(8),
-    boxShadow: [
+    boxShadow: const [
       BoxShadow(
         color: Colors.black12,
         spreadRadius: 2,

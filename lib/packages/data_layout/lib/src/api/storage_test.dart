@@ -6,8 +6,8 @@ class DataListRepository {
   Future<User> userData({required String idUser}) async {
     //имитация задержки получения данных из базы
     return await Future.delayed(Duration(seconds: 2)).then(
-      (_) => User(
-        idUser: idUser,
+      (_) => const User(
+        idUser: 'test id ___ test',
         name: 'Test name ',
         email: 'email',
         photoPath: 'photoPath',

@@ -142,7 +142,7 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
                         message:
                             'Чтобы отредактировать тренировку выключите check выходной',
                       );
-                    } else if (controllerCalendar.descriptionWorkoutList[0] ==
+                    } else if (controllerCalendar.descriptionWorkoutListFromCreatePage[0] ==
                             null &&
                         widget.index != 0) {
                       mySnackBarButton(
@@ -184,7 +184,7 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
                                 controllerCalendar.toggleDateIsEnd
                                     ? Text(
                                         controllerCalendar
-                                                    .descriptionWorkoutList[
+                                                    .descriptionWorkoutListFromCreatePage[
                                                 widget.index] ??
                                             'Нажмите и добавьте задание на все дни',
                                         style: TextStyle(
@@ -196,7 +196,7 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
                                       )
                                     : Text(
                                         controllerCalendar
-                                                    .descriptionWorkoutList[
+                                                    .descriptionWorkoutListFromCreatePage[
                                                 widget.index] ??
                                             'Задание на день не добавлено',
                                         // 'Нажмите и добавьте задание на все дни',
@@ -224,7 +224,7 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
               children: [
                 if (CalendarControllerGetXState.instance.itemCount != null &&
                     CalendarControllerGetXState
-                            .instance.descriptionWorkoutList.length >
+                            .instance.descriptionWorkoutListFromCreatePage.length >
                         1)
                   Expanded(
                     child: Row(
@@ -249,7 +249,7 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
                                         indexDay: widget.index,
                                         value: CalendarControllerGetXState
                                                 .instance
-                                                .descriptionWorkoutList[
+                                                .descriptionWorkoutListFromCreatePage[
                                             widget.index],
                                         toggleRepeatToTheEndOfTheList: true,
                                         repeatWithIndex: widget.index,
@@ -290,7 +290,7 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
 _methodDialog(context, {required int indexDay}) {
   TextEditingController _controllerTexr = TextEditingController(
       text: CalendarControllerGetXState
-          .instance.descriptionWorkoutList[indexDay]);
+          .instance.descriptionWorkoutListFromCreatePage[indexDay]);
   return Get.defaultDialog(
     backgroundColor: Theme.of(context).primaryColor.withOpacity(0.7),
     titlePadding: const EdgeInsets.only(

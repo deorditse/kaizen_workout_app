@@ -95,7 +95,7 @@ class BodySportsPage extends StatelessWidget {
                                               context,
                                               sportWorkoutModelDescription:
                                                   sportWorkout
-                                                          .descriptionWorkoutList[
+                                                          .descriptionWorkoutListFromCreatePage[
                                                       indexInDataSportsWorkoutList],
                                               firstWorkoutDay:
                                                   sportWorkout.firstWorkoutDay,
@@ -136,7 +136,7 @@ class BodySportsPage extends StatelessWidget {
                                                     indexInDataSportsWorkoutList !=
                                                             null
                                                         ? sportWorkout
-                                                                .descriptionWorkoutList[
+                                                                .descriptionWorkoutListFromCreatePage[
                                                             indexInDataSportsWorkoutList]
                                                         : 'нет данных',
                                                     style: TextStyle(
