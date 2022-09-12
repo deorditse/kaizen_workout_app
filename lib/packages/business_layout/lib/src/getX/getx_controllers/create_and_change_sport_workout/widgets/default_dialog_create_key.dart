@@ -1,3 +1,4 @@
+import 'package:business_layout/business_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:style_app/style_app.dart';
@@ -47,8 +48,9 @@ defaultDialogAboutSports({required context, String? idWorkout}) {
         ),
         TextButton(
           onPressed: () {
-            // funcLigicButtonPress();
-            return Get.close(1);
+            Get.close(1);
+            CreateAndChangeSportWorkoutControllerGetxState.instance
+                .clearAllDataAndBack();
           },
           child: Text(
             "прекрасно!",
