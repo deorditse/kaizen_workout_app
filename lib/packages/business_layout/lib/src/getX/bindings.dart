@@ -7,6 +7,5 @@ class BasicsExampleBinding implements Bindings {
     Get.put(ImplementAppStateGetXController());
     Get.put(ImplementSettingGetXController());
     Get.put(CreateAndChangeSportWorkoutControllerGetxState());
-    // Get.lazyPut(()=>CreateAndChangeSportWorkoutControllerGetxState());
   }
 }

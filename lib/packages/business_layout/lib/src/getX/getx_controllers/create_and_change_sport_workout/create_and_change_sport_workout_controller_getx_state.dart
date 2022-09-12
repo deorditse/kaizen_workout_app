@@ -1,6 +1,4 @@
-import 'dart:ffi';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:model/model.dart';
@@ -28,7 +26,19 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
   SportsWorkoutModel? _sportWorkoutNewCreate;
 
   @override
-  void onReady() {
+  void dispose() {
+    super.dispose();
+    clearAllDataAndBack();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    clearAllDataAndBack();
+  }
+
+  @override
+  void onInit() {
     super.onReady();
     //при инициации создаем id будущей тренировки
     initializedCreateNewWorkout();
@@ -208,15 +218,15 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
   }
 
   void clearAllDataAndBack() {
-    // firstWorkoutDay = DateTime.now();
-    // lastWorkoutDay = null;
-    // toggleDateIsEnd = false;
-    // isHoliday = false;
-    // itemCount = null;
-    // adminWorkout = null;
-    // descriptionWorkoutListFromCreatePage = [];
-    // _sportWorkoutNewCreate = null;
-    // update();
+    firstWorkoutDay = DateTime.now();
+    lastWorkoutDay = null;
+    toggleDateIsEnd = false;
+    isHoliday = false;
+    itemCount = null;
+    adminWorkout = null;
+    descriptionWorkoutListFromCreatePage = [];
+    _sportWorkoutNewCreate = null;
+    update();
 
     // Get.offAll('/');
   }
