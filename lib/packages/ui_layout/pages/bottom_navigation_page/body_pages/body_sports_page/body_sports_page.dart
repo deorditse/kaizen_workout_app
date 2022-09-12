@@ -37,8 +37,10 @@ class BodySportsPage extends StatelessWidget {
                     null) {
                   return _homePage(context);
                 } else {
-                  SportsWorkoutModel sportWorkout = controllerApp
+                  // SportsWorkoutModel
+                  final sportWorkout = controllerApp
                       .dataSportsWorkoutList[indexInSportsWorkoutList];
+                  //indexInDataSportsWorkoutList
                   final indexInDataSportsWorkoutList =
                       controllerApp.getDataIndexInDataSportsWorkoutList(
                           indexInSportsWorkoutList);
@@ -52,7 +54,6 @@ class BodySportsPage extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
                             decoration: myStyleContainer(context: context),
-                            //color Header
                             width: MediaQuery.of(context).size.width,
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -83,8 +84,7 @@ class BodySportsPage extends StatelessWidget {
                                   child: Padding(
                                     padding: const EdgeInsets.only(bottom: 4.0),
                                     child: Container(
-                                      decoration: BoxDecoration(
-                                        //  color: Colors.white,
+                                      decoration: const BoxDecoration(
                                         borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(0),
                                           topRight: Radius.circular(10),
