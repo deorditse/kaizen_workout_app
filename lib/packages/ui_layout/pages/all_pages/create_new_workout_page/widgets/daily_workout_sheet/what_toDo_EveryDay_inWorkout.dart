@@ -15,7 +15,7 @@ class WhatToDoEveryDayInWorkout extends StatelessWidget {
         color: Theme.of(context).scaffoldBackgroundColor,
       ),
       height: MediaQuery.of(context).size.width / 1.7,
-      child: GetBuilder<CalendarControllerGetXState>(
+      child: GetBuilder<CreateAndChangeSportWorkoutControllerGetxState>(
         builder: (controllerCalendar) {
           return ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -58,6 +58,8 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final controllerCreateNewWorkout =
+        CreateAndChangeSportWorkoutControllerGetxState.instance;
     return Padding(
       padding: const EdgeInsets.only(left: 8.0, right: 8),
       child: Column(
@@ -68,7 +70,7 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
             flex: 1,
             child: Column(
               children: [
-                if (CalendarControllerGetXState.instance.itemCount == null)
+                if (controllerCreateNewWorkout.itemCount == null)
                   Expanded(
                     child: Row(
                       children: [
@@ -82,7 +84,7 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
                       ],
                     ),
                   ),
-                if (CalendarControllerGetXState.instance.itemCount != null)
+                if (controllerCreateNewWorkout.itemCount != null)
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -106,13 +108,13 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
                                   () {
                                     _togleIsHoliday = !_togleIsHoliday;
                                     value == true
-                                        ? CalendarControllerGetXState.instance
+                                        ? controllerCreateNewWorkout
                                             .updateTaskForTheDay(
                                             indexDay: widget.index,
                                             value: 'Выходной',
                                             togleIsHoliday: true,
                                           )
-                                        : CalendarControllerGetXState.instance
+                                        : controllerCreateNewWorkout
                                             .updateTaskForTheDay(
                                             indexDay: widget.index,
                                             value: null,
@@ -131,7 +133,7 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
           ),
           Expanded(
             flex: 3,
-            child: GetBuilder<CalendarControllerGetXState>(
+            child: GetBuilder<CreateAndChangeSportWorkoutControllerGetxState>(
               builder: (controllerCalendar) {
                 return GestureDetector(
                   onTap: () {
@@ -142,7 +144,8 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
                         message:
                             'Чтобы отредактировать тренировку выключите check выходной',
                       );
-                    } else if (controllerCalendar.descriptionWorkoutListFromCreatePage[0] ==
+                    } else if (controllerCalendar
+                                .descriptionWorkoutListFromCreatePage[0] ==
                             null &&
                         widget.index != 0) {
                       mySnackBarButton(
@@ -222,9 +225,11 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
             flex: 1,
             child: Column(
               children: [
-                if (CalendarControllerGetXState.instance.itemCount != null &&
-                    CalendarControllerGetXState
-                            .instance.descriptionWorkoutListFromCreatePage.length >
+                if (CreateAndChangeSportWorkoutControllerGetxState
+                            .instance.itemCount !=
+                        null &&
+                    CreateAndChangeSportWorkoutControllerGetxState.instance
+                            .descriptionWorkoutListFromCreatePage.length >
                         1)
                   Expanded(
                     child: Row(
@@ -244,11 +249,14 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
                                         !_toggleRepeatToTheEndOfTheList;
 
                                     if (value) {
-                                      CalendarControllerGetXState.instance
+                                      final controllerCreateNewWorkout =
+                                          CreateAndChangeSportWorkoutControllerGetxState
+                                              .instance;
+
+                                      controllerCreateNewWorkout
                                           .updateTaskForTheDay(
                                         indexDay: widget.index,
-                                        value: CalendarControllerGetXState
-                                                .instance
+                                        value: controllerCreateNewWorkout
                                                 .descriptionWorkoutListFromCreatePage[
                                             widget.index],
                                         toggleRepeatToTheEndOfTheList: true,
@@ -288,15 +296,18 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
 }
 
 _methodDialog(context, {required int indexDay}) {
+  final controllerCreateNewWorkout =
+      CreateAndChangeSportWorkoutControllerGetxState.instance;
+
   TextEditingController _controllerTexr = TextEditingController(
-      text: CalendarControllerGetXState
-          .instance.descriptionWorkoutListFromCreatePage[indexDay]);
+      text: controllerCreateNewWorkout
+          .descriptionWorkoutListFromCreatePage[indexDay]);
   return Get.defaultDialog(
     backgroundColor: Theme.of(context).primaryColor.withOpacity(0.7),
     titlePadding: const EdgeInsets.only(
       top: 20,
     ),
-    title: !CalendarControllerGetXState.instance.toggleDateIsEnd
+    title: !controllerCreateNewWorkout.toggleDateIsEnd
         ? "Описание задачи на день"
         : "Описание задачи на все дни",
     content: SingleChildScrollView(
@@ -308,8 +319,8 @@ _methodDialog(context, {required int indexDay}) {
           controller: _controllerTexr,
           textInputAction: TextInputAction.done,
           onChanged: (value) {
-            CalendarControllerGetXState.instance
-                .updateTaskForTheDay(indexDay: indexDay, value: value);
+            controllerCreateNewWorkout.updateTaskForTheDay(
+                indexDay: indexDay, value: value);
           },
           onSubmitted: (_) {
             Get.close(1);
@@ -319,7 +330,7 @@ _methodDialog(context, {required int indexDay}) {
           decoration: InputDecoration(
             fillColor: Theme.of(context).cardColor.withOpacity(0.75),
             filled: true,
-            hintText: !CalendarControllerGetXState.instance.toggleDateIsEnd
+            hintText: !controllerCreateNewWorkout.toggleDateIsEnd
                 ? 'Подробно опишите задание на этот день тренировки'
                 : 'Подробно опишите задание на все дни тренировок',
             border: InputBorder.none,

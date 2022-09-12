@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:model/model.dart';
-import 'package:model/model.dart';
 import 'package:style_app/style_app.dart';
 import '../../../../business_layout.dart';
 import 'widgets/default_dialog_create_key.dart';
@@ -10,9 +9,9 @@ import 'widgets/default_dialog_create_key.dart';
 //для запуска кодогенерации flutter packages pub run build_runner build --delete-conflicting-outputs
 //чтобы зарегистрировать как фабрику для GetIt и обращаться к сервис локатору через  MainSimpleStateManagement
 
-class CalendarControllerGetXState extends GetxController {
-  static CalendarControllerGetXState instance =
-      Get.find<CalendarControllerGetXState>();
+class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
+  static CreateAndChangeSportWorkoutControllerGetxState instance =
+      Get.find<CreateAndChangeSportWorkoutControllerGetxState>();
 
   @override
   void onReady() {
