@@ -20,54 +20,63 @@ defaultDialogAllProgramWorkout({required context, required indexSportWorkout}) {
       height: MediaQuery.of(context).size.height * 0.55,
       width: MediaQuery.of(context).size.width,
       child: Container(
-        height: MediaQuery.of(context).size.height, //* 0.5,
-        child: ListView.builder(
-          itemCount: sportWorkout.descriptionWorkoutList.length,
-          itemBuilder: (BuildContext context, int index) {
-            final description = sportWorkout.descriptionWorkoutList[index];
+          height: MediaQuery.of(context).size.height, //* 0.5,
+          child: sportWorkout != null
+              ? ListView.builder(
+                  itemCount: sportWorkout.descriptionWorkoutList.length ?? 0,
+                  itemBuilder: (BuildContext context, int index) {
+                    final description =
+                        sportWorkout.descriptionWorkoutList[index] ??
+                            'ошибка получения данных #001';
 
-
-            return Card(
-              color: DateTime.now().isUtc
-                  ? Theme.of(context).primaryColor
-                  : Theme.of(context).cardColor,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  // mainAxisSize: MainAxisSize.min,
-                  children: [
-                    CircleAvatar(
-                      backgroundColor:
-                          Theme.of(context).primaryColor.withOpacity(0.7),
-                      radius: 22,
-                      child: FittedBox(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            DateFormat('d MMM').format(sportWorkout
-                                .firstWorkoutDay
-                                .add(Duration(days: index))),
-                            style: Theme.of(context).textTheme.headline2,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
+                    return Card(
+                      color: DateTime.now().isUtc
+                          ? Theme.of(context).primaryColor
+                          : Theme.of(context).cardColor,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          '${description}' ?? 'нет данных',
-                          style: Theme.of(context).textTheme.headline2,
+                        child: Row(
+                          // mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Theme.of(context)
+                                  .primaryColor
+                                  .withOpacity(0.7),
+                              radius: 22,
+                              child: FittedBox(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    DateFormat('d MMM').format(sportWorkout
+                                        .firstWorkoutDay
+                                        .add(Duration(days: index))),
+                                    style:
+                                        Theme.of(context).textTheme.headline2,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  '${description}' ?? 'нет данных',
+                                  style: Theme.of(context).textTheme.headline2,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
-      ),
+                    );
+                  },
+                )
+              : Center(
+                  child: Text(
+                    'ошибка получения данных',
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                )),
     ),
   );
 }

@@ -36,7 +36,7 @@ SliverAppBar mySliverSportsAppBar(context) {
     ],
     title: GetBuilder<ImplementAppStateGetXController>(
       builder: (_) => Text(
-        'Тренировка ${controllerApp.dataSportsWorkoutList.isNotEmpty ? 'id ${controllerApp.dataSportsWorkoutList[controllerApp.indexWorkoutList.value].idWorkout}' : ''}',
+        'Тренировка ${controllerApp.dataSportsWorkoutList.isNotEmpty ? 'id ${controllerApp.dataSportsWorkoutList[controllerApp.indexWorkoutList.value]!.idWorkout}' : ''}',
         style: Theme.of(context).textTheme.headline1,
       ),
     ),

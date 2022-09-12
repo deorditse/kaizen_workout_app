@@ -15,40 +15,45 @@ popupWithUsersInWorkout({
 
   return Get.defaultDialog(
     backgroundColor: myDefaultDialogBackground(context),
-    titlePadding: EdgeInsets.only(
+    titlePadding: const EdgeInsets.only(
       top: 20,
     ),
-    title: "Список участников\n${sportWorkout.nameWorkout}",
+    title: sportWorkout != null
+        ? "Список участников ${sportWorkout.idWorkout}\n${sportWorkout.nameWorkout}"
+        : "error",
     // content: Text(usersInWorkout.cast().toList().toString()),
-    content: Container(
-      height: MediaQuery.of(context).size.width,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            ...sportWorkout.usersInWorkout!
-                .cast()
-                .map(
-                  (user) => ListTile(
-                    hoverColor: Colors.yellow,
-                    focusColor: Colors.red,
-                    leading: CircleAvatar(
-                      backgroundImage: NetworkImage(
-                        'https://picsum.photos/1200/501',
-                        // fit: BoxFit.cover,
-                      ),
-                    ),
-                    title: Text('${user.name} ${user.family}'),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                    onTap: () {
-                      print('hello');
-                    },
-                  ),
-                )
-                .toSet(),
-          ],
-        ),
-      ),
-    ),
+    content: SizedBox(
+        height: MediaQuery.of(context).size.width,
+        child: sportWorkout != null
+            ? SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ...sportWorkout.usersInWorkout!
+                        .cast()
+                        .map(
+                          (user) => ListTile(
+                            hoverColor: Colors.yellow,
+                            focusColor: Colors.red,
+                            leading: const CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                'https://picsum.photos/1200/501',
+                                // fit: BoxFit.cover,
+                              ),
+                            ),
+                            title: Text('${user.name} ${user.family}'),
+                            trailing: Icon(Icons.arrow_forward_ios),
+                            onTap: () {
+                              print('hello');
+                            },
+                          ),
+                        )
+                        .toSet(),
+                  ],
+                ),
+              )
+            : const Center(
+                child: Text('error'),
+              )),
     titleStyle: Theme.of(context).textTheme.headline1,
     // middleTextStyle
   );

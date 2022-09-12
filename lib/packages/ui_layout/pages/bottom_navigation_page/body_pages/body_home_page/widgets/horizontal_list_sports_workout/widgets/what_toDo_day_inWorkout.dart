@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
+import 'package:kaizen/packages/model/lib/model.dart';
 
 class CardDailyWorkoutSheet extends StatefulWidget {
-  CardDailyWorkoutSheet({Key? key, required this.indexDayInListWorkoutDescription, required this.indexWorkoutList})
+  CardDailyWorkoutSheet(
+      {Key? key,
+      required this.indexDayInListWorkoutDescription,
+      required this.indexWorkoutList})
       : super(key: key);
   int indexWorkoutList;
   int indexDayInListWorkoutDescription;
@@ -62,10 +66,14 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: GetBuilder<ImplementAppStateGetXController>(
                             builder: (controllerApp) {
-                          final String? descriptionWorkout = controllerApp
-                                  .dataSportsWorkoutList
-                                  .elementAt(widget.indexWorkoutList)
-                                  .descriptionWorkoutList[widget.indexDayInListWorkoutDescription];
+                          final sportWorkout = controllerApp
+                              .dataSportsWorkoutList
+                              .elementAt(widget.indexWorkoutList);
+
+                          final String descriptionWorkout = sportWorkout
+                                      ?.descriptionWorkoutList[
+                                  widget.indexDayInListWorkoutDescription] ??
+                              'error';
 
                           return Text(
                             descriptionWorkout ?? 'нет данных',
