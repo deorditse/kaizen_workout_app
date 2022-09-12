@@ -13,7 +13,7 @@ class ImplementAppStateGetXController extends GetxController {
   static ImplementAppStateGetXController instance = Get.find();
 
   ///
-  List<SportsWorkoutModel> dataSportsWorkoutList = [];
+  List<SportsWorkoutModel?> dataSportsWorkoutList = [];
   Rx<int> indexWorkoutList = 0.obs;
   List<SportsWorkoutModel> dataSportsWorkoutListWhenIAdmin = [];
   User? myUser; //включает в себя лист с ключами тренировок
@@ -87,10 +87,10 @@ class ImplementAppStateGetXController extends GetxController {
     }
   }
 
- void addNewWorkoutInDataSportWorkoutList(
-      {required SportsWorkoutModel sportsWorkoutModel})  {
+  void addNewWorkoutInDataSportWorkoutList(
+      {required SportsWorkoutModel sportsWorkoutModel}) {
     try {
-       dataSportsWorkoutList.add(sportsWorkoutModel);
+      dataSportsWorkoutList.add(sportsWorkoutModel);
       update();
     } catch (error) {
       print('error from addNewWorkoutInDataSportWorkoutList $error');

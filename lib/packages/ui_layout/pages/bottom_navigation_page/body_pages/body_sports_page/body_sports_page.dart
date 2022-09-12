@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:kaizen/packages/business_layout/lib/src/getX/getx_controllers/app_controller/implement_getx_state_management.dart';
 import 'package:kaizen/packages/business_layout/lib/src/getX/getx_controllers/setting_controller/implement_getx_state_management.dart';
-import 'package:kaizen/packages/model/lib/model.dart';
 import 'package:kaizen/packages/style_app/lib/src/consts_app.dart';
 import 'package:kaizen/packages/style_app/lib/src/style_card.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/old/pages/Test_calendars_page/controller/calendar_page_controller.dart';
@@ -48,141 +47,24 @@ class BodySportsPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                        height: 140,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            decoration: myStyleContainer(context: context),
-                            width: MediaQuery.of(context).size.width,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Container(
-                                  alignment: Alignment.center,
-                                  width: MediaQuery.of(context).size.width,
-                                  child: Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 10.0),
-                                    child: Container(
-                                      child: Text(
-                                        'Задача на день',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline1,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 12,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(bottom: 4.0),
-                                    child: Container(
-                                      decoration: const BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(0),
-                                          topRight: Radius.circular(10),
-                                          bottomLeft: Radius.circular(0),
-                                          bottomRight: Radius.circular(10),
-                                        ),
-                                      ),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          if (indexInDataSportsWorkoutList !=
-                                              null) {
-                                            _defaultDialogWithDayProgram(
-                                              context,
-                                              sportWorkoutModelDescription:
-                                                  sportWorkout
-                                                          .descriptionWorkoutList[
-                                                      indexInDataSportsWorkoutList],
-                                              firstWorkoutDay:
-                                                  sportWorkout.firstWorkoutDay,
-                                            );
-                                          }
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(4.0),
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            decoration: BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .primaryColor
-                                                  .withOpacity(0.1),
-                                              border: Border(
-                                                top: BorderSide.none,
-                                                left: BorderSide(
-                                                  width: 4.0,
-                                                  color: Theme.of(context)
-                                                      .primaryColor,
-                                                ),
-                                                right: BorderSide.none,
-                                                bottom: BorderSide.none,
-                                              ),
-                                              // color: Colors.black.withOpacity(0.05),
-                                            ),
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
-                                              child: SingleChildScrollView(
-                                                child: Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(horizontal: 8),
-                                                  child: Text(
-                                                    indexInDataSportsWorkoutList !=
-                                                            null
-                                                        ? sportWorkout
-                                                                .descriptionWorkoutList[
-                                                            indexInDataSportsWorkoutList]!
-                                                        : 'нет данных',
-                                                    style: TextStyle(
-                                                      color: Theme.of(context)
-                                                          .primaryColor,
-                                                      // Colors.green.shade700,
-                                                      fontSize: 14,
-                                                      //fontWeight: FontWeight.bold,
-                                                    ),
-                                                    textAlign: TextAlign.left,
-                                                    overflow: TextOverflow.clip,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                      _taskOfTheDay(
+                        context: context,
+                        indexInDataSportsWorkoutList:
+                            indexInDataSportsWorkoutList,
+                        sportWorkout: sportWorkout,
                       ),
                       SizedBox(
                         height: heightPadding,
                       ),
-                      Container(
-                        //flex: 10,
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 8.0,
-                            right: 8.0,
-                          ),
-                          child: Container(
-                            padding: EdgeInsets.only(bottom: 20),
-                            decoration: myStyleContainer(context: context),
-                            child: Calendar(key: key),
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 8.0,
+                          right: 8.0,
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.only(bottom: 20),
+                          decoration: myStyleContainer(context: context),
+                          child: Calendar(key: key),
                         ),
                       ),
                       Padding(
@@ -201,11 +83,11 @@ class BodySportsPage extends StatelessWidget {
                       SizedBox(
                         height: heightPadding,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: ListUsersCompletedTaskForDay(),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 100,
                       ),
                     ],
@@ -263,6 +145,119 @@ class BodySportsPage extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline2!),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  SizedBox _taskOfTheDay({
+    required context,
+    required indexInDataSportsWorkoutList,
+    required sportWorkout,
+  }) {
+    return SizedBox(
+      height: 140,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: myStyleContainer(context: context),
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 8,
+              ),
+              Container(
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Container(
+                    child: Text(
+                      'Задача на день',
+                      style: Theme.of(context).textTheme.headline1,
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 12,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 4.0),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(0),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(0),
+                        bottomRight: Radius.circular(10),
+                      ),
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        if (indexInDataSportsWorkoutList != null) {
+                          _defaultDialogWithDayProgram(
+                            context,
+                            sportWorkoutModelDescription:
+                                sportWorkout.descriptionWorkoutList[
+                                    indexInDataSportsWorkoutList],
+                            firstWorkoutDay: sportWorkout.firstWorkoutDay,
+                          );
+                        }
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Container(
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color:
+                                Theme.of(context).primaryColor.withOpacity(0.1),
+                            border: Border(
+                              top: BorderSide.none,
+                              left: BorderSide(
+                                width: 4.0,
+                                color: Theme.of(context).primaryColor,
+                              ),
+                              right: BorderSide.none,
+                              bottom: BorderSide.none,
+                            ),
+                            // color: Colors.black.withOpacity(0.05),
+                          ),
+                          width: MediaQuery.of(context).size.width,
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: SingleChildScrollView(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                child: Text(
+                                  indexInDataSportsWorkoutList != null
+                                      ? sportWorkout.descriptionWorkoutList[
+                                          indexInDataSportsWorkoutList]!
+                                      : 'нет данных',
+                                  style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
+                                    // Colors.green.shade700,
+                                    fontSize: 14,
+                                    //fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.left,
+                                  overflow: TextOverflow.clip,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
