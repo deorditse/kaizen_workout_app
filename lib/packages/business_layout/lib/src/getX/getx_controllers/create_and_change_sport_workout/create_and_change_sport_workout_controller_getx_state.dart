@@ -26,12 +26,6 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
   SportsWorkoutModel? _sportWorkoutNewCreate;
 
   @override
-  void dispose() {
-    super.dispose();
-    clearAllDataAndBack();
-  }
-
-  @override
   void onClose() {
     super.onClose();
     clearAllDataAndBack();
@@ -217,7 +211,7 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
     update();
   }
 
-  void clearAllDataAndBack() {
+  Future<void> clearAllDataAndBack() async {
     firstWorkoutDay = DateTime.now();
     lastWorkoutDay = null;
     toggleDateIsEnd = false;
@@ -226,8 +220,9 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
     adminWorkout = null;
     descriptionWorkoutListFromCreatePage = [];
     _sportWorkoutNewCreate = null;
+    idWorkout = '';
+    await _createIdWorkout();
+    nameWorkout = 'тренировка';
     update();
-
-    // Get.offAll('/');
   }
 }

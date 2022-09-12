@@ -49,8 +49,9 @@ defaultDialogAboutSports({required context, String? idWorkout}) {
         ),
         TextButton(
           onPressed: () {
-            // CreateAndChangeSportWorkoutControllerGetxState
-            //     .instance.clearAllDataAndBack();
+            CreateAndChangeSportWorkoutControllerGetxState
+                .instance.clearAllDataAndBack();
+            Get.back();
             Get.close(1);
           },
           child: Text(
