@@ -69,14 +69,14 @@ class WorkoutCard extends StatelessWidget {
       height: constrains.maxHeight / 7,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: sportWorkout.usersInWorkout?.length,
+        itemCount: sportWorkout.usersInWorkout?.length ?? 0,
         itemBuilder: (context, index) => Row(
           children: [
             Padding(
               padding: const EdgeInsets.only(right: 4.0),
               child: CircleAvatar(
                 radius: constrains.maxHeight / 12,
-                backgroundImage: NetworkImage(
+                backgroundImage: const NetworkImage(
                   'https://picsum.photos/1200/501',
                 ),
               ),
@@ -216,7 +216,7 @@ class WorkoutCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  'Участников ${sportWorkout.usersInWorkout?.length}',
+                  'Участников ${sportWorkout.usersInWorkout?.length ?? ''}',
                   style: Theme.of(context).textTheme.headline3,
                 ),
                 SizedBox(

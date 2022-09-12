@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
-import 'package:kaizen/packages/style_app/lib/style_app.dart';
+import 'package:kaizen/packages/business_layout/lib/src/getX/getx_controllers/app_controller/implement_getx_state_management.dart';
+import 'package:kaizen/packages/business_layout/lib/src/getX/getx_controllers/setting_controller/implement_getx_state_management.dart';
+import 'package:kaizen/packages/model/lib/model.dart';
+import 'package:kaizen/packages/style_app/lib/src/consts_app.dart';
+import 'package:kaizen/packages/style_app/lib/src/style_card.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/old/pages/Test_calendars_page/controller/calendar_page_controller.dart';
-import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/ui_sports/widgets/calendar/calendar.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/ui_sports/widgets/app_bar_sports.dart';
+import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/ui_sports/widgets/calendar/calendar.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/ui_sports/widgets/difault_dialog_all_program_workout.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/ui_sports/widgets/list_users_comleted_task_day.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/ui_sports/widgets/statisticsWorkoutWidget.dart';
-
 
 class BodySportsPage extends StatelessWidget {
   BodySportsPage({Key? key}) : super(key: key);
@@ -26,17 +28,20 @@ class BodySportsPage extends StatelessWidget {
           mySliverSportsAppBar(context),
           SliverToBoxAdapter(
             child: GetBuilder<ImplementAppStateGetXController>(
-              builder: (_controllerApp) {
-                int index = _controllerApp.indexWorkoutList.value;
-                final sportWorkout =
-                    _controllerApp.dataSportsWorkoutList.isNotEmpty
-                        ? _controllerApp.dataSportsWorkoutList.cast()[index]!
-                        : null;
-                if (sportWorkout == null) {
+              builder: (controllerApp) {
+                int indexInSportsWorkoutList =
+                    controllerApp.indexWorkoutList.value;
+
+                if (controllerApp
+                        .dataSportsWorkoutList[indexInSportsWorkoutList] ==
+                    null) {
                   return _homePage(context);
                 } else {
+                  SportsWorkoutModel sportWorkout = controllerApp
+                      .dataSportsWorkoutList[indexInSportsWorkoutList];
                   final indexInDataSportsWorkoutList =
-                      _controllerApp.getDataIndexInDataSportsWorkoutList(index);
+                      controllerApp.getDataIndexInDataSportsWorkoutList(
+                          indexInSportsWorkoutList);
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -95,7 +100,7 @@ class BodySportsPage extends StatelessWidget {
                                               context,
                                               sportWorkoutModelDescription:
                                                   sportWorkout
-                                                          .descriptionWorkoutListFromCreatePage[
+                                                          .descriptionWorkoutList[
                                                       indexInDataSportsWorkoutList],
                                               firstWorkoutDay:
                                                   sportWorkout.firstWorkoutDay,
@@ -136,8 +141,8 @@ class BodySportsPage extends StatelessWidget {
                                                     indexInDataSportsWorkoutList !=
                                                             null
                                                         ? sportWorkout
-                                                                .descriptionWorkoutListFromCreatePage[
-                                                            indexInDataSportsWorkoutList]
+                                                                .descriptionWorkoutList[
+                                                            indexInDataSportsWorkoutList]!
                                                         : 'нет данных',
                                                     style: TextStyle(
                                                       color: Theme.of(context)
@@ -186,7 +191,7 @@ class BodySportsPage extends StatelessWidget {
                           onPressed: () {
                             defaultDialogAllProgramWorkout(
                               context: context,
-                              indexSportWorkout: index,
+                              indexSportWorkout: indexInSportsWorkoutList,
                             );
                           },
                           child: Text('Посмотреть программу тренировки'),
