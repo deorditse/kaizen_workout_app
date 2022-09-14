@@ -7,9 +7,10 @@ import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_page
 rowWithListUsersAndButton({
   required int index,
   required context,
-  required sportWorkout,
+  required usersInWorkout,
   required constrains,
   bool? buttonIsDelete,
+  bool? isAdmin,
 }) {
   final controllerSetting = Get.find<ImplementSettingGetXController>();
 
@@ -22,7 +23,7 @@ rowWithListUsersAndButton({
             popupWithUsersInWorkout(
               context: context,
               index: index,
-              isAdmin: false,
+              isAdmin: isAdmin ?? false,
             );
           },
           child: Column(
@@ -30,7 +31,7 @@ rowWithListUsersAndButton({
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                'Участников ${sportWorkout?.usersInWorkout?.length ?? ''}',
+                'Участников ${usersInWorkout?.length ?? ''}',
                 style: Theme.of(context).textTheme.headline3,
               ),
               const SizedBox(
@@ -38,7 +39,7 @@ rowWithListUsersAndButton({
               ),
               _photoListUsersInWorkout(
                 constrains: constrains,
-                sportWorkout: sportWorkout,
+                usersInWorkout: usersInWorkout,
                 context: context,
               ),
               // Icon(Icons.arrow_forward_ios),
@@ -68,15 +69,15 @@ rowWithListUsersAndButton({
 
 _photoListUsersInWorkout({
   required constrains,
-  required sportWorkout,
+  required usersInWorkout,
   required context,
 }) {
   return SizedBox(
     height: constrains.maxHeight / 7,
-    child: sportWorkout?.usersInWorkout != null
+    child: usersInWorkout != null
         ? ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: sportWorkout?.usersInWorkout?.length ?? 1,
+            itemCount: usersInWorkout?.length ?? 1,
             itemBuilder: (context, index) => Row(
               children: [
                 Padding(
@@ -88,8 +89,8 @@ _photoListUsersInWorkout({
                     ),
                   ),
                 ),
-                if (sportWorkout != null &&
-                    index == sportWorkout.usersInWorkout!.length - 1)
+                if (usersInWorkout != null &&
+                    index == usersInWorkout!.length - 1)
                   const Icon(Icons.arrow_forward_ios),
               ],
             ),

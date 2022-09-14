@@ -24,11 +24,11 @@ popupWithUsersInWorkout({
     // content: Text(usersInWorkout.cast().toList().toString()),
     content: SizedBox(
         height: MediaQuery.of(context).size.width,
-        child: sportWorkout != null
+        child: sportWorkout?.usersInWorkout != null
             ? SingleChildScrollView(
                 child: Column(
                   children: [
-                    ...sportWorkout.usersInWorkout!
+                    ...sportWorkout!.usersInWorkout!
                         .cast()
                         .map(
                           (user) => ListTile(
@@ -52,7 +52,7 @@ popupWithUsersInWorkout({
                 ),
               )
             : const Center(
-                child: Text('error'),
+                child: Text('Ошибка получения данных'),
               )),
     titleStyle: Theme.of(context).textTheme.headline1,
     // middleTextStyle

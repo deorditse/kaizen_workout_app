@@ -77,7 +77,7 @@ class AdminHorizontalListSportsWorkout extends StatelessWidget {
       ),
       onPressed: () {
         Get.put(CreateAndChangeSportWorkoutControllerGetxState());
-        Get.to(() => CreateWorkoutPage());
+        Get.to(() => const CreateWorkoutPage());
       },
     );
   }
