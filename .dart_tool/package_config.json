@@ -3,13 +3,13 @@
   "packages": [
     {
       "name": "_fe_analyzer_shared",
-      "rootUri": "file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/_fe_analyzer_shared-47.0.0",
+      "rootUri": "file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/_fe_analyzer_shared-48.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "analyzer",
-      "rootUri": "file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/analyzer-4.7.0",
+      "rootUri": "file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/analyzer-5.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -39,9 +39,9 @@
     },
     {
       "name": "build",
-      "rootUri": "file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/build-2.3.0",
+      "rootUri": "file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/build-2.3.1",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.17"
     },
     {
       "name": "build_config",
@@ -57,21 +57,21 @@
     },
     {
       "name": "build_resolvers",
-      "rootUri": "file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/build_resolvers-2.0.9",
+      "rootUri": "file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/build_resolvers-2.0.10",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.17"
     },
     {
       "name": "build_runner",
-      "rootUri": "file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/build_runner-2.2.0",
+      "rootUri": "file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/build_runner-2.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "build_runner_core",
-      "rootUri": "file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/build_runner_core-7.2.3",
+      "rootUri": "file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/build_runner_core-7.2.4",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.17"
     },
     {
       "name": "built_collection",
@@ -111,7 +111,7 @@
     },
     {
       "name": "code_builder",
-      "rootUri": "file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/code_builder-4.2.0",
+      "rootUri": "file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/code_builder-4.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -147,9 +147,9 @@
     },
     {
       "name": "dart_style",
-      "rootUri": "file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/dart_style-2.2.3",
+      "rootUri": "file:///Users/dmitrijdemidov/.pub-cache/hosted/pub.dartlang.org/dart_style-2.2.4",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.17"
     },
     {
       "name": "data_layout",
@@ -728,7 +728,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-09-14T14:40:15.551323Z",
+  "generated": "2022-09-14T17:21:59.791742Z",
   "generator": "pub",
   "generatorVersion": "2.19.0-81.0.dev"
 }

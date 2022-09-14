@@ -18,7 +18,7 @@
 		</data>
 		<key>Headers/OIDAuthState+IOS.h</key>
 		<data>
-		4TjaqEEDtwgWrVNBCCTK9FP+coY=
+		WK/w+zc9gg6+gVAjiXEvwP3L03M=
 		</data>
 		<key>Headers/OIDAuthState.h</key>
 		<data>
@@ -42,7 +42,7 @@
 		</data>
 		<key>Headers/OIDAuthorizationService+IOS.h</key>
 		<data>
-		nc9T6Me32NSk3Sv3G0KmvRiKwMk=
+		IZOhSMcER30KcCTLFoqEC+r9t0M=
 		</data>
 		<key>Headers/OIDAuthorizationService.h</key>
 		<data>
@@ -78,11 +78,11 @@
 		</data>
 		<key>Headers/OIDExternalUserAgentCatalyst.h</key>
 		<data>
-		SXx9rnZfvxsxeFEmBXoSH5eKqoQ=
+		EuSo6cig4kpVEPe7+7hOndxDV7Q=
 		</data>
 		<key>Headers/OIDExternalUserAgentIOS.h</key>
 		<data>
-		yGLPJqf5jjcxgJ8TnxoL3E+CbSY=
+		46iSjkTOhJs21KJIV8+f8ZfN7YI=
 		</data>
 		<key>Headers/OIDExternalUserAgentIOSCustomBrowser.h</key>
 		<data>
@@ -158,7 +158,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		D4QU41XfEgffBguMG/NwivDxKbE=
+		BGNpmtTuabTAgLV7v85+AQ6NDqM=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -204,11 +204,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			4TjaqEEDtwgWrVNBCCTK9FP+coY=
+			WK/w+zc9gg6+gVAjiXEvwP3L03M=
 			</data>
 			<key>hash2</key>
 			<data>
-			DGtlQxLcBPZq6oUnYMp4ckJMYVgrbf1mQ/UsaXnnVM4=
+			evZ4HpRwDvCDL9kEPbFAS8IZdJxr5IqXdRAY5Tnb/cM=
 			</data>
 		</dict>
 		<key>Headers/OIDAuthState.h</key>
@@ -270,11 +270,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			nc9T6Me32NSk3Sv3G0KmvRiKwMk=
+			IZOhSMcER30KcCTLFoqEC+r9t0M=
 			</data>
 			<key>hash2</key>
 			<data>
-			wZNaq3vh8i2oieO6vChtOCRuRvk3+rdpeF8hqasUAxM=
+			mfpYDsntaUidWjZByB1AkG8ZfhRdLgQO0AwcTnqx4gc=
 			</data>
 		</dict>
 		<key>Headers/OIDAuthorizationService.h</key>
@@ -369,22 +369,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			SXx9rnZfvxsxeFEmBXoSH5eKqoQ=
+			EuSo6cig4kpVEPe7+7hOndxDV7Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			mEpsZj47WJJx7Km6vRNFbXhuxr+k0GfKq/Vy6dzWeJU=
+			sC+MXF6d9V8AtcLQs4xMTGco8ALbwDVGcZIabynJTgw=
 			</data>
 		</dict>
 		<key>Headers/OIDExternalUserAgentIOS.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			yGLPJqf5jjcxgJ8TnxoL3E+CbSY=
+			46iSjkTOhJs21KJIV8+f8ZfN7YI=
 			</data>
 			<key>hash2</key>
 			<data>
-			eNAlNlavrmIOnixnCre9vSuyqnp/mjlLOqHQgSKfCAI=
+			GaXXpUKkH4itu8GuR6Esv4BkjqhQvb1IIC93GdZSFpk=
 			</data>
 		</dict>
 		<key>Headers/OIDExternalUserAgentIOSCustomBrowser.h</key>

@@ -5,10 +5,10 @@ import 'package:kaizen/packages/business_layout/lib/src/getX/getx_controllers/ap
 import 'package:kaizen/packages/business_layout/lib/src/getX/getx_controllers/create_and_change_sport_workout_controller/create_and_change_sport_workout_controller_getx_state.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout_page/create_workout_page.dart';
-import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/admin_horizontal_list_sports_workout/card_workout_admin.dart';
+import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/horizontal_lists_with_sport_workout/admin_horizontal_list_sports_workout/card_workout_admin.dart';
 
 class AdminHorizontalListSportsWorkout extends StatelessWidget {
-  AdminHorizontalListSportsWorkout({Key? key}) : super(key: key);
+  const AdminHorizontalListSportsWorkout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

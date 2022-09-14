@@ -89,6 +89,10 @@ class ImplementAppStateGetXController extends GetxController {
   void addNewWorkoutInDataSportWorkoutList(
       {required SportsWorkoutModel sportsWorkoutModel}) {
     try {
+      dataSportsWorkoutListWhenIAdmin = [
+        ...dataSportsWorkoutListWhenIAdmin,
+        sportsWorkoutModel
+      ];
       dataSportsWorkoutList = [sportsWorkoutModel, ...dataSportsWorkoutList];
       update();
     } catch (error) {

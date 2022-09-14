@@ -44,18 +44,6 @@ defaultDialogAboutSports({required context, String? idWorkout}) {
                   color: Theme.of(context).primaryColor,
                   fontSize: 28,
                 ),
-            // Text(
-            //   idWorkout ?? 'нет данных',
-            //   style: Theme
-            //       .of(context)
-            //       .textTheme
-            //       .headline1!
-            //       .copyWith(
-            //     color: Theme
-            //         .of(context)
-            //         .primaryColor,
-            //     fontSize: 28,
-            //   ),
           ),
         ),
         SizedBox(

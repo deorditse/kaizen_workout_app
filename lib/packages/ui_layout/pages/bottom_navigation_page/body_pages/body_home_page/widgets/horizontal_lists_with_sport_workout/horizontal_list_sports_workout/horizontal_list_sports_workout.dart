@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kaizen/packages/business_layout/lib/src/getX/getx_controllers/app_controller/implement_getx_state_management.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
-import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/horizontal_list_sports_workout/card_workout..dart';
-import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/horizontal_list_sports_workout/widgets/what_toDo_day_inWorkout.dart';
+import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/horizontal_lists_with_sport_workout/horizontal_list_sports_workout/card_workout..dart';
+import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/horizontal_lists_with_sport_workout/widgets_horizontal_list/widgets/what_toDo_day_inWorkout.dart';
 
 class HorizontalListSportsWorkout extends StatelessWidget {
   const HorizontalListSportsWorkout({Key? key}) : super(key: key);
@@ -36,13 +36,7 @@ class HorizontalListSportsWorkout extends StatelessWidget {
                                   index: index,
                                 ),
                               ),
-                              if (indexInDataSportsWorkoutList != null
-                              /*       &&
-                                  controller.dataSportsWorkoutList
-                                      .elementAt(index)
-                                      .descriptionWorkoutList[
-                                          indexInDataSportsWorkoutList].isNotEmpty*/
-                              )
+                              if (indexInDataSportsWorkoutList != null)
                                 Expanded(
                                   flex: 1,
                                   child: Padding(
