@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:kaizen/packages/business_layout/lib/src/getX/getx_controllers/create_and_change_sport_workout_controller/create_and_change_sport_workout_controller_getx_state.dart';
-import 'package:kaizen/packages/business_layout/lib/src/getX/getx_controllers/setting_controller/implement_getx_state_management.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout_page/style.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout_page/widgets/daily_workout_sheet/what_toDo_EveryDay_inWorkout.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import '../../../../business_layout/lib/business_layout.dart';
 
 class CreateWorkoutPage extends StatefulWidget {
   static const id = '/create_workout_page';
 
-  CreateWorkoutPage({Key? key}) : super(key: key);
+  const CreateWorkoutPage({Key? key}) : super(key: key);
 
   @override
   State<CreateWorkoutPage> createState() => _CreateWorkoutPageState();
@@ -59,7 +58,7 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
               Center(
                 child: ElevatedButton(
                   onPressed: _createWorkout,
-                  child: Text('Создать тренировку'),
+                  child: const Text('Создать тренировку'),
                 ),
               ),
               SizedBox(
@@ -339,7 +338,7 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
                     ),
                   ],
                 ),
-                Divider(),
+                const Divider(),
               ],
             ),
             if (!controllerSportWorkout.toggleDateIsEnd) _oldDayIn(),
@@ -372,7 +371,7 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
                 if (controllerCalendar.lastWorkoutDay != null ||
                     controllerCalendar.toggleDateIsEnd)
                   //создания листа с карточками дней
-                  WhatToDoEveryDayInWorkout(),
+                  const WhatToDoEveryDayInWorkout(),
                 if (controllerCalendar.lastWorkoutDay == null &&
                     !controllerCalendar.toggleDateIsEnd)
                   Padding(

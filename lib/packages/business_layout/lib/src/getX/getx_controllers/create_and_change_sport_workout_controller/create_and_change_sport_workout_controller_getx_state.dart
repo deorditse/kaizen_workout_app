@@ -1,9 +1,9 @@
 import 'dart:math';
-import 'package:business_layout/business_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:model/model.dart';
 import 'package:style_app/style_app.dart';
+import '../../../../business_layout.dart';
 import 'widgets/default_dialog_create_key.dart';
 
 //каждый раз при изменении запускать кодогенерацию
@@ -195,8 +195,7 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
     }
   }
 
-  _saveNewSportWorkoutInDataBase(
-      {required SportsWorkoutModel sportsWorkoutModel}) {
+  _saveNewSportWorkoutInDataBase({required sportsWorkoutModel}) {
     print('    ///ToDo: create send workout in DB');
 
     ///ToDo: create send workout in DB
