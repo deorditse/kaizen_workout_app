@@ -25,13 +25,6 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
   SportsWorkoutModel? _sportWorkoutNewCreate;
 
   @override
-  void dispose() {
-    super.dispose();
-    clearAllDataInNewSportWorkout();
-    print('dispose() in CreateAndChangeSportWorkoutControllerGetxState');
-  }
-  
-  @override
   void onInit() {
     super.onReady();
     //при инициации создаем id будущей тренировки
@@ -171,8 +164,7 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
         //обновляю данные в sportWorkoutNewCreate
         await _updateAllDataInSportWorkoutNewCreate();
         //добавляю тренировку в свой лист тренировок и сохраняю в базу данных
-        //тренировка создана
-
+//добавляю тренировку в лист всех тренировок и созданных мною
         ImplementAppStateGetXController.instance
             .addNewWorkoutInDataSportWorkoutList(
                 sportsWorkoutModel: _sportWorkoutNewCreate!);
@@ -180,6 +172,7 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
         await _saveNewSportWorkoutInDataBase(
             sportsWorkoutModel: _sportWorkoutNewCreate!);
 
+        //тренировка создана
         defaultDialogAboutSports(
             context: context, idWorkout: _sportWorkoutNewCreate!.idWorkout);
 
@@ -193,6 +186,9 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
             ),
           ),
         ));
+
+        //очищаем все поля
+        clearAllDataInNewSportWorkout();
       }
     } catch (error) {
       print('ошибка из createSportWorkoutButtonTap ${error}');
@@ -223,7 +219,7 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
     _sportWorkoutNewCreate = null;
     idWorkout = '';
     await _createIdWorkout();
-    nameWorkout = 'тренировка';
+    updateNameWorkout(newNameSportWorkout: 'тренировка $idWorkout');
     update();
   }
 }

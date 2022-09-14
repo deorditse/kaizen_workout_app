@@ -420,6 +420,11 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
   AppBar _appBarCreatePage() {
     return AppBar(
       // leading: MyLeftDrawer.openLeftDrawer(),
+      leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: const FittedBox(child: Icon(Icons.arrow_back_ios_outlined))),
       title: FittedBox(
         child: Padding(
           padding: EdgeInsets.only(right: 8.0),

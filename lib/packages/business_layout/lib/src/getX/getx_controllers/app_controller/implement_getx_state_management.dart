@@ -19,7 +19,6 @@ class ImplementAppStateGetXController extends GetxController {
   User? myUser; //включает в себя лист с ключами тренировок
 
   // Rx<int> indexInDataSportsWorkoutList = 0.obs;
-
   @override
   void onInit() {
     super.onInit();

@@ -6,9 +6,11 @@ import '../../../../../business_layout.dart';
 
 defaultDialogAboutSports({required context, String? idWorkout}) {
   return Get.defaultDialog(
+    barrierDismissible: false,
     // titlePadding: EdgeInsets.only(top: 0),
     //  contentPadding: EdgeInsets.only(top: 15),
     // barrierDismissible: false,
+
     backgroundColor: myDefaultDialogBackground(context),
     titlePadding: EdgeInsets.zero,
     // backgroundColor: backColorAlertDialog,
@@ -36,12 +38,24 @@ defaultDialogAboutSports({required context, String? idWorkout}) {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(
+          child: SelectableText(
             idWorkout ?? 'нет данных',
             style: Theme.of(context).textTheme.headline1!.copyWith(
                   color: Theme.of(context).primaryColor,
                   fontSize: 28,
                 ),
+            // Text(
+            //   idWorkout ?? 'нет данных',
+            //   style: Theme
+            //       .of(context)
+            //       .textTheme
+            //       .headline1!
+            //       .copyWith(
+            //     color: Theme
+            //         .of(context)
+            //         .primaryColor,
+            //     fontSize: 28,
+            //   ),
           ),
         ),
         SizedBox(
@@ -49,14 +63,14 @@ defaultDialogAboutSports({required context, String? idWorkout}) {
         ),
         TextButton(
           onPressed: () {
-            CreateAndChangeSportWorkoutControllerGetxState
-                .instance.clearAllDataInNewSportWorkout();
+            CreateAndChangeSportWorkoutControllerGetxState.instance
+                .clearAllDataInNewSportWorkout();
             Get.back();
-            Get.close(1);
+            Get.back();
           },
           child: Text(
             "прекрасно!",
-            style: Theme.of(context).textTheme.headline3,
+            style: Theme.of(context).textTheme.headline2,
           ),
           //style: myButtonStyleFromShowDialog(),
         ),
