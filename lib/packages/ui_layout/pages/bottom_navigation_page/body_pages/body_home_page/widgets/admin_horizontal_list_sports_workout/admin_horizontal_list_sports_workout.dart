@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:kaizen/packages/business_layout/lib/src/getX/getx_controllers/app_controller/implement_getx_state_management.dart';
+import 'package:kaizen/packages/business_layout/lib/src/getX/getx_controllers/create_and_change_sport_workout_controller/create_and_change_sport_workout_controller_getx_state.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout_page/create_workout_page.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/admin_horizontal_list_sports_workout/card_workout_admin.dart';
@@ -75,6 +76,7 @@ class AdminHorizontalListSportsWorkout extends StatelessWidget {
         color: Theme.of(context).textTheme.headline2!.color,
       ),
       onPressed: () {
+        Get.put(CreateAndChangeSportWorkoutControllerGetxState());
         Get.to(() => CreateWorkoutPage());
       },
     );

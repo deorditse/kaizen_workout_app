@@ -56,7 +56,7 @@ class MyGetApp extends StatelessWidget {
         GetPage(
           name: CreateWorkoutPage.id,
           page: () => CreateWorkoutPage(),
-          binding: BasicsExampleBinding(),
+          binding: CreateAndChangeNewWorkoutBinding(),
         ),
         GetPage(
           name: LoginView.id,
