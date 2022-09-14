@@ -5,6 +5,7 @@ import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/horizontal_lists_with_sport_workout/widgets_horizontal_list/row_bottom_photo_list_users_in_workout_and_button.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/horizontal_lists_with_sport_workout/widgets_horizontal_list/row_key_name_chat.dart';
+import 'package:kaizen/packages/model/lib/model.dart'; //только при таком импорте работает корректно
 
 class AdminWorkoutCard extends StatelessWidget {
   AdminWorkoutCard({Key? key, required this.index}) : super(key: key);
@@ -36,7 +37,7 @@ class AdminWorkoutCard extends StatelessWidget {
                     ),
                     Expanded(
                       child: _centralContentWithStatusData(
-                        firstWorkoutDay: sportWorkout.firstWorkoutDay,
+                        firstWorkoutDay: sportWorkout?.firstWorkoutDay,
                         context: context,
                       ),
                     ),
