@@ -28,7 +28,7 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    clearAllDataAndBack();
+    clearAllDataInNewSportWorkout();
   }
 
   @override
@@ -211,7 +211,7 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
     update();
   }
 
-  Future<void> clearAllDataAndBack() async {
+  Future<void> clearAllDataInNewSportWorkout() async {
     firstWorkoutDay = DateTime.now();
     lastWorkoutDay = null;
     toggleDateIsEnd = false;

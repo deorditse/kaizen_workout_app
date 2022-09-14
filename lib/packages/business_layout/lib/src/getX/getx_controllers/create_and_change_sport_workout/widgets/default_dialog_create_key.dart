@@ -50,7 +50,7 @@ defaultDialogAboutSports({required context, String? idWorkout}) {
         TextButton(
           onPressed: () {
             CreateAndChangeSportWorkoutControllerGetxState
-                .instance.clearAllDataAndBack();
+                .instance.clearAllDataInNewSportWorkout();
             Get.back();
             Get.close(1);
           },
