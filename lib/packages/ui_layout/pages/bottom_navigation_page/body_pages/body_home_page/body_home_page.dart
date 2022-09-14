@@ -52,7 +52,7 @@ class _BodyHomePageState extends State<BodyHomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Ваши тренировки',
+                          'Все тренировки',
                           style: Theme.of(context).textTheme.headline1,
                         ),
                         // Text('View all'),
