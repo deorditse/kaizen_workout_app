@@ -5,6 +5,7 @@ import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/horizontal_lists_with_sport_workout/widgets_horizontal_list/row_bottom_photo_list_users_in_workout_and_button.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/horizontal_lists_with_sport_workout/widgets_horizontal_list/row_key_name_chat.dart';
+import 'package:model/model.dart'; //только так работает, так как на бизнес слое такой импорт - нужно чтобы совподало
 
 class WorkoutCard extends StatelessWidget {
   const WorkoutCard({Key? key, required this.indexInDataSportsWorkoutList})
@@ -67,7 +68,7 @@ class WorkoutCard extends StatelessWidget {
       {required indexInDataSportsWorkoutList, required context}) {
     final controllerSetting = Get.find<ImplementSettingGetXController>();
 
-    final sportWorkout = ImplementAppStateGetXController
+    SportsWorkoutModel? sportWorkout = ImplementAppStateGetXController
         .instance.dataSportsWorkoutList[indexInDataSportsWorkoutList];
 
     return Column(

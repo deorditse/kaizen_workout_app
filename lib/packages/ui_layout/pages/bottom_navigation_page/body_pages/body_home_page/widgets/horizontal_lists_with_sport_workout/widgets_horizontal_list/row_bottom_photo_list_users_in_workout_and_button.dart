@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:kaizen/packages/business_layout/lib/src/getX/getx_controllers/app_controller/implement_getx_state_management.dart';
 import 'package:kaizen/packages/business_layout/lib/src/getX/getx_controllers/setting_controller/implement_getx_state_management.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/horizontal_lists_with_sport_workout/widgets_horizontal_list/widgets/popup_with_users_in_workout.dart';
+import 'package:model/model.dart'; //только так работает, так как на бизнес слое такой импорт - нужно чтобы совподало
 
 rowWithListUsersAndButton({
   required int index,
@@ -12,8 +13,7 @@ rowWithListUsersAndButton({
 }) {
   final controllerApp = Get.find<ImplementAppStateGetXController>();
 
-  /*Set<NameAndPhotoUser>*/
-  final usersInWorkout = (isAdmin != null && isAdmin)
+  Set<NameAndPhotoUser> usersInWorkout = (isAdmin != null && isAdmin)
       ? controllerApp.dataSportsWorkoutListWhenIAdmin[index].usersInWorkout
       : controllerApp.dataSportsWorkoutList[index]!.usersInWorkout;
 

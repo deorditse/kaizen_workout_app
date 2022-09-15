@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
-import 'package:kaizen/packages/business_layout/lib/src/getX/getx_controllers/setting_controller/implement_getx_state_management.dart';
+import 'package:model/model.dart'; //только так работает, так как на слое данных такой импорт - нужно чтобы совподало
 
 keyNameAndChat({required context, required int index, bool? isAdmin}) {
   final controllerSetting = Get.find<ImplementSettingGetXController>();
 
-  final sportWorkout = (isAdmin == null && isAdmin != true)
+  SportsWorkoutModel sportWorkout = (isAdmin == null && isAdmin != true)
       ? ImplementAppStateGetXController.instance.dataSportsWorkoutList[index]!
       : ImplementAppStateGetXController
           .instance.dataSportsWorkoutListWhenIAdmin[index];

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:kaizen/packages/model/lib/src/sports_page/sports_workout_model.dart';
+import 'package:model/model.dart'; //только так работает, так как на бизнес слое такой импорт - нужно чтобы совподало
 
 //страница пока что нигде не используется
 

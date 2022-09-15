@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
-import 'package:kaizen/packages/model/lib/model.dart';
+import 'package:model/model.dart'; //только так работает, так как на бизнес слое такой импорт - нужно чтобы совподало
 
 class CardDailyWorkoutSheet extends StatefulWidget {
   CardDailyWorkoutSheet(
@@ -66,7 +66,7 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: GetBuilder<ImplementAppStateGetXController>(
                             builder: (controllerApp) {
-                          final sportWorkout = controllerApp
+                          SportsWorkoutModel? sportWorkout = controllerApp
                               .dataSportsWorkoutList
                               .elementAt(widget.indexWorkoutList);
 
@@ -98,67 +98,4 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
       ),
     );
   }
-}
-
-_methodDialog(context) {
-  return Get.defaultDialog(
-    backgroundColor: Theme.of(context).primaryColor.withOpacity(0.5),
-    titlePadding: EdgeInsets.only(
-      top: 20,
-    ),
-    title: "Описание задачи на день",
-    content: SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.all(0),
-        height: MediaQuery.of(context).size.width,
-        child: TextField(
-          autofocus: true,
-          textInputAction: TextInputAction.done,
-          onChanged: (value) {
-            // setState(() {
-            //   myListPageController
-            //       .myStringMessageTextFieldDown
-            //       .value = value;
-            //
-            //   SaveSharedPrefObject
-            //       .saveTextFieldDown(
-            //       myListPageController
-            //           .indexMyArrayBody.value,
-            //       value);
-            // });
-          },
-          onSubmitted: (_) {
-            Get.close(1);
-          },
-          maxLines: 20,
-          //  minLines: 5,
-          decoration: const InputDecoration(
-            fillColor: Colors.white54,
-            filled: true,
-            hintText: 'Подробно опишите задание на этот день тренировки',
-            border: InputBorder.none,
-            hintStyle: TextStyle(
-              color: Colors.black54,
-            ),
-          ),
-          keyboardType: TextInputType.text,
-          cursorColor: Theme.of(context).primaryColor,
-
-          style: const TextStyle(
-            color: Colors.black87,
-            //fontWeight: FontWeight.bold,
-            fontSize: 18,
-          ),
-          textCapitalization: TextCapitalization.sentences,
-          //Заглавные для предложения
-          textAlign: TextAlign.left,
-          // controller: _controllerTextFieldDown,
-        ),
-      ),
-    ),
-    titleStyle: const TextStyle(
-      color: Colors.white70,
-      fontSize: 16,
-    ),
-  );
 }

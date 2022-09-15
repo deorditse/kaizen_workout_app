@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
+import 'package:model/model.dart'; //только так работает, так как на бизнес слое такой импорт - нужно чтобы совподало
 
 defaultDialogAllProgramWorkout({required context, required indexSportWorkout}) {
-  final sportWorkout = ImplementAppStateGetXController
+  SportsWorkoutModel? sportWorkout = ImplementAppStateGetXController
       .instance.dataSportsWorkoutList[indexSportWorkout];
   return Get.defaultDialog(
     backgroundColor: myDefaultDialogBackground(context),

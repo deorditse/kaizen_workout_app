@@ -11,6 +11,7 @@ import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_page
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/ui_sports/widgets/difault_dialog_all_program_workout.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/ui_sports/widgets/list_users_comleted_task_day.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/ui_sports/widgets/statisticsWorkoutWidget.dart';
+import 'package:model/model.dart'; //только так работает, так как на бизнес слое такой импорт - нужно чтобы совподало
 
 class BodySportsPage extends StatelessWidget {
   BodySportsPage({Key? key}) : super(key: key);
@@ -37,7 +38,7 @@ class BodySportsPage extends StatelessWidget {
                   return _homePage(context);
                 } else {
                   // SportsWorkoutModel
-                  final sportWorkout = controllerApp
+                  SportsWorkoutModel? sportWorkout = controllerApp
                       .dataSportsWorkoutList[indexInSportsWorkoutList];
                   //indexInDataSportsWorkoutList
                   final indexInDataSportsWorkoutList =
