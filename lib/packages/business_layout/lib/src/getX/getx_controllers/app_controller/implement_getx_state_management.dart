@@ -67,7 +67,7 @@ class ImplementAppStateGetXController extends GetxController {
     }
   }
 
-  int? getDataIndexInDataSportsWorkoutList(int indexWorkoutList) {
+  int? getDataIndexInDescriptionListForWorkout(int indexWorkoutList) {
     try {
       final firstWorkoutDay =
           dataSportsWorkoutList[indexWorkoutList]?.firstWorkoutDay;

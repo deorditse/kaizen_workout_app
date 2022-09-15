@@ -2,5 +2,5 @@ import 'package:flutter/material.dart';
 
 String nameApp = 'Kaizen';
 
-myDefaultDialogBackground(context) =>
-    Theme.of(context).cardColor.withOpacity(0.8);
+Color myDefaultDialogBackground(BuildContext context, {double? opacity}) =>
+    Theme.of(context).cardColor.withOpacity(opacity ?? 0.8);

@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:model/model.dart';
 import 'package:style_app/style_app.dart';
@@ -255,7 +256,8 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
     update();
   }
 
-  Future<void> updateEditWorkoutButtonTap({required context}) async {
+  Future<void> updateEditWorkoutButtonTap(
+      {required BuildContext context}) async {
     try {
       final controllerSportWorkout =
           CreateAndChangeSportWorkoutControllerGetxState.instance;
@@ -269,7 +271,13 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
         );
       } else {
         //обновляем тренировку и в БД
-        // updateEditWorkoutButtonTap(context: context);
+        mySnackBarButton(
+          context: context,
+          title: "Тренировка обновлена",
+          message: "",
+        );
+        Get.close(0);
+        clearAllDataInNewSportWorkout();
       }
     } catch (error) {
       print('error from _createWorkout $error');

@@ -20,8 +20,8 @@ class HorizontalListSportsWorkout extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: controller.dataSportsWorkoutList.length,
                   itemBuilder: (context, index) {
-                    int? indexInDataSportsWorkoutList =
-                        controller.getDataIndexInDataSportsWorkoutList(index);
+                    int? indexInDescriptionListForWorkout = controller
+                        .getDataIndexInDescriptionListForWorkout(index);
                     return Row(
                       children: [
                         Padding(
@@ -36,7 +36,7 @@ class HorizontalListSportsWorkout extends StatelessWidget {
                                   indexInDataSportsWorkoutList: index,
                                 ),
                               ),
-                              if (indexInDataSportsWorkoutList != null)
+                              if (indexInDescriptionListForWorkout != null)
                                 Expanded(
                                   flex: 1,
                                   child: Padding(
@@ -52,7 +52,7 @@ class HorizontalListSportsWorkout extends StatelessWidget {
                                       child: IfYouOpenTheTaskForTheDay(
                                         indexWorkoutList: index,
                                         indexDayInListWorkoutDescription:
-                                            indexInDataSportsWorkoutList,
+                                            indexInDescriptionListForWorkout,
                                       ),
                                     ),
                                   ),

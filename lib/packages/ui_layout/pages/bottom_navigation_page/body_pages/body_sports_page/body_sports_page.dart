@@ -29,66 +29,21 @@ class BodySportsPage extends StatelessWidget {
           SliverToBoxAdapter(
             child: GetBuilder<ImplementAppStateGetXController>(
               builder: (controllerApp) {
-                int indexInSportsWorkoutList =
-                    controllerApp.indexWorkoutList.value;
+                if (controllerApp.dataSportsWorkoutList.isNotEmpty &&
+                    controllerApp.dataSportsWorkoutList[
+                            controllerApp.indexWorkoutList.value] !=
+                        null) {
+                  int? indexInDescriptionWorkoutListForWorkout =
+                      controllerApp.getDataIndexInDescriptionListForWorkout(
+                          controllerApp.indexWorkoutList.value);
 
-                if (controllerApp
-                        .dataSportsWorkoutList[indexInSportsWorkoutList] ==
-                    null) {
-                  return _homePage(context);
+                  return _bodyCalendarPage(
+                      indexInDescriptionListForWorkout:
+                          indexInDescriptionWorkoutListForWorkout,
+                      indexInSportWorkoutList:
+                          controllerApp.indexWorkoutList.value);
                 } else {
-                  // SportsWorkoutModel
-                  SportsWorkoutModel? sportWorkout = controllerApp
-                      .dataSportsWorkoutList[indexInSportsWorkoutList];
-                  //indexInDataSportsWorkoutList
-                  final indexInDataSportsWorkoutList =
-                      controllerApp.getDataIndexInDataSportsWorkoutList(
-                          indexInSportsWorkoutList);
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      _taskOfTheDay(
-                        context: context,
-                        indexInDataSportsWorkoutList:
-                            indexInDataSportsWorkoutList,
-                        sportWorkout: sportWorkout,
-                      ),
-                      SizedBox(
-                        height: heightPadding,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 8.0,
-                          right: 8.0,
-                        ),
-                        child: Container(
-                          padding: const EdgeInsets.only(bottom: 20),
-                          decoration: myStyleContainer(context: context),
-                          child: Calendar(key: key),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: _watchSportsWorkoutList(
-                          context: context,
-                          indexInSportsWorkoutList: indexInSportsWorkoutList,
-                          nameWorkout: sportWorkout?.nameWorkout,
-                        ),
-                      ),
-                      statisticsWorkout(),
-                      SizedBox(
-                        height: heightPadding,
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        child: ListUsersCompletedTaskForDay(),
-                      ),
-                      const SizedBox(
-                        height: 100,
-                      ),
-                    ],
-                  );
+                  return _ifNoWorkout(context);
                 }
               },
             ),
@@ -123,7 +78,7 @@ class BodySportsPage extends StatelessWidget {
     );
   }
 
-  Widget _homePage(context) {
+  Widget _ifNoWorkout(context) {
     return Padding(
       padding: const EdgeInsets.only(top: 30.0),
       child: Center(
@@ -139,7 +94,10 @@ class BodySportsPage extends StatelessWidget {
                     0;
               },
               child: Text('Выбрать или создать тренировку',
-                  style: Theme.of(context).textTheme.headline2!),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline2!
+                      .copyWith(color: Theme.of(context).primaryColor)),
             ),
           ],
         ),
@@ -149,9 +107,11 @@ class BodySportsPage extends StatelessWidget {
 
   SizedBox _taskOfTheDay({
     required context,
-    required indexInDataSportsWorkoutList,
-    required sportWorkout,
+    required indexInDescriptionListForWorkout,
+    required int indexInSportWorkoutList,
   }) {
+    SportsWorkoutModel? sportWorkout = ImplementAppStateGetXController
+        .instance.dataSportsWorkoutList[indexInSportWorkoutList];
     return SizedBox(
       height: 140,
       child: Padding(
@@ -195,12 +155,12 @@ class BodySportsPage extends StatelessWidget {
                     ),
                     child: GestureDetector(
                       onTap: () {
-                        if (indexInDataSportsWorkoutList != null) {
+                        if (indexInDescriptionListForWorkout != null) {
                           _defaultDialogWithDayProgram(
                             context,
                             sportWorkoutModelDescription:
-                                sportWorkout.descriptionWorkoutList[
-                                    indexInDataSportsWorkoutList],
+                                sportWorkout!.descriptionWorkoutList[
+                                    indexInDescriptionListForWorkout],
                             firstWorkoutDay: sportWorkout.firstWorkoutDay,
                           );
                         }
@@ -231,9 +191,9 @@ class BodySportsPage extends StatelessWidget {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8),
                                 child: Text(
-                                  indexInDataSportsWorkoutList != null
-                                      ? sportWorkout.descriptionWorkoutList[
-                                          indexInDataSportsWorkoutList]!
+                                  indexInDescriptionListForWorkout != null
+                                      ? sportWorkout!.descriptionWorkoutList[
+                                          indexInDescriptionListForWorkout]!
                                       : 'нет данных',
                                   style: TextStyle(
                                     color: Theme.of(context).primaryColor,
@@ -288,5 +248,59 @@ class BodySportsPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _bodyCalendarPage({
+    required int? indexInDescriptionListForWorkout,
+    required int indexInSportWorkoutList,
+  }) {
+    return Builder(builder: (BuildContext context) {
+      SportsWorkoutModel? sportWorkout = ImplementAppStateGetXController
+          .instance.dataSportsWorkoutList[indexInSportWorkoutList];
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _taskOfTheDay(
+            context: context,
+            indexInDescriptionListForWorkout: indexInDescriptionListForWorkout,
+            indexInSportWorkoutList: indexInSportWorkoutList,
+          ),
+          SizedBox(
+            height: heightPadding,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 8.0,
+              right: 8.0,
+            ),
+            child: Container(
+              padding: const EdgeInsets.only(bottom: 20),
+              decoration: myStyleContainer(context: context),
+              child: Calendar(key: key),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: _watchSportsWorkoutList(
+              context: context,
+              indexInSportsWorkoutList: indexInSportWorkoutList,
+              nameWorkout: sportWorkout?.nameWorkout,
+            ),
+          ),
+          statisticsWorkout(),
+          SizedBox(
+            height: heightPadding,
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            child: ListUsersCompletedTaskForDay(),
+          ),
+          const SizedBox(
+            height: 100,
+          ),
+        ],
+      );
+    });
   }
 }
