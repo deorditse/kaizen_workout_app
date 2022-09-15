@@ -15,8 +15,8 @@ class NameAndPhotoUser {
   NameAndPhotoUser({
     required this.idUser,
     required this.name,
-    required this.photoPath,
-    required this.family,
+    this.photoPath,
+    this.family,
   });
 
   //для упращенного получения данных, чтобы не получать всего пользователя целиком, а когда он нужен - получать отдельно как модель User

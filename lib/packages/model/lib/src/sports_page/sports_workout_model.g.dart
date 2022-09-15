@@ -13,8 +13,8 @@ _$_SportsWorkoutModel _$$_SportsWorkoutModelFromJson(
       adminWorkout: NameAndPhotoUser.fromJson(
           json['adminWorkout'] as Map<String, dynamic>),
       nameWorkout: json['nameWorkout'] as String,
-      usersInWorkout: (json['usersInWorkout'] as List<dynamic>?)
-          ?.map((e) => NameAndPhotoUser.fromJson(e as Map<String, dynamic>))
+      usersInWorkout: (json['usersInWorkout'] as List<dynamic>)
+          .map((e) => NameAndPhotoUser.fromJson(e as Map<String, dynamic>))
           .toSet(),
       descriptionWorkoutList: (json['descriptionWorkoutList'] as List<dynamic>)
           .map((e) => e as String?)
@@ -34,7 +34,7 @@ Map<String, dynamic> _$$_SportsWorkoutModelToJson(
       'idWorkout': instance.idWorkout,
       'adminWorkout': instance.adminWorkout,
       'nameWorkout': instance.nameWorkout,
-      'usersInWorkout': instance.usersInWorkout?.toList(),
+      'usersInWorkout': instance.usersInWorkout.toList(),
       'descriptionWorkoutList': instance.descriptionWorkoutList,
       'firstWorkoutDay': instance.firstWorkoutDay.toIso8601String(),
       'lastWorkoutDay': instance.lastWorkoutDay?.toIso8601String(),

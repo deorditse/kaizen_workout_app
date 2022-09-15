@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_model.g.dart';
+
 part 'user_model.freezed.dart';
 
 // flutter pub run build_runner build --delete-conflicting-outputs
@@ -12,7 +13,7 @@ part 'user_model.freezed.dart';
 class User with _$User {
   const factory User({
     required String idUser,
-    required String? name,
+    required String name,
     String? email,
     int? age,
     String? photoPath,

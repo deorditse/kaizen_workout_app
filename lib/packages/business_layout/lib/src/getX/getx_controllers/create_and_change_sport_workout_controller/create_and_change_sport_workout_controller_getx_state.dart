@@ -28,16 +28,27 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
   void onInit() {
     super.onReady();
     //при инициации создаем id будущей тренировки
+    final _dataUser = ImplementAppStateGetXController.instance.myUser;
+    if (_dataUser != null) {
+      adminWorkout = NameAndPhotoUser(
+        //упрощенная модель юзера для предварительного просмотра
+        idUser: _dataUser.idUser,
+        name: _dataUser.name ?? 'anonymous',
+        photoPath: _dataUser.photoPath,
+        family: _dataUser.family,
+      );
+      update();
+    }
     initializedCreateNewWorkout();
     print('onInit() in CreateAndChangeSportWorkoutControllerGetxState');
   }
 
   //пустая тренировка
 
-  initializedCreateNewWorkout() async {
+  Future<void> initializedCreateNewWorkout() async {
     //сразу добавлю id тренировки и пользователя - будет администратором
     try {
-      await _createIdWorkout();
+      await _createIdWorkout(); //присваиваю id
     } catch (error) {
       print('error from initializedCreateNewWorkout $error');
     }
@@ -120,19 +131,7 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
 
   Future<void> _updateAllDataInSportWorkoutNewCreate() async {
     try {
-      final _dataUser = ImplementAppStateGetXController.instance.myUser;
-      print('erownvpiwnrep ______ $_dataUser');
-      if (_dataUser != null) {
-        adminWorkout = NameAndPhotoUser(
-          //упрощенная модель юзера для предварительного просмотра
-          idUser: _dataUser.idUser,
-          name: _dataUser.name ?? 'no name',
-          photoPath: _dataUser.photoPath,
-          family: _dataUser.family,
-        );
-        print('erownvpiwnrep ______ $adminWorkout');
-        update();
-
+      if (adminWorkout != null) {
         _sportWorkoutNewCreate = SportsWorkoutModel(
           idWorkout: idWorkout,
           nameWorkout: nameWorkout,
@@ -140,6 +139,7 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
           lastWorkoutDay: lastWorkoutDay,
           adminWorkout: adminWorkout!,
           descriptionWorkoutList: descriptionWorkoutListFromCreatePage,
+          usersInWorkout: {adminWorkout!},
         );
         update();
       } else {
@@ -213,7 +213,7 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
     toggleDateIsEnd = false;
     isHoliday = false;
     itemCount = null;
-    adminWorkout = null;
+    // adminWorkout = null;
     descriptionWorkoutListFromCreatePage = [];
     _sportWorkoutNewCreate = null;
     idWorkout = '';

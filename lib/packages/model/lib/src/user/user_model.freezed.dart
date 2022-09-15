@@ -21,7 +21,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$User {
   String get idUser => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   int? get age => throw _privateConstructorUsedError;
   String? get photoPath => throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res>;
   $Res call(
       {String idUser,
-      String? name,
+      String name,
       String? email,
       int? age,
       String? photoPath,
@@ -83,7 +83,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       email: email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -127,7 +127,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   $Res call(
       {String idUser,
-      String? name,
+      String name,
       String? email,
       int? age,
       String? photoPath,
@@ -168,7 +168,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       email: email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -228,7 +228,7 @@ class _$_User implements _User {
   @override
   final String idUser;
   @override
-  final String? name;
+  final String name;
   @override
   final String? email;
   @override
@@ -323,7 +323,7 @@ class _$_User implements _User {
 abstract class _User implements User {
   const factory _User(
       {required final String idUser,
-      required final String? name,
+      required final String name,
       final String? email,
       final int? age,
       final String? photoPath,
@@ -338,7 +338,7 @@ abstract class _User implements User {
   @override
   String get idUser;
   @override
-  String? get name;
+  String get name;
   @override
   String? get email;
   @override

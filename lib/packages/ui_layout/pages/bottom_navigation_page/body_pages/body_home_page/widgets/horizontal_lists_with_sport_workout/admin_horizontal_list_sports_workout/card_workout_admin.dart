@@ -36,7 +36,7 @@ class AdminWorkoutCard extends StatelessWidget {
                     ),
                     Expanded(
                       child: _centralContentWithStatusData(
-                        firstWorkoutDay: sportWorkout?.firstWorkoutDay,
+                        firstWorkoutDay: sportWorkout.firstWorkoutDay,
                         context: context,
                       ),
                     ),
@@ -44,7 +44,7 @@ class AdminWorkoutCard extends StatelessWidget {
                       child: rowWithListUsersAndButton(
                         index: index,
                         context: context,
-                        usersInWorkout: sportWorkout.usersInWorkout,
+                        usersInWorkout: sportWorkout.usersInWorkout!,
                         constrains: constrains,
                         buttonIsDelete: true,
                         isAdmin: true,

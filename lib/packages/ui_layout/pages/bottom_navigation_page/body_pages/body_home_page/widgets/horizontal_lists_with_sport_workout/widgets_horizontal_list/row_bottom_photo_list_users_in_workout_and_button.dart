@@ -13,7 +13,7 @@ rowWithListUsersAndButton({
   bool? isAdmin,
 }) {
   final controllerSetting = Get.find<ImplementSettingGetXController>();
-
+  print(usersInWorkout);
   return Row(
     children: [
       Expanded(
@@ -31,7 +31,7 @@ rowWithListUsersAndButton({
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                'Участников ${usersInWorkout?.length ?? ''}',
+                'Участников ${usersInWorkout.length ?? ''}',
                 style: Theme.of(context).textTheme.headline3,
               ),
               const SizedBox(
