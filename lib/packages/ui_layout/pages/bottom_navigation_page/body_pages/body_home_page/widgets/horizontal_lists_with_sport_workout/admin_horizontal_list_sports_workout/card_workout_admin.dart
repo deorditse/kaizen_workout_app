@@ -68,7 +68,8 @@ class AdminWorkoutCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Get.put(CreateAndChangeSportWorkoutControllerGetxState());
-        Get.to(CreateWorkoutPage(sportsWorkoutModelForEdit: sportWorkout));
+        Get.to(
+            () => CreateWorkoutPage(sportsWorkoutModelForEdit: sportWorkout));
       },
       child: Column(
         children: [
