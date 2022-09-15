@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:model/model.dart'; //только так работает, так как на бизнес слое такой импорт - нужно чтобы совподало
 
-class CardDailyWorkoutSheet extends StatefulWidget {
-  CardDailyWorkoutSheet(
+class IfYouOpenTheTaskForTheDay extends StatefulWidget {
+  IfYouOpenTheTaskForTheDay(
       {Key? key,
       required this.indexDayInListWorkoutDescription,
       required this.indexWorkoutList})
@@ -13,10 +13,11 @@ class CardDailyWorkoutSheet extends StatefulWidget {
   int indexDayInListWorkoutDescription;
 
   @override
-  State<CardDailyWorkoutSheet> createState() => _CardDailyWorkoutSheetState();
+  State<IfYouOpenTheTaskForTheDay> createState() =>
+      _IfYouOpenTheTaskForTheDayState();
 }
 
-class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
+class _IfYouOpenTheTaskForTheDayState extends State<IfYouOpenTheTaskForTheDay> {
   final controllerSetting = Get.find<ImplementSettingGetXController>();
 
   @override
@@ -41,7 +42,7 @@ class _CardDailyWorkoutSheetState extends State<CardDailyWorkoutSheet> {
             ),
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(10),
                     bottomRight: Radius.circular(10),

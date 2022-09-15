@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kaizen/main.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
-import 'package:kaizen/packages/ui_layout/widgets/bottom_navigation_bar/bottom_navigator_bar.dart';
+import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/bottom_navigation_bar/bottom_navigator_bar.dart';
 import 'package:kaizen/packages/ui_layout/widgets/end_drawer/end_drawer_app_bar.dart';
 
 class MyBottomMenuSceleton extends StatefulWidget {

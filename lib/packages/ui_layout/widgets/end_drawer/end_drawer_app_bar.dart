@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 
-import '../../pages/all_pages/authentication_page/views/login_page.dart';
+import '../../pages/other_pages/authentication_page/views/login_page.dart';
 
 class MyEndDrawer extends StatelessWidget {
   static openEndDrawer({color}) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/horizontal_lists_with_sport_workout/admin_horizontal_list_sports_workout/admin_horizontal_list_sports_workout.dart';
-import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/horizontal_lists_with_sport_workout/horizontal_list_sports_workout/horizontal_list_sports_workout.dart';
+import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/horizontal_lists_with_sport_workout/admin_horizontal_list_sports_workout/admin_horizontal_list_sports_workout.dart';
+import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/horizontal_lists_with_sport_workout/horizontal_list_sports_workout/horizontal_list_sports_workout.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_profile_page/app_bar_profile.dart';
 
 class BodyProfilePage extends StatefulWidget {
@@ -80,7 +80,7 @@ class _BodyProfilePageState extends State<BodyProfilePage> {
                   style: Theme.of(context).textTheme.headline2,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Padding(
@@ -91,8 +91,8 @@ class _BodyProfilePageState extends State<BodyProfilePage> {
                   style: Theme.of(context).textTheme.headline1,
                 ),
               ),
-              AdminHorizontalListSportsWorkout(),
-              SizedBox(
+              const AdminHorizontalListSportsWorkout(),
+              const SizedBox(
                 height: 20,
               ),
               Padding(
@@ -103,8 +103,8 @@ class _BodyProfilePageState extends State<BodyProfilePage> {
                   style: Theme.of(context).textTheme.headline1,
                 ),
               ),
-              HorizontalListSportsWorkout(),
-              SizedBox(
+              const HorizontalListSportsWorkout(),
+              const SizedBox(
                 height: 120,
               ),
             ],

@@ -5,8 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
-import 'package:kaizen/packages/ui_layout/pages/all_pages/create_change_new_workout_page/style.dart';
-import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/style/style_calendar.dart';
+import 'package:kaizen/packages/ui_layout/pages/other_pages/create_change_new_workout_page/style.dart';
 
 class WhenWeEnd extends StatelessWidget {
   WhenWeEnd({Key? key}) : super(key: key);

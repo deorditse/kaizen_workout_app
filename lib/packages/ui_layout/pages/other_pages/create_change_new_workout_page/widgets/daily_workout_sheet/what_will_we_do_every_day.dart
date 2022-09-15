@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
-import 'package:kaizen/packages/ui_layout/pages/all_pages/create_change_new_workout_page/widgets/daily_workout_sheet/what_toDo_EveryDay_inWorkout.dart';
+import 'package:kaizen/packages/ui_layout/pages/other_pages/create_change_new_workout_page/widgets/daily_workout_sheet/what_toDo_EveryDay_inWorkout.dart';
 
 class WhatWillWeDoEveryDay extends StatelessWidget {
   const WhatWillWeDoEveryDay({Key? key}) : super(key: key);

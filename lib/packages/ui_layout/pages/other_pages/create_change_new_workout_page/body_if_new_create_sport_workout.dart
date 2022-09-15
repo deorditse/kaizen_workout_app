@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
-import 'package:kaizen/packages/ui_layout/pages/all_pages/create_change_new_workout_page/widgets/daily_workout_sheet/what_will_we_do_every_day.dart';
-import 'package:kaizen/packages/ui_layout/pages/all_pages/create_change_new_workout_page/widgets/name_workout.dart';
-import 'package:kaizen/packages/ui_layout/pages/all_pages/create_change_new_workout_page/widgets/steps_workout.dart';
-import 'package:kaizen/packages/ui_layout/pages/all_pages/create_change_new_workout_page/widgets/when_we_end.dart';
-import 'package:kaizen/packages/ui_layout/pages/all_pages/create_change_new_workout_page/widgets/when_we_start.dart';
+import 'package:kaizen/packages/ui_layout/pages/other_pages/create_change_new_workout_page/widgets/daily_workout_sheet/what_will_we_do_every_day.dart';
+import 'package:kaizen/packages/ui_layout/pages/other_pages/create_change_new_workout_page/widgets/name_workout.dart';
+import 'package:kaizen/packages/ui_layout/pages/other_pages/create_change_new_workout_page/widgets/steps_workout.dart';
+import 'package:kaizen/packages/ui_layout/pages/other_pages/create_change_new_workout_page/widgets/when_we_end.dart';
+import 'package:kaizen/packages/ui_layout/pages/other_pages/create_change_new_workout_page/widgets/when_we_start.dart';
 
 class IfNewCreateSportWorkout extends StatelessWidget {
   IfNewCreateSportWorkout({Key? key}) : super(key: key);
