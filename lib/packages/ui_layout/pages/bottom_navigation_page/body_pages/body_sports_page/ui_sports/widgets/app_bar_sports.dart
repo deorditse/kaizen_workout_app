@@ -5,7 +5,7 @@ import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
 
 SliverAppBar mySliverSportsAppBar(context) {
-  ImplementAppStateGetXController controllerApp = Get.find();
+  ImplementAppStateGetXController controllerApp = ImplementAppStateGetXController.instance;
 
   return SliverAppBar(
     backgroundColor: Theme.of(context).scaffoldBackgroundColor,

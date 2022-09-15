@@ -11,7 +11,7 @@ rowWithListUsersAndButton({
   required constrains,
   bool? isAdmin,
 }) {
-  final controllerApp = Get.find<ImplementAppStateGetXController>();
+  final controllerApp = ImplementAppStateGetXController.instance;
 
   Set<NameAndPhotoUser> usersInWorkout = (isAdmin != null && isAdmin)
       ? controllerApp.dataSportsWorkoutListWhenIAdmin[index].usersInWorkout

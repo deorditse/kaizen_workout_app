@@ -4,7 +4,7 @@ import 'package:style_app/style_app.dart';
 
 import '../../../../../business_layout.dart';
 
-defaultDialogAboutSports({required context, String? idWorkout}) {
+defaultDialogAboutSports({required BuildContext context, String? idWorkout}) {
   return Get.defaultDialog(
     barrierDismissible: false,
     // titlePadding: EdgeInsets.only(top: 0),
@@ -51,10 +51,10 @@ defaultDialogAboutSports({required context, String? idWorkout}) {
         ),
         TextButton(
           onPressed: () {
+            Get.close(0);
+            Get.back();
             CreateAndChangeSportWorkoutControllerGetxState.instance
                 .clearAllDataInNewSportWorkout();
-            Get.back();
-            Get.back();
           },
           child: Text(
             "прекрасно!",

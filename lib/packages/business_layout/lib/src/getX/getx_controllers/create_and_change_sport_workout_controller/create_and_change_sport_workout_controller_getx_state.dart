@@ -1,10 +1,9 @@
 import 'dart:math';
-import 'package:business_layout/src/getX/getx_controllers/create_and_change_sport_workout_controller/widgets/default_dialog_create_key.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:model/model.dart';
 import 'package:style_app/style_app.dart';
 import '../../../../business_layout.dart';
+import 'widgets/default_dialog_create_key.dart';
 
 //каждый раз при изменении запускать кодогенерацию
 //для запуска кодогенерации flutter packages pub run build_runner build --delete-conflicting-outputs
@@ -194,7 +193,6 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
         //     ),
         //   ),
         // );
-
         //очищаем все поля в create после создания тренировки
         clearAllDataInNewSportWorkout();
       }
@@ -271,7 +269,7 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
         );
       } else {
         //обновляем тренировку и в БД
-        controllerSportWorkout.updateEditWorkoutButtonTap(context: context);
+        // updateEditWorkoutButtonTap(context: context);
       }
     } catch (error) {
       print('error from _createWorkout $error');

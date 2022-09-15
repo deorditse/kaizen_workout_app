@@ -116,7 +116,7 @@ Widget _endDayIn({required context}) {
   );
 }
 
-void _showDatePickerEnd({required context}) {
+void _showDatePickerEnd({required BuildContext context}) {
   final controllerSportWorkout =
       CreateAndChangeSportWorkoutControllerGetxState.instance;
   DatePicker.showDatePicker(

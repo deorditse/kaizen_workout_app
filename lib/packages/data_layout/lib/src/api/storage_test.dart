@@ -51,6 +51,12 @@ class DataListRepository {
         return SportsWorkoutModel(
           idWorkout: '${4000 + index}',
           nameWorkout: 'Отжимания каждый день $index',
+          adminWorkout: NameAndPhotoUser(
+            idUser: 'test id admin',
+            name: 'adminWorkout  $index',
+            photoPath: 'photoPath $index',
+            family: 'family $index',
+          ),
           usersInWorkout: <NameAndPhotoUser>{
             NameAndPhotoUser(
               idUser: 'test/gNe2AwjMJMVJ8OLvFu1T',
@@ -63,6 +69,12 @@ class DataListRepository {
               name: 'user 2 name ${index * index}',
               photoPath: 'photoPath ${index + index}',
               family: 'family ${index + index}',
+            ),
+            NameAndPhotoUser(
+              idUser: 'test id admin',
+              name: 'adminWorkout  $index',
+              photoPath: 'photoPath $index',
+              family: 'family $index',
             ),
           },
           descriptionWorkoutList: [
@@ -81,12 +93,6 @@ class DataListRepository {
               family: 'family $index',
             ),
           },
-          adminWorkout: NameAndPhotoUser(
-            idUser: 'test id admin',
-            name: 'adminWorkout  $index',
-            photoPath: 'photoPath $index',
-            family: 'family $index',
-          ),
         );
       }),
     );

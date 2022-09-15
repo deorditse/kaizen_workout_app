@@ -10,7 +10,8 @@ class ImplementAppStateGetXController extends GetxController {
   final ImplementationSportsWorkoutDataServices _servicesDataLayout =
       ImplementationSportsWorkoutDataServices();
 
-  static ImplementAppStateGetXController instance = Get.find();
+  static ImplementAppStateGetXController instance =
+      Get.find<ImplementAppStateGetXController>();
 
   ///
   List<SportsWorkoutModel?> dataSportsWorkoutList = [];
@@ -90,9 +91,10 @@ class ImplementAppStateGetXController extends GetxController {
       {required SportsWorkoutModel sportsWorkoutModel}) {
     try {
       dataSportsWorkoutListWhenIAdmin = [
-        ...dataSportsWorkoutListWhenIAdmin,
-        sportsWorkoutModel
+        sportsWorkoutModel,
+        ...dataSportsWorkoutListWhenIAdmin
       ];
+
       dataSportsWorkoutList = [sportsWorkoutModel, ...dataSportsWorkoutList];
       update();
     } catch (error) {
