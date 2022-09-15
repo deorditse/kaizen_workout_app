@@ -123,4 +123,21 @@ class ImplementAppStateGetXController extends GetxController {
       print('error from getDataSportWorkout $error');
     }
   }
+
+  //функция чтобы получить индекс в dataSportsWorkoutList когда перехожу из dataSportsWorkoutListWhenIAdmin
+  void updateIndexForDataSportsWorkoutList(
+      {required int indexFromDataSportsWorkoutListWhenIAdmin}) {
+    final idWorkoutDataSportsWorkoutListWhenIAdmin =
+        dataSportsWorkoutListWhenIAdmin[
+                indexFromDataSportsWorkoutListWhenIAdmin]
+            .idWorkout;
+
+    for (var element in dataSportsWorkoutList) {
+      if (idWorkoutDataSportsWorkoutListWhenIAdmin == element?.idWorkout) {
+        indexWorkoutList.value = dataSportsWorkoutList.indexOf(element);
+        update();
+        return;
+      }
+    }
+  }
 }

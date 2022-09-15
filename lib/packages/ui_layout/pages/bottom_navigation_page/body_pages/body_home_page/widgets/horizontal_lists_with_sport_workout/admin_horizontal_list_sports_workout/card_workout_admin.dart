@@ -46,7 +46,6 @@ class AdminWorkoutCard extends StatelessWidget {
                         context: context,
                         usersInWorkout: sportWorkout.usersInWorkout!,
                         constrains: constrains,
-                        buttonIsDelete: true,
                         isAdmin: true,
                       ),
                     ),

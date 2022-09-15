@@ -9,7 +9,6 @@ rowWithListUsersAndButton({
   required context,
   required usersInWorkout,
   required constrains,
-  bool? buttonIsDelete,
   bool? isAdmin,
 }) {
   final controllerSetting = Get.find<ImplementSettingGetXController>();
@@ -47,22 +46,28 @@ rowWithListUsersAndButton({
           ),
         ),
       ),
-      if (buttonIsDelete == null)
-        TextButton(
-          onPressed: () {
-            //меняю отслеживание id тренировки
+      TextButton(
+        onPressed: () {
+          //меняю отслеживание id тренировки
+          if (isAdmin == null) {
             ImplementAppStateGetXController.instance.indexWorkoutList.value =
                 index;
-            //переходим на страницу календаря
-            controllerSetting.currentTabIndex.value = 1;
-          },
-          child: FittedBox(
-            child: Text(
-              'к тренировке',
-              style: Theme.of(context).textTheme.headline3,
-            ),
+          } else if (isAdmin == true) {
+            //нужно найти какому индексу в dataSportsWorkoutList соответсвует ииндекс из dataSportsWorkoutListWhenIAdmin
+            ImplementAppStateGetXController.instance
+                .updateIndexForDataSportsWorkoutList(
+                    indexFromDataSportsWorkoutListWhenIAdmin: index);
+          }
+          //переходим на страницу календаря
+          controllerSetting.currentTabIndex.value = 1;
+        },
+        child: FittedBox(
+          child: Text(
+            'к тренировке',
+            style: Theme.of(context).textTheme.headline3,
           ),
         ),
+      ),
     ],
   );
 }
