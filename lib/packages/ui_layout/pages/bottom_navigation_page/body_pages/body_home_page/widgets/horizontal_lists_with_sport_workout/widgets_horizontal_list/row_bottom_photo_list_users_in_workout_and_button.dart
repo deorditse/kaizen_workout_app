@@ -10,13 +10,14 @@ rowWithListUsersAndButton({
   required constrains,
   bool? isAdmin,
 }) {
-  final controllerSetting = Get.find<ImplementSettingGetXController>();
+  final controllerApp = Get.find<ImplementAppStateGetXController>();
 
-  final usersInWorkout = (isAdmin == null && isAdmin != true)
-      ? ImplementAppStateGetXController
-          .instance.dataSportsWorkoutList[index]!.usersInWorkout
-      : ImplementAppStateGetXController
-          .instance.dataSportsWorkoutListWhenIAdmin[index].usersInWorkout;
+  final usersInWorkout = (isAdmin != null && isAdmin)
+      ? controllerApp.dataSportsWorkoutListWhenIAdmin
+          .cast()[index]
+          .usersInWorkout
+      : controllerApp.dataSportsWorkoutList.cast()[index]!.usersInWorkout;
+
   return Row(
     children: [
       Expanded(
@@ -63,7 +64,7 @@ rowWithListUsersAndButton({
                     indexFromDataSportsWorkoutListWhenIAdmin: index);
           }
           //переходим на страницу календаря
-          controllerSetting.currentTabIndex.value = 1;
+          ImplementSettingGetXController.instance.currentTabIndex.value = 1;
         },
         child: FittedBox(
           child: Text(
