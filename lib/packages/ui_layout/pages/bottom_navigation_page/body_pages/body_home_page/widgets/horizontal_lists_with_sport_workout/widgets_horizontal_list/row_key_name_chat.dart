@@ -19,7 +19,8 @@ keyNameAndChat({required context, required int index, bool? isAdmin}) {
         flex: 1,
         child: FittedBox(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            // mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               FittedBox(
                 child: SelectableText(
@@ -28,11 +29,13 @@ keyNameAndChat({required context, required int index, bool? isAdmin}) {
                       .textTheme
                       .headline2!
                       .copyWith(color: Theme.of(context).primaryColor),
+                  textAlign: TextAlign.left,
                 ),
               ),
               Text(
                 'ключ',
                 style: Theme.of(context).textTheme.headline3,
+                textAlign: TextAlign.left,
               ),
             ],
           ),

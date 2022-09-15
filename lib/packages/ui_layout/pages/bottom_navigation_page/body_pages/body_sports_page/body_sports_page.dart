@@ -68,15 +68,11 @@ class BodySportsPage extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: TextButton(
-                          onPressed: () {
-                            defaultDialogAllProgramWorkout(
-                              context: context,
-                              indexSportWorkout: indexInSportsWorkoutList,
-                            );
-                          },
-                          child: Text('Посмотреть программу тренировки'),
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: _watchSportsWorkoutList(
+                          context: context,
+                          indexInSportsWorkoutList: indexInSportsWorkoutList,
+                          nameWorkout: sportWorkout?.nameWorkout,
                         ),
                       ),
                       statisticsWorkout(),
@@ -258,6 +254,36 @@ class BodySportsPage extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  _watchSportsWorkoutList(
+      {required context, required indexInSportsWorkoutList, nameWorkout}) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 0.0),
+      child: TextButton(
+        onPressed: () {
+          defaultDialogAllProgramWorkout(
+            context: context,
+            indexSportWorkout: indexInSportsWorkoutList,
+          );
+        },
+        child: Column(
+          children: [
+            const Text('Посмотреть программу тренировки'),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+              child: Text(
+                "${nameWorkout ?? ''}",
+                style: TextStyle(
+                    color: Theme.of(context).textTheme.headline3!.color),
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
         ),
       ),
     );
