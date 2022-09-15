@@ -15,43 +15,62 @@ keyNameAndChat({required context, required int index, bool? isAdmin}) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      FittedBox(
-        child: Text(
-          'Ключ \n${sportWorkout.idWorkout}',
-        ),
-      ),
-      const SizedBox(
-        width: 5,
-      ),
-      Expanded(
-        flex: 3,
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Text(
-            sportWorkout?.nameWorkout.toString() ?? '',
-            style: Theme.of(context).textTheme.headline2,
-            textAlign: TextAlign.center,
+      Flexible(
+        flex: 1,
+        child: FittedBox(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              FittedBox(
+                child: SelectableText(
+                  sportWorkout.idWorkout,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline2!
+                      .copyWith(color: Theme.of(context).primaryColor),
+                ),
+              ),
+              Text(
+                'ключ',
+                style: Theme.of(context).textTheme.headline3,
+              ),
+            ],
           ),
         ),
       ),
-      const SizedBox(
-        width: 5,
+      Flexible(
+        flex: 4,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Text(
+            sportWorkout.nameWorkout.toString() ?? '',
+            style: Theme.of(context).textTheme.headline2,
+            overflow: TextOverflow.fade,
+          ),
+        ),
       ),
-      Expanded(
+      Flexible(
         flex: 1,
-        child: FittedBox(
-          child: GestureDetector(
-            onTap: () {
-              controllerSetting.currentTabIndex.value = 2;
-            },
+        child: GestureDetector(
+          onTap: () {
+            controllerSetting.currentTabIndex.value = 2;
+          },
+          child: FittedBox(
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              // mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 FaIcon(
                   FontAwesomeIcons.message,
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context)
+                      .primaryColor, //textTheme.headline3!.color,
+                  size: 15,
                 ),
-                const Text('Group chat'),
+                Text(
+                  'чат',
+                  style: Theme.of(context).textTheme.headline3,
+                ),
               ],
             ),
           ),

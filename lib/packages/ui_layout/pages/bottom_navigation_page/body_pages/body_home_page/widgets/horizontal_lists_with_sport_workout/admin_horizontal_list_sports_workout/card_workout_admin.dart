@@ -21,7 +21,7 @@ class AdminWorkoutCard extends StatelessWidget {
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 1.6,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+              padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 5),
               child: LayoutBuilder(
                 builder: (context, constrains) => Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -93,7 +93,8 @@ class AdminWorkoutCard extends StatelessWidget {
               children: [
                 Text(
                   'редактировать: ',
-                  style: Theme.of(context).textTheme.headline3!,
+                  style: Theme.of(context).textTheme.headline3!.copyWith(
+                      color: Theme.of(context).textTheme.headline1!.color),
                 ),
               ],
             ),

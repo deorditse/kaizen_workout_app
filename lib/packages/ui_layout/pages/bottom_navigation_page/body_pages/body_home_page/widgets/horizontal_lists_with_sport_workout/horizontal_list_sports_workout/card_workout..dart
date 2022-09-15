@@ -25,7 +25,8 @@ class WorkoutCard extends StatelessWidget {
           ),
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 3),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2),
               child: LayoutBuilder(
                 builder: (context, constrains) {
                   return Column(

@@ -12,16 +12,16 @@ rowWithListUsersAndButton({
 }) {
   final controllerApp = Get.find<ImplementAppStateGetXController>();
 
+  /*Set<NameAndPhotoUser>*/
   final usersInWorkout = (isAdmin != null && isAdmin)
-      ? controllerApp.dataSportsWorkoutListWhenIAdmin
-          .cast()[index]
-          .usersInWorkout
-      : controllerApp.dataSportsWorkoutList.cast()[index]!.usersInWorkout;
+      ? controllerApp.dataSportsWorkoutListWhenIAdmin[index].usersInWorkout
+      : controllerApp.dataSportsWorkoutList[index]!.usersInWorkout;
 
   return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      Expanded(
-        flex: 2,
+      Flexible(
+        // flex: 2,
         child: GestureDetector(
           onTap: () {
             popupWithUsersInWorkout(
@@ -51,22 +51,22 @@ rowWithListUsersAndButton({
           ),
         ),
       ),
-      TextButton(
-        onPressed: () {
-          //меняю отслеживание id тренировки
-          if (isAdmin == null) {
-            ImplementAppStateGetXController.instance.indexWorkoutList.value =
-                index;
-          } else if (isAdmin == true) {
-            //нужно найти какому индексу в dataSportsWorkoutList соответсвует ииндекс из dataSportsWorkoutListWhenIAdmin
-            ImplementAppStateGetXController.instance
-                .updateIndexForDataSportsWorkoutList(
-                    indexFromDataSportsWorkoutListWhenIAdmin: index);
-          }
-          //переходим на страницу календаря
-          ImplementSettingGetXController.instance.currentTabIndex.value = 1;
-        },
-        child: FittedBox(
+      FittedBox(
+        child: TextButton(
+          onPressed: () {
+            //меняю отслеживание id тренировки
+            if (isAdmin == null) {
+              ImplementAppStateGetXController.instance.indexWorkoutList.value =
+                  index;
+            } else if (isAdmin == true) {
+              //нужно найти какому индексу в dataSportsWorkoutList соответсвует ииндекс из dataSportsWorkoutListWhenIAdmin
+              ImplementAppStateGetXController.instance
+                  .updateIndexForDataSportsWorkoutList(
+                      indexFromDataSportsWorkoutListWhenIAdmin: index);
+            }
+            //переходим на страницу календаря
+            ImplementSettingGetXController.instance.currentTabIndex.value = 1;
+          },
           child: Text(
             'к тренировке',
             style: Theme.of(context).textTheme.headline3,
@@ -101,7 +101,7 @@ _photoListUsersInWorkout({
                 ),
                 if (usersInWorkout != null &&
                     index == usersInWorkout!.length - 1)
-                  const Icon(Icons.arrow_forward_ios),
+                  const FittedBox(child: Icon(Icons.arrow_forward_ios)),
               ],
             ),
           )
