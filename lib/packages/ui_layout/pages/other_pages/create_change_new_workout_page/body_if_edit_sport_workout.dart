@@ -7,14 +7,37 @@ import 'package:kaizen/packages/ui_layout/pages/other_pages/create_change_new_wo
 import 'package:model/model.dart'; //только так работает, так как на бизнес слое такой импорт - нужно чтобы совподало
 import 'package:flutter/material.dart';
 
-class IfEditSportWorkout extends StatelessWidget {
-  IfEditSportWorkout({
+class IfEditSportWorkout extends StatefulWidget {
+  const IfEditSportWorkout({
     required this.sportsWorkoutModelForEdit,
     Key? key,
   }) : super(key: key);
 
-  SportsWorkoutModel sportsWorkoutModelForEdit;
+  final SportsWorkoutModel sportsWorkoutModelForEdit;
+
+  @override
+  State<IfEditSportWorkout> createState() => _IfEditSportWorkoutState();
+}
+
+class _IfEditSportWorkoutState extends State<IfEditSportWorkout> {
   final double _sizeBetweenContainer = 20;
+
+  @override
+  void initState() {
+    super.initState();
+
+    //обновляю данные по тренировке
+    CreateAndChangeSportWorkoutControllerGetxState.instance
+        .editSportWorkoutFromEditWorkoutPage(
+            sportsWorkoutModelForEdit: widget.sportsWorkoutModelForEdit);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    CreateAndChangeSportWorkoutControllerGetxState.instance
+        .clearAllDataInNewSportWorkout();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +49,7 @@ class IfEditSportWorkout extends StatelessWidget {
         ),
         nameWorkout(
             context: context,
-            nameSportWorkoutEdit: sportsWorkoutModelForEdit.nameWorkout),
+            nameSportWorkoutEdit: widget.sportsWorkoutModelForEdit.nameWorkout),
         SizedBox(
           height: _sizeBetweenContainer,
         ),
@@ -43,13 +66,16 @@ class IfEditSportWorkout extends StatelessWidget {
           height: _sizeBetweenContainer,
         ),
         Hero(
-          tag: 'admin_edit_workout ${sportsWorkoutModelForEdit.idWorkout}',
+          tag:
+              'admin_edit_workout ${widget.sportsWorkoutModelForEdit.idWorkout}',
           child: Material(
             color: Colors.transparent,
             child: Center(
               child: ElevatedButton(
-                onPressed: () => _editWorkout(context: context),
-                child: const Text('Редактировать тренировку'),
+                onPressed: () => CreateAndChangeSportWorkoutControllerGetxState
+                    .instance
+                    .updateEditWorkoutButtonTap(context: context),
+                child: const Text('Обновить тренировку'),
               ),
             ),
           ),
@@ -59,27 +85,5 @@ class IfEditSportWorkout extends StatelessWidget {
         ),
       ],
     );
-  }
-}
-
-void _editWorkout({required context}) {
-  try {
-    final controllerSportWorkout =
-        CreateAndChangeSportWorkoutControllerGetxState.instance;
-
-    if (controllerSportWorkout.lastWorkoutDay == null &&
-        !controllerSportWorkout.toggleDateIsEnd) {
-      mySnackBarButton(
-        context: context,
-        title: "обязательное поле*",
-        message: "В пункте 2 выберите дату окончания тренировки",
-      );
-    } else {
-      //добавляем тренировку в список тренировок и в БД
-      controllerSportWorkout.createNewSportWorkoutFromCreateWorkoutPage(
-          context: context);
-    }
-  } catch (error) {
-    print('error from _createWorkout $error');
   }
 }

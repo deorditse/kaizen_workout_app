@@ -1,10 +1,10 @@
 import 'dart:math';
+import 'package:business_layout/src/getX/getx_controllers/create_and_change_sport_workout_controller/widgets/default_dialog_create_key.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:model/model.dart';
 import 'package:style_app/style_app.dart';
 import '../../../../business_layout.dart';
-import 'widgets/default_dialog_create_key.dart';
 
 //каждый раз при изменении запускать кодогенерацию
 //для запуска кодогенерации flutter packages pub run build_runner build --delete-conflicting-outputs
@@ -152,7 +152,13 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
   Future<void> createNewSportWorkoutFromCreateWorkoutPage(
       {required context}) async {
     try {
-      if (descriptionWorkoutListFromCreatePage.contains(null)) {
+      if (lastWorkoutDay == null && !toggleDateIsEnd) {
+        mySnackBarButton(
+          context: context,
+          title: "обязательное поле*",
+          message: "В пункте 2 выберите дату окончания тренировки",
+        );
+      } else if (descriptionWorkoutListFromCreatePage.contains(null)) {
         mySnackBarButton(
           context: context,
           title: "Не все дни заполнены",
@@ -160,10 +166,12 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
               'Заполните каждый день тренировки или нажмите повторить до конца списка',
         );
       } else {
+        //добавляем тренировку в список тренировок и в БД
+
         //обновляю данные в sportWorkoutNewCreate
         await _updateAllDataInSportWorkoutNewCreate();
         //добавляю тренировку в свой лист тренировок и сохраняю в базу данных
-//добавляю тренировку в лист всех тренировок и созданных мною
+        //добавляю тренировку в лист всех тренировок и созданных мною
         ImplementAppStateGetXController.instance
             .addNewWorkoutInDataSportWorkoutList(
                 sportsWorkoutModel: _sportWorkoutNewCreate!);
@@ -175,18 +183,19 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
         defaultDialogAboutSports(
             context: context, idWorkout: _sportWorkoutNewCreate!.idWorkout);
 
-        //test
-        Get.defaultDialog(
-            content: Container(
-          height: MediaQuery.of(context).size.height * 0.7,
-          child: SingleChildScrollView(
-            child: Text(
-              _sportWorkoutNewCreate.toString(),
-            ),
-          ),
-        ));
+        // //test
+        // Get.defaultDialog(
+        //   content: Container(
+        //     height: MediaQuery.of(context).size.height * 0.7,
+        //     child: SingleChildScrollView(
+        //       child: Text(
+        //         _sportWorkoutNewCreate.toString(),
+        //       ),
+        //     ),
+        //   ),
+        // );
 
-        //очищаем все поля
+        //очищаем все поля в create после создания тренировки
         clearAllDataInNewSportWorkout();
       }
     } catch (error) {
@@ -225,4 +234,49 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
     toggleDateIsEnd = !toggleDateIsEnd;
     update();
   }
+
+  /// для редактирования тренировки
+  Future<void> editSportWorkoutFromEditWorkoutPage(
+      {required SportsWorkoutModel sportsWorkoutModelForEdit}) async {
+    addFirstDay(sportsWorkoutModelForEdit.firstWorkoutDay);
+
+    addLastDay(sportsWorkoutModelForEdit.lastWorkoutDay);
+
+    toggleDateIsEnd = (lastWorkoutDay == null) ? true : false;
+
+    adminWorkout = sportsWorkoutModelForEdit.adminWorkout;
+
+    descriptionWorkoutListFromCreatePage =
+        sportsWorkoutModelForEdit.descriptionWorkoutList;
+
+    idWorkout = sportsWorkoutModelForEdit.idWorkout;
+
+    updateNameWorkout(
+        newNameSportWorkout: sportsWorkoutModelForEdit.nameWorkout);
+
+    update();
+  }
+
+  Future<void> updateEditWorkoutButtonTap({required context}) async {
+    try {
+      final controllerSportWorkout =
+          CreateAndChangeSportWorkoutControllerGetxState.instance;
+
+      if (controllerSportWorkout.lastWorkoutDay == null &&
+          !controllerSportWorkout.toggleDateIsEnd) {
+        mySnackBarButton(
+          context: context,
+          title: "обязательное поле*",
+          message: "В пункте 2 выберите дату окончания тренировки",
+        );
+      } else {
+        //обновляем тренировку и в БД
+        controllerSportWorkout.updateEditWorkoutButtonTap(context: context);
+      }
+    } catch (error) {
+      print('error from _createWorkout $error');
+    }
+  }
+
+  ///
 }

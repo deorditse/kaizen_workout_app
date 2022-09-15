@@ -38,7 +38,9 @@ class IfNewCreateSportWorkout extends StatelessWidget {
         ),
         Center(
           child: ElevatedButton(
-            onPressed: () => _createWorkout(context: context),
+            onPressed: () => CreateAndChangeSportWorkoutControllerGetxState
+                .instance
+                .createNewSportWorkoutFromCreateWorkoutPage(context: context),
             child: const Text('Создать тренировку'),
           ),
         ),
@@ -47,27 +49,5 @@ class IfNewCreateSportWorkout extends StatelessWidget {
         ),
       ],
     );
-  }
-}
-
-void _createWorkout({required context}) {
-  try {
-    final controllerSportWorkout =
-        CreateAndChangeSportWorkoutControllerGetxState.instance;
-
-    if (controllerSportWorkout.lastWorkoutDay == null &&
-        !controllerSportWorkout.toggleDateIsEnd) {
-      mySnackBarButton(
-        context: context,
-        title: "обязательное поле*",
-        message: "В пункте 2 выберите дату окончания тренировки",
-      );
-    } else {
-      //добавляем тренировку в список тренировок и в БД
-      controllerSportWorkout.createNewSportWorkoutFromCreateWorkoutPage(
-          context: context);
-    }
-  } catch (error) {
-    print('error from _createWorkout $error');
   }
 }
