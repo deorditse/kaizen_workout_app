@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/business_layout/lib/src/getX/getx_controllers/setting_controller/implement_getx_state_management.dart';
-import 'package:kaizen/packages/model/lib/model.dart';
 
-keyNameAndChat({required context, required sportWorkout}) {
+keyNameAndChat({required context, required int index, bool? isAdmin}) {
   final controllerSetting = Get.find<ImplementSettingGetXController>();
+
+  final sportWorkout = (isAdmin == null && isAdmin != true)
+      ? ImplementAppStateGetXController.instance.dataSportsWorkoutList[index]!
+      : ImplementAppStateGetXController
+          .instance.dataSportsWorkoutListWhenIAdmin[index];
 
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       FittedBox(
         child: Text(
-          'Ключ \n${sportWorkout?.idWorkout ?? ''}',
+          'Ключ \n${sportWorkout.idWorkout}',
         ),
       ),
       const SizedBox(

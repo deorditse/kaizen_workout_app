@@ -7,18 +7,16 @@ import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_page
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 
 class AdminWorkoutCard extends StatelessWidget {
-  AdminWorkoutCard({Key? key, required this.index}) : super(key: key);
+  const AdminWorkoutCard(
+      {Key? key, required this.indexInDataSportsWorkoutListWhenIAdmin})
+      : super(key: key);
 
-  final int index;
-  final controllerSetting = Get.find<ImplementSettingGetXController>();
+  final int indexInDataSportsWorkoutListWhenIAdmin;
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ImplementAppStateGetXController>(
       builder: (controllerApp) {
-        final sportWorkout =
-            controllerApp.dataSportsWorkoutListWhenIAdmin.elementAt(index);
-
         return Center(
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 1.6,
@@ -31,20 +29,21 @@ class AdminWorkoutCard extends StatelessWidget {
                     Expanded(
                       child: keyNameAndChat(
                         context: context,
-                        sportWorkout: sportWorkout,
+                        index: indexInDataSportsWorkoutListWhenIAdmin,
+                        isAdmin: true,
                       ),
                     ),
                     Expanded(
                       child: _centralContentWithStatusData(
-                        firstWorkoutDay: sportWorkout.firstWorkoutDay,
+                        indexInDataSportsWorkoutListWhenIAdmin:
+                            indexInDataSportsWorkoutListWhenIAdmin,
                         context: context,
                       ),
                     ),
                     Expanded(
                       child: rowWithListUsersAndButton(
-                        index: index,
+                        index: indexInDataSportsWorkoutListWhenIAdmin,
                         context: context,
-                        usersInWorkout: sportWorkout.usersInWorkout!,
                         constrains: constrains,
                         isAdmin: true,
                       ),
@@ -59,39 +58,48 @@ class AdminWorkoutCard extends StatelessWidget {
     );
   }
 
-  _centralContentWithStatusData({required firstWorkoutDay, required context}) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Начало: ', style: Theme.of(context).textTheme.headline3!
-                // .copyWith(color: Theme.of(context).cardColor),
-                ),
-            Text(DateFormat('d MMM y').format(firstWorkoutDay!),
-                style: Theme.of(context).textTheme.headline3!
-                // .copyWith(color: Theme.of(context).cardColor),
-                ),
-          ],
-        ),
-        const SizedBox(
-          height: 4,
-        ),
-        Container(
-          decoration: myStyleContainer(
-              context: context,
-              color: Theme.of(context).scaffoldBackgroundColor),
-          child: Row(
+  _centralContentWithStatusData(
+      {required indexInDataSportsWorkoutListWhenIAdmin, required context}) {
+    final sportWorkout = ImplementAppStateGetXController
+            .instance.dataSportsWorkoutListWhenIAdmin[
+        indexInDataSportsWorkoutListWhenIAdmin];
+    return GestureDetector(
+      onTap: () {
+        // Get.to(CreateWorkoutPage(sportsWorkoutModelForEdit: sportWorkout));
+      },
+      child: Column(
+        children: [
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'редактировать: ',
-                style: Theme.of(context).textTheme.headline3!,
-              ),
+              Text('Начало: ', style: Theme.of(context).textTheme.headline3!
+                  // .copyWith(color: Theme.of(context).cardColor),
+                  ),
+              Text(DateFormat('d MMM y').format(sportWorkout.firstWorkoutDay),
+                  style: Theme.of(context).textTheme.headline3!
+                  // .copyWith(color: Theme.of(context).cardColor),
+                  ),
             ],
           ),
-        ),
-      ],
+          const SizedBox(
+            height: 4,
+          ),
+          Container(
+            decoration: myStyleContainer(
+                context: context,
+                color: Theme.of(context).scaffoldBackgroundColor),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'редактировать: ',
+                  style: Theme.of(context).textTheme.headline3!,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

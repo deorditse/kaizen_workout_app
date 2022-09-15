@@ -33,7 +33,7 @@ class HorizontalListSportsWorkout extends StatelessWidget {
                                 flex: 3,
                                 child: WorkoutCard(
                                   key: UniqueKey(),
-                                  index: index,
+                                  indexInDataSportsWorkoutList: index,
                                 ),
                               ),
                               if (indexInDataSportsWorkoutList != null)

@@ -9,16 +9,15 @@ import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_page
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/horizontal_lists_with_sport_workout/widgets_horizontal_list/row_key_name_chat.dart';
 
 class WorkoutCard extends StatelessWidget {
-  WorkoutCard({Key? key, required this.index}) : super(key: key);
+  const WorkoutCard({Key? key, required this.indexInDataSportsWorkoutList})
+      : super(key: key);
 
-  final int index;
+  final int indexInDataSportsWorkoutList;
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ImplementAppStateGetXController>(
       builder: (controllerApp) {
-        final sportWorkout =
-            controllerApp.dataSportsWorkoutList.elementAt(index);
         return Container(
           width: controllerApp.dataSportsWorkoutList.length > 1
               ? MediaQuery.of(context).size.width / 1.4
@@ -37,21 +36,20 @@ class WorkoutCard extends StatelessWidget {
                       Expanded(
                         child: keyNameAndChat(
                           context: context,
-                          sportWorkout: sportWorkout,
+                          index: indexInDataSportsWorkoutList,
                         ),
                       ),
                       Expanded(
                         child: _centralContentWithStatusData(
-                          firstWorkoutDay: sportWorkout?.firstWorkoutDay,
-                          lastWorkoutDay: sportWorkout?.lastWorkoutDay,
+                          indexInDataSportsWorkoutList:
+                              indexInDataSportsWorkoutList,
                           context: context,
                         ),
                       ),
                       Expanded(
                         child: rowWithListUsersAndButton(
-                          index: index,
+                          index: indexInDataSportsWorkoutList,
                           context: context,
-                          usersInWorkout: sportWorkout?.usersInWorkout,
                           constrains: constrains,
                         ),
                       ),
@@ -67,23 +65,26 @@ class WorkoutCard extends StatelessWidget {
   }
 
   _centralContentWithStatusData(
-      {required firstWorkoutDay, required lastWorkoutDay, required context}) {
+      {required indexInDataSportsWorkoutList, required context}) {
     final controllerSetting = Get.find<ImplementSettingGetXController>();
+
+    final sportWorkout = ImplementAppStateGetXController
+        .instance.dataSportsWorkoutList[indexInDataSportsWorkoutList];
 
     return Column(
       children: [
-        if (firstWorkoutDay.isAfter(DateTime.now()))
+        if (sportWorkout!.firstWorkoutDay.isAfter(DateTime.now()))
           Text(
-            lastWorkoutDay == null
+            sportWorkout.lastWorkoutDay == null
                 ? 'длительность бессрочно'
-                : 'длительность ${lastWorkoutDay!.difference(firstWorkoutDay).inDays} дней',
+                : 'длительность ${sportWorkout.lastWorkoutDay!.difference(sportWorkout.firstWorkoutDay).inDays} дней',
             style: Theme.of(context).textTheme.headline3,
           ),
-        if (firstWorkoutDay.isBefore(DateTime.now()))
+        if (sportWorkout.firstWorkoutDay.isBefore(DateTime.now()))
           Text(
-            lastWorkoutDay == null
+            sportWorkout.lastWorkoutDay == null
                 ? 'длительность бессрочно'
-                : 'идет с ${DateFormat('d MMM y').format(firstWorkoutDay)}',
+                : 'идет с ${DateFormat('d MMM y').format(sportWorkout.firstWorkoutDay)}',
             style: Theme.of(context).textTheme.headline3,
           ),
         const SizedBox(
@@ -93,14 +94,14 @@ class WorkoutCard extends StatelessWidget {
           onTap: () {
             //меняю отслеживание id тренировки
             ImplementAppStateGetXController.instance.indexWorkoutList.value =
-                index;
+                indexInDataSportsWorkoutList;
             //переходим на страницу календаря
             controllerSetting.currentTabIndex.value = 1;
           },
           child: Container(
             decoration: myStyleContainer(
                 context: context,
-                color: firstWorkoutDay.isAfter(DateTime.now())
+                color: sportWorkout.firstWorkoutDay.isAfter(DateTime.now())
                     ? Theme.of(context).primaryColor.withOpacity(0.4)
                     : Theme.of(context).primaryColor),
             child: Row(
@@ -108,11 +109,11 @@ class WorkoutCard extends StatelessWidget {
               children: [
                 FittedBox(
                   child: Text(
-                    firstWorkoutDay.isAfter(DateTime.now())
-                        ? 'старт ${DateFormat('d MMM y').format(firstWorkoutDay)}'
-                        : lastWorkoutDay == null
-                            ? 'пройдено дней ${DateTime.now().difference(firstWorkoutDay).inDays + 1} / начато ${DateFormat('d.MM.y').format(firstWorkoutDay)}'
-                            : 'прогресс: ${DateTime.now().difference(firstWorkoutDay).inDays + 1}/${lastWorkoutDay!.difference(firstWorkoutDay).inDays}',
+                    sportWorkout.firstWorkoutDay.isAfter(DateTime.now())
+                        ? 'старт ${DateFormat('d MMM y').format(sportWorkout.firstWorkoutDay)}'
+                        : sportWorkout.lastWorkoutDay == null
+                            ? 'пройдено дней ${DateTime.now().difference(sportWorkout.firstWorkoutDay).inDays + 1} / начато ${DateFormat('d.MM.y').format(sportWorkout.firstWorkoutDay)}'
+                            : 'прогресс: ${DateTime.now().difference(sportWorkout.firstWorkoutDay).inDays + 1}/${sportWorkout.lastWorkoutDay!.difference(sportWorkout.firstWorkoutDay).inDays}',
                     style: Theme.of(context)
                         .textTheme
                         .headline3!

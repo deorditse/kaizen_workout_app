@@ -7,12 +7,16 @@ import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_page
 rowWithListUsersAndButton({
   required int index,
   required context,
-  required usersInWorkout,
   required constrains,
   bool? isAdmin,
 }) {
   final controllerSetting = Get.find<ImplementSettingGetXController>();
-  print(usersInWorkout);
+
+  final usersInWorkout = (isAdmin == null && isAdmin != true)
+      ? ImplementAppStateGetXController
+          .instance.dataSportsWorkoutList[index]!.usersInWorkout
+      : ImplementAppStateGetXController
+          .instance.dataSportsWorkoutListWhenIAdmin[index].usersInWorkout;
   return Row(
     children: [
       Expanded(

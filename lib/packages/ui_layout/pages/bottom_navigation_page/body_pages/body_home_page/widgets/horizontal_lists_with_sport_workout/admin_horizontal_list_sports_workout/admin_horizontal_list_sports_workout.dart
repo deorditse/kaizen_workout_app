@@ -35,7 +35,7 @@ class AdminHorizontalListSportsWorkout extends StatelessWidget {
                               context: context,
                             ),
                             child: AdminWorkoutCard(
-                              index: index,
+                              indexInDataSportsWorkoutListWhenIAdmin: index,
                             ),
                           ),
                           if (index ==
@@ -77,7 +77,7 @@ class AdminHorizontalListSportsWorkout extends StatelessWidget {
       ),
       onPressed: () {
         Get.put(CreateAndChangeSportWorkoutControllerGetxState());
-        Get.to(() => const CreateWorkoutPage());
+        Get.to(() => CreateWorkoutPage());
       },
     );
   }
