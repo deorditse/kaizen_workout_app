@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
+import 'package:kaizen/packages/ui_layout/pages/all_pages/create_change_new_workout_page/create_workout_page.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/horizontal_lists_with_sport_workout/widgets_horizontal_list/row_bottom_photo_list_users_in_workout_and_button.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/horizontal_lists_with_sport_workout/widgets_horizontal_list/row_key_name_chat.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
@@ -66,7 +67,8 @@ class AdminWorkoutCard extends StatelessWidget {
         indexInDataSportsWorkoutListWhenIAdmin];
     return GestureDetector(
       onTap: () {
-        // Get.to(CreateWorkoutPage(sportsWorkoutModelForEdit: sportWorkout));
+        Get.put(CreateAndChangeSportWorkoutControllerGetxState());
+        Get.to(CreateWorkoutPage(sportsWorkoutModelForEdit: sportWorkout));
       },
       child: Column(
         children: [

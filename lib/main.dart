@@ -5,7 +5,7 @@ import 'package:kaizen/packages/style_app/lib/src/theme_app/custom_theme/materia
 import 'package:kaizen/packages/style_app/lib/src/theme_app/custom_theme/material_theme/light_custom_theme_material.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/authentication_page/controller/bindings.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/authentication_page/views/login_page.dart';
-import 'package:kaizen/packages/ui_layout/pages/all_pages/create_new_workout_page/create_workout_page.dart';
+import 'package:kaizen/packages/ui_layout/pages/all_pages/create_change_new_workout_page/create_workout_page.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/news_page/news_page.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_chat_page/body_chat_page.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/body_home_page.dart';

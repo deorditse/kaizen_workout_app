@@ -44,7 +44,6 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
   }
 
   //пустая тренировка
-
   Future<void> initializedCreateNewWorkout() async {
     //сразу добавлю id тренировки и пользователя - будет администратором
     try {
@@ -219,6 +218,11 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
     idWorkout = '';
     await _createIdWorkout();
     updateNameWorkout(newNameSportWorkout: 'тренировка $idWorkout');
+    update();
+  }
+
+  void changeToggleDateIsEnd() {
+    toggleDateIsEnd = !toggleDateIsEnd;
     update();
   }
 }
