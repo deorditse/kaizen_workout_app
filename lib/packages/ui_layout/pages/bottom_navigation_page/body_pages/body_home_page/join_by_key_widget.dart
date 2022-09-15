@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kaizen/packages/style_app/lib/src/style_text_field.dart';
 
-Widget JoinByKey() {
+Widget joinByKey() {
   TextEditingController _controller = TextEditingController();
 
   return Builder(
@@ -11,7 +11,6 @@ Widget JoinByKey() {
         child: Card(
           elevation: 15,
           color: Theme.of(context).cardColor,
-
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(22),
           ),
