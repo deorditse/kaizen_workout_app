@@ -27,7 +27,8 @@ class _BodyHomePageState extends State<BodyHomePage> {
             children: [
               GetBuilder<ImplementAppStateGetXController>(
                 builder: (controller) => SizedBox(
-                  height: controller.dataSportsWorkoutList.isNotEmpty ? 5 : 30,
+                  height:
+                      controller.dataSportsWorkoutList.isNotEmpty ? 5 : 30,
                 ),
               ),
               JoinByKey(),

@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_change_new_workout_page/style.dart';
+import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/style/style_calendar.dart';
 
 class WhenWeEnd extends StatelessWidget {
   WhenWeEnd({Key? key}) : super(key: key);
@@ -18,29 +19,28 @@ class WhenWeEnd extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '2. Когда закончим?',
-                      style: Theme.of(context).textTheme.headline1,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          'бессрочно',
-                          style: Theme.of(context).textTheme.headline3,
-                        ),
-                        GetBuilder<
-                            CreateAndChangeSportWorkoutControllerGetxState>(
-                          builder: (controllerSportWorkout) => Switch(
+        child: GetBuilder<CreateAndChangeSportWorkoutControllerGetxState>(
+          builder: (controllerSportWorkout) => Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '2. Когда закончим?',
+                        style: Theme.of(context).textTheme.headline1,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            'бессрочно',
+                            style: Theme.of(context).textTheme.headline3,
+                          ),
+                          Switch(
                             value: controllerSportWorkout.toggleDateIsEnd,
                             onChanged: (value) {
                               controllerSportWorkout.changeToggleDateIsEnd();
@@ -50,18 +50,18 @@ class WhenWeEnd extends StatelessWidget {
                               }
                             },
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const Divider(),
-              ],
-            ),
-            if (!CreateAndChangeSportWorkoutControllerGetxState
-                .instance.toggleDateIsEnd)
-              _endDayIn(context: context),
-          ],
+                        ],
+                      ),
+                    ],
+                  ),
+                  const Divider(),
+                ],
+              ),
+              if (!CreateAndChangeSportWorkoutControllerGetxState
+                  .instance.toggleDateIsEnd)
+                _endDayIn(context: context),
+            ],
+          ),
         ),
       ),
     );

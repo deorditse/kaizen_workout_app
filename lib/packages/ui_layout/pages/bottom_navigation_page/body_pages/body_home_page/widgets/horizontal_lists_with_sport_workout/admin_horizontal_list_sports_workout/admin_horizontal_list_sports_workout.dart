@@ -6,6 +6,7 @@ import 'package:kaizen/packages/business_layout/lib/src/getX/getx_controllers/cr
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_change_new_workout_page/create_workout_page.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/horizontal_lists_with_sport_workout/admin_horizontal_list_sports_workout/card_workout_admin.dart';
+import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/style/style_calendar.dart';
 
 class AdminHorizontalListSportsWorkout extends StatelessWidget {
   const AdminHorizontalListSportsWorkout({Key? key}) : super(key: key);
@@ -77,7 +78,10 @@ class AdminHorizontalListSportsWorkout extends StatelessWidget {
       ),
       onPressed: () {
         Get.put(CreateAndChangeSportWorkoutControllerGetxState());
-        Get.to(() => CreateWorkoutPage());
+        Get.to(
+          () => CreateWorkoutPage(),
+          transition: myTransitionDownToUp(),
+        );
       },
     );
   }

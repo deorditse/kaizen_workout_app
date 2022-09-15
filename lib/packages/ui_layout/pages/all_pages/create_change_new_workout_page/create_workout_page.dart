@@ -35,9 +35,8 @@ class CreateWorkoutPage extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: isSportWorkoutEdit
               ? IfEditSportWorkout(
-                  idWorkout: idWorkout,
                   sportsWorkoutModelForEdit: sportsWorkoutModelForEdit!)
-              : IfNewCreateSportWorkout(idWorkout: idWorkout),
+              : IfNewCreateSportWorkout(),
         ),
       ),
       // bottomNavigationBar: MyBottomNavigatorBar(),

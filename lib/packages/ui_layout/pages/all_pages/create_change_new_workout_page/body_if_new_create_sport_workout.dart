@@ -8,10 +8,8 @@ import 'package:kaizen/packages/ui_layout/pages/all_pages/create_change_new_work
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_change_new_workout_page/widgets/when_we_start.dart';
 
 class IfNewCreateSportWorkout extends StatelessWidget {
-  IfNewCreateSportWorkout({Key? key, required this.idWorkout})
-      : super(key: key);
+  IfNewCreateSportWorkout({Key? key}) : super(key: key);
   final double _sizeBetweenContainer = 20;
-  String idWorkout;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +20,7 @@ class IfNewCreateSportWorkout extends StatelessWidget {
         SizedBox(
           height: _sizeBetweenContainer * 1.5,
         ),
-        nameWorkout(context: context, idWorkout: idWorkout),
+        nameWorkout(context: context),
         SizedBox(
           height: _sizeBetweenContainer,
         ),

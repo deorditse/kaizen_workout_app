@@ -2,7 +2,6 @@ import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_change_new_workout_page/widgets/daily_workout_sheet/what_will_we_do_every_day.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_change_new_workout_page/widgets/name_workout.dart';
-import 'package:kaizen/packages/ui_layout/pages/all_pages/create_change_new_workout_page/widgets/steps_workout.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_change_new_workout_page/widgets/when_we_end.dart';
 import 'package:kaizen/packages/ui_layout/pages/all_pages/create_change_new_workout_page/widgets/when_we_start.dart';
 import 'package:model/model.dart'; //только так работает, так как на бизнес слое такой импорт - нужно чтобы совподало
@@ -11,24 +10,23 @@ import 'package:flutter/material.dart';
 class IfEditSportWorkout extends StatelessWidget {
   IfEditSportWorkout({
     required this.sportsWorkoutModelForEdit,
-    required this.idWorkout,
     Key? key,
   }) : super(key: key);
 
   SportsWorkoutModel sportsWorkoutModelForEdit;
   final double _sizeBetweenContainer = 20;
-  String idWorkout;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        steps(),
         SizedBox(
-          height: _sizeBetweenContainer * 1.5,
+          height: _sizeBetweenContainer,
         ),
-        nameWorkout(context: context, idWorkout: idWorkout),
+        nameWorkout(
+            context: context,
+            nameSportWorkoutEdit: sportsWorkoutModelForEdit.nameWorkout),
         SizedBox(
           height: _sizeBetweenContainer,
         ),
@@ -44,10 +42,16 @@ class IfEditSportWorkout extends StatelessWidget {
         SizedBox(
           height: _sizeBetweenContainer,
         ),
-        Center(
-          child: ElevatedButton(
-            onPressed: () => _editWorkout(context: context),
-            child: const Text('Редактировать тренировку'),
+        Hero(
+          tag: 'admin_edit_workout ${sportsWorkoutModelForEdit.idWorkout}',
+          child: Material(
+            color: Colors.transparent,
+            child: Center(
+              child: ElevatedButton(
+                onPressed: () => _editWorkout(context: context),
+                child: const Text('Редактировать тренировку'),
+              ),
+            ),
           ),
         ),
         SizedBox(

@@ -21,10 +21,13 @@ class _MyBottomMenuSceletonState extends State<MyBottomMenuSceleton> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true, // чтобы можно было сделать прозрачным баттон навигатор бар
+      extendBody: true,
+      // чтобы можно было сделать прозрачным баттон навигатор бар
       endDrawer: MyEndDrawer(),
-      body: Obx(() => listBodyPagesMenuBottomNavigation[
-          controllerSetting.currentTabIndex.value]),
+      body: Obx(
+        () => listBodyPagesMenuBottomNavigation[
+            controllerSetting.currentTabIndex.value],
+      ),
       bottomNavigationBar: MyBottomNavigatorBar(),
     );
   }

@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
 
-Widget nameWorkout({required idWorkout, required context}) {
-
+Widget nameWorkout({nameSportWorkoutEdit, required context}) {
   final controllerCreateNewWorkout =
       CreateAndChangeSportWorkoutControllerGetxState.instance;
 
+  String newCreateNameWorkout =
+      CreateAndChangeSportWorkoutControllerGetxState.instance.nameWorkout;
+
   TextEditingController _controller =
-      TextEditingController(text: controllerCreateNewWorkout.nameWorkout);
+      TextEditingController(text: nameSportWorkoutEdit ?? newCreateNameWorkout);
 
   return Padding(
     padding: const EdgeInsets.all(6.0),

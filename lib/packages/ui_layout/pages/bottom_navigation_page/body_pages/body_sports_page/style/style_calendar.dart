@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 EdgeInsets paddingAvatars = const EdgeInsets.only(top: 8, bottom: 6);
 Color backColorAlertDialog = Colors.black26;
@@ -38,3 +39,5 @@ TextStyle myTextStyleCheckBox([myColor]) {
     //fontWeight: FontWeight.bold,
   );
 }
+
+Transition myTransitionDownToUp() => Transition.downToUp;
