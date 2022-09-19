@@ -3,30 +3,10 @@ import 'package:get/get.dart';
 import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:style_app/style_app.dart';
 
-//
-// class DefaultDialogExitTheWorkout extends StatefulWidget {
-//   const DefaultDialogExitTheWorkout({Key? key}) : super(key: key);
-//
-//   @override
-//   State<DefaultDialogExitTheWorkout> createState() =>
-//       _DefaultDialogExitTheWorkoutState();
-// }
-//
-// class _DefaultDialogExitTheWorkoutState
-//     extends State<DefaultDialogExitTheWorkout> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }
-
 void defaultDialogExitTheWorkout(
     {required BuildContext context, required String idWorkout}) {
   Get.defaultDialog(
-    barrierDismissible: false,
-
     backgroundColor: myDefaultDialogBackground(context),
-    //backColorAlertDialog,
     content: _homeDialogFromCalendarPage(context, idWorkout),
     title: "",
   ).then((value) => print(value));
@@ -63,7 +43,7 @@ Widget _homeDialogFromCalendarPage(BuildContext context, idWorkout) {
             onPressed: () {
               Get.close(0);
             },
-            child: Text(
+            child: const Text(
               "Нет",
             ),
           ),
@@ -76,7 +56,7 @@ Widget _homeDialogFromCalendarPage(BuildContext context, idWorkout) {
                   .exitTheWorkout(idWorkout: idWorkout, context: context);
               Get.close(0);
             },
-            child: Text(
+            child: const Text(
               "Да",
             ),
           ),
