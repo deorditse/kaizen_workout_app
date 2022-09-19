@@ -8,6 +8,7 @@ import 'package:kaizen/packages/style_app/lib/src/style_card.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/old/pages/Test_calendars_page/controller/calendar_page_controller.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/ui_sports/widgets/app_bar_sports.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/ui_sports/widgets/calendar/calendar.dart';
+import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/ui_sports/widgets/default_dialog_exit_the_workout.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/ui_sports/widgets/difault_dialog_all_program_workout.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/ui_sports/widgets/list_users_comleted_task_day.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/ui_sports/widgets/statisticsWorkoutWidget.dart';
@@ -33,6 +34,7 @@ class BodySportsPage extends StatelessWidget {
                     controllerApp.dataSportsWorkoutList[
                             controllerApp.indexWorkoutList.value] !=
                         null) {
+                  //отображение задачи на день из листа тренировок - нахождение индекса
                   int? indexInDescriptionWorkoutListForWorkout =
                       controllerApp.getDataIndexInDescriptionListForWorkout(
                           controllerApp.indexWorkoutList.value);
@@ -75,33 +77,6 @@ class BodySportsPage extends StatelessWidget {
         ),
       ),
       titleStyle: Theme.of(context).textTheme.headline1,
-    );
-  }
-
-  Widget _ifNoWorkout(context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 30.0),
-      child: Center(
-        child: Column(
-          children: [
-            CircularProgressIndicator(),
-            SizedBox(
-              height: 20,
-            ),
-            TextButton(
-              onPressed: () {
-                ImplementSettingGetXController.instance.currentTabIndex.value =
-                    0;
-              },
-              child: Text('Выбрать или создать тренировку',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline2!
-                      .copyWith(color: Theme.of(context).primaryColor)),
-            ),
-          ],
-        ),
-      ),
     );
   }
 
@@ -254,53 +229,103 @@ class BodySportsPage extends StatelessWidget {
     required int? indexInDescriptionListForWorkout,
     required int indexInSportWorkoutList,
   }) {
-    return Builder(builder: (BuildContext context) {
-      SportsWorkoutModel? sportWorkout = ImplementAppStateGetXController
-          .instance.dataSportsWorkoutList[indexInSportWorkoutList];
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          _taskOfTheDay(
-            context: context,
-            indexInDescriptionListForWorkout: indexInDescriptionListForWorkout,
-            indexInSportWorkoutList: indexInSportWorkoutList,
-          ),
-          SizedBox(
-            height: heightPadding,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 8.0,
-              right: 8.0,
-            ),
-            child: Container(
-              padding: const EdgeInsets.only(bottom: 20),
-              decoration: myStyleContainer(context: context),
-              child: Calendar(key: key),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: _watchSportsWorkoutList(
+    return Builder(
+      builder: (BuildContext context) {
+        SportsWorkoutModel? sportWorkout = ImplementAppStateGetXController
+            .instance.dataSportsWorkoutList[indexInSportWorkoutList];
+
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _taskOfTheDay(
               context: context,
-              indexInSportsWorkoutList: indexInSportWorkoutList,
-              nameWorkout: sportWorkout?.nameWorkout,
+              indexInDescriptionListForWorkout:
+                  indexInDescriptionListForWorkout,
+              indexInSportWorkoutList: indexInSportWorkoutList,
             ),
-          ),
-          statisticsWorkout(),
+            SizedBox(
+              height: heightPadding,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 8.0,
+                right: 8.0,
+              ),
+              child: Container(
+                padding: const EdgeInsets.only(bottom: 20),
+                decoration: myStyleContainer(context: context),
+                child: Calendar(key: key),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: _watchSportsWorkoutList(
+                context: context,
+                indexInSportsWorkoutList: indexInSportWorkoutList,
+                nameWorkout: sportWorkout?.nameWorkout,
+              ),
+            ),
+            statisticsWorkout(),
+            SizedBox(
+              height: heightPadding,
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.0),
+              child: ListUsersCompletedTaskForDay(),
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            TextButton(
+              onPressed: () {
+                defaultDialogExitTheWorkout(
+                    context: context,
+                    idWorkout:
+                        sportWorkout!.idWorkout); //сделать колбек с результатом
+              },
+              child: Text(
+                'Выйти из тренировки',
+                style: Theme.of(context)
+                    .textTheme
+                    .headline2!
+                    .copyWith(color: Colors.red),
+              ),
+            ),
+            const SizedBox(
+              height: 100,
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+Widget _ifNoWorkout(context) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 30.0),
+    child: Center(
+      child: Column(
+        children: [
+          CircularProgressIndicator(),
           SizedBox(
-            height: heightPadding,
+            height: 20,
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
-            child: ListUsersCompletedTaskForDay(),
-          ),
-          const SizedBox(
-            height: 100,
+          TextButton(
+            onPressed: () {
+              ImplementSettingGetXController.instance.currentTabIndex.value = 0;
+            },
+            child: Text(
+              'Выбрать или создать тренировку',
+              style: Theme.of(context)
+                  .textTheme
+                  .headline2!
+                  .copyWith(color: Theme.of(context).primaryColor),
+            ),
           ),
         ],
-      );
-    });
-  }
+      ),
+    ),
+  );
 }

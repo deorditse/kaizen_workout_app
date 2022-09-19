@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/old/pages/Test_calendars_page/utils.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/ui_sports/widgets/calendar/calendar_header.dart';
+import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/ui_sports/widgets/default_dialog_cancel_completed_day.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/ui_sports/widgets/default_dialog_if_day_has_not_come.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/ui_sports/widgets/snackbar_widget_add_day.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -257,8 +258,7 @@ class _CalendarState extends State<Calendar> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    setState(() {});
-                    Navigator.of(context).pop();
+                    Get.close(0);
                   },
                   child: Text(
                     "Нет",
@@ -289,14 +289,17 @@ class _CalendarState extends State<Calendar> {
     void funcLigicButtonPress() {
       if (stateActiveDay) {
         stateActiveDay = !stateActiveDay;
-        Get.defaultDialog(
-          barrierDismissible: false,
+        // defaultDialogCancelCompletedDay(context: context);
+          Get.defaultDialog(
+            barrierDismissible: false,
 
-          backgroundColor: myDefaultDialogBackground(context),
-          //backColorAlertDialog,
-          content: _homeDialogFromCalendarPage(context),
-          title: "",
-        );
+            backgroundColor: myDefaultDialogBackground(context),
+            //backColorAlertDialog,
+            content: _homeDialogFromCalendarPage(context),
+            title: "",
+          );
+
+
         setState(() {
           selectedDays.add(selectedDay);
         });

@@ -1,4 +1,5 @@
 import 'package:data_layout/data_layout.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:model/model.dart';
 
@@ -141,5 +142,10 @@ class ImplementAppStateGetXController extends GetxController {
         return;
       }
     }
+  }
+
+  ///ToDo: exit
+  exitTheWorkout({required String idWorkout, required BuildContext context}) {
+    print('exitTheWorkout  $idWorkout');
   }
 }
