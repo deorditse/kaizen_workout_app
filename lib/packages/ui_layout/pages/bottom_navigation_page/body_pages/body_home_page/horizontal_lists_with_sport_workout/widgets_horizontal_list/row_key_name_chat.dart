@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
+import 'package:business_layout/business_layout.dart';
 import 'package:model/model.dart'; //только так работает, так как на слое данных такой импорт - нужно чтобы совподало
 
 keyNameAndChat({required context, required int index, bool? isAdmin}) {

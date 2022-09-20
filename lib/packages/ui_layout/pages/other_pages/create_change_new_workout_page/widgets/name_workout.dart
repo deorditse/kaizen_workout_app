@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
+import 'package:business_layout/business_layout.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
 
 Widget nameWorkout({nameSportWorkoutEdit, required context}) {

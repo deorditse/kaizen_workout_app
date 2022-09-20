@@ -12,7 +12,7 @@ class MySliverHomeAppBar extends StatelessWidget {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       leading: TextButton(
         onPressed: () {
-          Get.to(() => NewsPage());
+          Get.toNamed(NewsPage.id);
         },
         child: FittedBox(
           child: Text(

@@ -1,4 +1,4 @@
-import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
+import 'package:business_layout/business_layout.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
 import 'package:kaizen/packages/ui_layout/pages/other_pages/create_change_new_workout_page/widgets/daily_workout_sheet/what_will_we_do_every_day.dart';
 import 'package:kaizen/packages/ui_layout/pages/other_pages/create_change_new_workout_page/widgets/name_workout.dart';

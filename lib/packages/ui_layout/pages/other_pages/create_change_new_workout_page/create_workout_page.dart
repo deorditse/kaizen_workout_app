@@ -1,20 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/ui_layout/pages/other_pages/create_change_new_workout_page/body_if_edit_sport_workout.dart';
 import 'package:kaizen/packages/ui_layout/pages/other_pages/create_change_new_workout_page/body_if_new_create_sport_workout.dart';
 import 'package:kaizen/packages/ui_layout/pages/other_pages/create_change_new_workout_page/widgets/app_bar_create_change_workout.dart';
 import 'package:model/model.dart'; //только так работает, так как на бизнес слое такой импорт - нужно чтобы совподало
+import 'package:business_layout/business_layout.dart';
 
-class CreateWorkoutPage extends StatelessWidget {
+class CreateWorkoutPage extends StatefulWidget {
   static const id = '/create_workout_page';
 
-  CreateWorkoutPage({Key? key, this.sportsWorkoutModelForEdit})
-      : super(key: key);
+  @override
+  State<CreateWorkoutPage> createState() => _CreateWorkoutPageState();
+}
 
-  SportsWorkoutModel? sportsWorkoutModelForEdit; //для редактирования тренировки
+class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
+  //для редактирования принимаю переданные аргументы при переходе на эту страницу
+  SportsWorkoutModel? sportsWorkoutModelForEdit;
 
-  final controllerSetting = Get.find<ImplementSettingGetXController>();
+  @override
+  void initState() {
+    super.initState();
+    sportsWorkoutModelForEdit = Get.arguments;
+    print('initState');
+
+    if (sportsWorkoutModelForEdit != null) {
+      //если нажата кнопка редактирования
+      CreateAndChangeSportWorkoutControllerGetxState.instance
+          .editSportWorkoutFromEditWorkoutPage(
+              sportsWorkoutModelForEdit: sportsWorkoutModelForEdit!);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

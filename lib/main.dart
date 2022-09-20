@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
+import 'package:business_layout/business_layout.dart';
 import 'package:kaizen/packages/style_app/lib/src/theme_app/custom_theme/material_theme/dark_custom_theme_material.dart';
 import 'package:kaizen/packages/style_app/lib/src/theme_app/custom_theme/material_theme/light_custom_theme_material.dart';
 import 'package:kaizen/packages/ui_layout/pages/other_pages/authentication_page/controller/bindings.dart';

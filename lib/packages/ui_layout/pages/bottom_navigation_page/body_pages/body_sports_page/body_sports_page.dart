@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:kaizen/packages/business_layout/lib/src/getX/getx_controllers/app_controller/implement_getx_state_management.dart';
-import 'package:kaizen/packages/business_layout/lib/src/getX/getx_controllers/setting_controller/implement_getx_state_management.dart';
+import 'package:business_layout/business_layout.dart';
 import 'package:kaizen/packages/style_app/lib/src/consts_app.dart';
 import 'package:kaizen/packages/style_app/lib/src/style_card.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/old/pages/Test_calendars_page/controller/calendar_page_controller.dart';
@@ -14,13 +13,27 @@ import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_page
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_sports_page/ui_sports/widgets/statisticsWorkoutWidget.dart';
 import 'package:model/model.dart'; //только так работает, так как на бизнес слое такой импорт - нужно чтобы совподало
 
-class BodySportsPage extends StatelessWidget {
+class BodySportsPage extends StatefulWidget {
   BodySportsPage({Key? key}) : super(key: key);
 
+  @override
+  State<BodySportsPage> createState() => _BodySportsPageState();
+}
+
+class _BodySportsPageState extends State<BodySportsPage> {
   final double heightPadding = 20;
 
   @override
+  void initState() {
+    super.initState();
+    //инициирую контроллер календаря
+    CalendarBinding();
+  }
+
+  @override
   Widget build(BuildContext context) {
+
+    ///delete c этого слоя и перенести на бизнес логику как в CalendarBinding();
     Get.put(TableBasicsController());
 
     return Center(
@@ -40,10 +53,12 @@ class BodySportsPage extends StatelessWidget {
                           controllerApp.indexWorkoutList.value);
 
                   return _bodyCalendarPage(
-                      indexInDescriptionListForWorkout:
-                          indexInDescriptionWorkoutListForWorkout,
-                      indexInSportWorkoutList:
-                          controllerApp.indexWorkoutList.value);
+                    indexInDescriptionListForWorkout:
+                        indexInDescriptionWorkoutListForWorkout,
+                    indexInSportWorkoutList:
+                        controllerApp.indexWorkoutList.value,
+                    key: widget.key,
+                  );
                 } else {
                   return _ifNoWorkout(context);
                 }
@@ -228,6 +243,7 @@ class BodySportsPage extends StatelessWidget {
   Widget _bodyCalendarPage({
     required int? indexInDescriptionListForWorkout,
     required int indexInSportWorkoutList,
+    key,
   }) {
     return Builder(
       builder: (BuildContext context) {

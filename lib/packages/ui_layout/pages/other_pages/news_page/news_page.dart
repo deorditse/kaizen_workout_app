@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
+import 'package:business_layout/business_layout.dart';
 
 class NewsPage extends StatefulWidget {
   static const id = '/news_page';
