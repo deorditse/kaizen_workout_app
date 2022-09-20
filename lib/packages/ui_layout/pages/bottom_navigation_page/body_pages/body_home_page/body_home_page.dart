@@ -5,7 +5,7 @@ import 'package:business_layout/business_layout.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/horizontal_lists_with_sport_workout/horizontal_list_sports_workout/horizontal_list_sports_workout.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/app_bar.dart';
-import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/default_dialof_join_by_key.dart';
+import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_home_page/widgets/default_dialog_join_by_key.dart';
 
 import 'horizontal_lists_with_sport_workout/admin_horizontal_list_sports_workout/admin_horizontal_list_sports_workout.dart';
 
@@ -28,11 +28,10 @@ class _BodyHomePageState extends State<BodyHomePage> {
             children: [
               GetBuilder<ImplementAppStateGetXController>(
                 builder: (controller) => SizedBox(
-                  height:
-                      controller.dataSportsWorkoutList.isNotEmpty ? 5 : 30,
+                  height: controller.dataSportsWorkoutList.isNotEmpty ? 5 : 30,
                 ),
               ),
-              joinByKey(),
+              JoinByKey(),
               Center(
                 child: TextButton(
                   onPressed: _whereGetKey,
