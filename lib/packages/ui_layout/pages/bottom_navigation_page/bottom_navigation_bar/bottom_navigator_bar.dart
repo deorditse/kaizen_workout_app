@@ -12,7 +12,7 @@ class TabItem {
 
 final List<TabItem> _tabBar = [
   TabItem(title: 'Главная', icon: FaIcon(FontAwesomeIcons.home)),
-  TabItem(title: 'Тренировки', icon: FaIcon(FontAwesomeIcons.braille)),
+  TabItem(title: 'Тренировка', icon: FaIcon(FontAwesomeIcons.braille)),
   TabItem(title: 'Чат', icon: FaIcon(FontAwesomeIcons.comments)),
   TabItem(title: 'Профиль', icon: FaIcon(FontAwesomeIcons.user)),
 ];

@@ -9,20 +9,23 @@ void defaultDialogExitTheWorkout(
     backgroundColor: myDefaultDialogBackground(context),
     content: _homeDialogFromCalendarPage(context, idWorkout),
     title: "",
+    titlePadding: EdgeInsets.zero,
   ).then((value) => print(value));
 }
 
 Widget _homeDialogFromCalendarPage(BuildContext context, idWorkout) {
   return Column(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Text(
           "Хотите выйти из тренировки?",
-          style: Theme.of(context).textTheme.headline2,
+          style: Theme.of(context).textTheme.headline1,
           textAlign: TextAlign.center,
         ),
       ),
+      const SizedBox(height: 5),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: FittedBox(
@@ -34,7 +37,7 @@ Widget _homeDialogFromCalendarPage(BuildContext context, idWorkout) {
         ),
       ),
       const SizedBox(
-        height: 20,
+        height: 10,
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
