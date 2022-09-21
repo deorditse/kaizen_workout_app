@@ -13,7 +13,7 @@ import 'widgets/default_dialog_create_key.dart';
 class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
   static CreateAndChangeSportWorkoutControllerGetxState instance =
       Get.find<CreateAndChangeSportWorkoutControllerGetxState>();
-  String idWorkout = '';
+  String idWorkout = "";
   String nameWorkout = 'тренировка';
   DateTime firstWorkoutDay = DateTime.now();
   DateTime? lastWorkoutDay;
@@ -27,6 +27,7 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    _initialized();
     //при инициации создаем id будущей тренировки
     final _dataUser = ImplementAppStateGetXController.instance.myUser;
     if (_dataUser != null) {
@@ -43,6 +44,12 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
     //теперь надо сделать проверку идет ли редактирование или нет
     // initializedCreateNewWorkout();
     print('onInit() in CreateAndChangeSportWorkoutControllerGetxState');
+  }
+
+  Future<void> _initialized() async {
+    if (idWorkout == '') {
+      await _createIdWorkout();
+    }
   }
 
   void addFirstDay(DateTime date) {
@@ -141,13 +148,15 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
     }
   }
 
+  Future<void> _createIdWorkout() async {
+    idWorkout = Random().nextInt(9999).toString();
+    nameWorkout = '$nameWorkout $idWorkout';
+    update();
+  }
+
   Future<void> createNewSportWorkoutFromCreateWorkoutPage(
       {required context}) async {
     try {
-      if (idWorkout == '') {
-        await _createIdWorkout();
-      }
-
       if (lastWorkoutDay == null && !toggleDateIsEnd) {
         mySnackBarButton(
           context: context,
@@ -191,12 +200,6 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
     ///ToDo: create send workout in DB
   }
 
-  Future<void> _createIdWorkout() async {
-    idWorkout = Random().nextInt(9999).toString();
-    nameWorkout = '$nameWorkout $idWorkout';
-    update();
-  }
-
   Future<void> clearAllDataInNewSportWorkout() async {
     firstWorkoutDay = DateTime.now();
     lastWorkoutDay = null;
@@ -216,7 +219,7 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
     update();
   }
 
-  /// для редактирования тренировки
+  /// для редактирования тренировки________________________________________________________________
   Future<void> editSportWorkoutFromEditWorkoutPage(
       {required int indexInDataSportsWorkoutListWhenIAdmin}) async {
     final SportsWorkoutModel sportsWorkoutModelForEdit =
@@ -224,6 +227,7 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
                 .instance.dataSportsWorkoutListWhenIAdmin[
             indexInDataSportsWorkoutListWhenIAdmin];
 
+    //обновляю все данные полей
     addFirstDay(sportsWorkoutModelForEdit.firstWorkoutDay);
 
     addLastDay(sportsWorkoutModelForEdit.lastWorkoutDay);
@@ -248,7 +252,8 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
       {required BuildContext context,
       required int indexInDataSportsWorkoutListWhenIAdmin}) async {
     try {
-      await _updateAllDataInSportWorkoutNewCreate(); //обновляю _sportWorkoutNewCreate для отправки данных и изменения
+      //обновляю _sportWorkoutNewCreate для отправки данных и изменения
+      await _updateAllDataInSportWorkoutNewCreate();
 
       if (lastWorkoutDay == null && !toggleDateIsEnd) {
         mySnackBarButton(
