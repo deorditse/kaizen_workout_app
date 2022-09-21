@@ -5,7 +5,6 @@ BoxDecoration myStyleContainer({
   color,
   borderRadius,
 }) {
-
   return BoxDecoration(
     color: color ?? Theme.of(context).cardColor,
     borderRadius: borderRadius ?? BorderRadius.circular(8),
@@ -19,4 +18,3 @@ BoxDecoration myStyleContainer({
     ],
   );
 }
-

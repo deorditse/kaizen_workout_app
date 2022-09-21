@@ -243,7 +243,8 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
 
     addLastDay(sportsWorkoutModelForEdit.lastWorkoutDay);
 
-    toggleDateIsEnd = (lastWorkoutDay == null) ? true : false;
+    toggleDateIsEnd =
+        (sportsWorkoutModelForEdit.lastWorkoutDay == null) ? true : false;
 
     adminWorkout = sportsWorkoutModelForEdit.adminWorkout;
 
