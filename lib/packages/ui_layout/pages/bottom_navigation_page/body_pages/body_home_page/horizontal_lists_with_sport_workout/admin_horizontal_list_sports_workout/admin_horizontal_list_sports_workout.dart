@@ -58,7 +58,9 @@ class AdminHorizontalListSportsWorkout extends StatelessWidget {
               : Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18.0),
                   child: Center(
-                    child: _addNewSportWorkout(context),
+                    child: _addNewSportWorkout(
+                      context,
+                    ),
                   ),
                 ),
         );

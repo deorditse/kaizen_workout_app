@@ -9,6 +9,10 @@ import 'package:business_layout/business_layout.dart';
 class CreateWorkoutPage extends StatefulWidget {
   static const id = '/create_workout_page';
 
+  const CreateWorkoutPage({super.key, this.indexInWorkoutList});
+
+  final int? indexInWorkoutList;
+
   @override
   State<CreateWorkoutPage> createState() => _CreateWorkoutPageState();
 }
@@ -16,11 +20,13 @@ class CreateWorkoutPage extends StatefulWidget {
 class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
   //для редактирования принимаю переданные аргументы при переходе на эту страницу
   SportsWorkoutModel? sportsWorkoutModelForEdit;
+  int? indexInDataSportsWorkoutListWhenIAdmin;
 
   @override
   void initState() {
     super.initState();
-    sportsWorkoutModelForEdit = Get.arguments;
+    sportsWorkoutModelForEdit = Get.arguments[0];
+    indexInDataSportsWorkoutListWhenIAdmin = Get.arguments[1];
     print('initState');
 
     if (sportsWorkoutModelForEdit != null) {
@@ -50,7 +56,9 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
           padding: const EdgeInsets.all(8.0),
           child: isSportWorkoutEdit
               ? IfEditSportWorkout(
-                  sportsWorkoutModelForEdit: sportsWorkoutModelForEdit!)
+                  sportsWorkoutModelForEdit: sportsWorkoutModelForEdit!,
+                  indexInDataSportsWorkoutListWhenIAdmin:
+                      indexInDataSportsWorkoutListWhenIAdmin!)
               : IfNewCreateSportWorkout(),
         ),
       ),

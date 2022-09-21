@@ -10,10 +10,12 @@ import 'package:flutter/material.dart';
 class IfEditSportWorkout extends StatefulWidget {
   const IfEditSportWorkout({
     required this.sportsWorkoutModelForEdit,
+    required this.indexInDataSportsWorkoutListWhenIAdmin,
     Key? key,
   }) : super(key: key);
 
   final SportsWorkoutModel sportsWorkoutModelForEdit;
+  final int indexInDataSportsWorkoutListWhenIAdmin;
 
   @override
   State<IfEditSportWorkout> createState() => _IfEditSportWorkoutState();
@@ -26,7 +28,7 @@ class _IfEditSportWorkoutState extends State<IfEditSportWorkout> {
   void initState() {
     super.initState();
 
-    //обновляю данные по тренировке
+    //обновляю данные по тренировке если есть редактирование
     CreateAndChangeSportWorkoutControllerGetxState.instance
         .editSportWorkoutFromEditWorkoutPage(
             sportsWorkoutModelForEdit: widget.sportsWorkoutModelForEdit);
@@ -74,7 +76,10 @@ class _IfEditSportWorkoutState extends State<IfEditSportWorkout> {
               child: ElevatedButton(
                 onPressed: () => CreateAndChangeSportWorkoutControllerGetxState
                     .instance
-                    .updateEditWorkoutButtonTap(context: context),
+                    .updateEditWorkoutButtonTap(
+                        context: context,
+                        indexInDataSportsWorkoutListWhenIAdmin:
+                            widget.indexInDataSportsWorkoutListWhenIAdmin),
                 child: const Text('Обновить тренировку'),
               ),
             ),

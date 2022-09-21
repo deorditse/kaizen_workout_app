@@ -148,4 +148,12 @@ class ImplementAppStateGetXController extends GetxController {
   exitTheWorkout({required String idWorkout, required BuildContext context}) {
     print('exitTheWorkout  $idWorkout');
   }
+
+  Future<void> updateDataSportsWorkoutListWhenIAdmin(
+      {required int indexInDataSportsWorkoutListWhenIAdmin,
+      required SportsWorkoutModel sportWorkoutUpdate}) async {
+    dataSportsWorkoutListWhenIAdmin[indexInDataSportsWorkoutListWhenIAdmin] =
+        sportWorkoutUpdate;
+    update();
+  }
 }

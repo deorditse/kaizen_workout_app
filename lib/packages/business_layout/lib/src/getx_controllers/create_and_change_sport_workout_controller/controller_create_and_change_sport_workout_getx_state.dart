@@ -184,19 +184,6 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
         //тренировка создана
         defaultDialogAboutSports(
             context: context, idWorkout: _sportWorkoutNewCreate!.idWorkout);
-
-        // //test
-        // Get.defaultDialog(
-        //   content: Container(
-        //     height: MediaQuery.of(context).size.height * 0.7,
-        //     child: SingleChildScrollView(
-        //       child: Text(
-        //         _sportWorkoutNewCreate.toString(),
-        //       ),
-        //     ),
-        //   ),
-        // );
-        //очищаем все поля в create после создания тренировки
         clearAllDataInNewSportWorkout();
       }
     } catch (error) {
@@ -260,13 +247,23 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
   }
 
   Future<void> updateEditWorkoutButtonTap(
-      {required BuildContext context}) async {
+      {required BuildContext context,
+      required int indexInDataSportsWorkoutListWhenIAdmin}) async {
     try {
+      await _updateAllDataInSportWorkoutNewCreate(); //обновляю _sportWorkoutNewCreate для отправки данных и изменения
+
       if (lastWorkoutDay == null && !toggleDateIsEnd) {
         mySnackBarButton(
           context: context,
           title: "обязательное поле*",
           message: "В пункте 2 выберите дату окончания тренировки",
+        );
+      } else if (descriptionWorkoutListFromCreatePage.contains(null)) {
+        mySnackBarButton(
+          context: context,
+          title: "Не все дни заполнены",
+          message:
+              'Заполните каждый день тренировки или нажмите повторить до конца списка',
         );
       } else {
         //обновляем тренировку и в БД
@@ -275,6 +272,13 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
           title: "Тренировка обновлена",
           message: "",
         );
+
+        await ImplementAppStateGetXController.instance
+            .updateDataSportsWorkoutListWhenIAdmin(
+                indexInDataSportsWorkoutListWhenIAdmin:
+                    indexInDataSportsWorkoutListWhenIAdmin,
+                sportWorkoutUpdate: _sportWorkoutNewCreate!);
+
         Get.close(0);
         clearAllDataInNewSportWorkout();
       }
