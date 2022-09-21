@@ -27,12 +27,14 @@ class _BodySportsPageState extends State<BodySportsPage> {
   void initState() {
     super.initState();
     //инициирую контроллер календаря
-    CalendarBinding();
+    Get.put(CalendarControllerGetxState());
+
+    //test
+    print(CalendarControllerGetxState.instance.test);
   }
 
   @override
   Widget build(BuildContext context) {
-
     ///delete c этого слоя и перенести на бизнес логику как в CalendarBinding();
     Get.put(TableBasicsController());
 

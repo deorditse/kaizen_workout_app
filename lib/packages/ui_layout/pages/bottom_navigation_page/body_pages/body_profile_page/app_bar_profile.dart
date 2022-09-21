@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kaizen/packages/ui_layout/widgets/end_drawer/end_drawer_app_bar.dart';
+import 'package:kaizen/packages/ui_layout/widgets_for_all_pages/end_drawer/end_drawer_app_bar.dart';
 
 import 'body_profile_page.dart';
 

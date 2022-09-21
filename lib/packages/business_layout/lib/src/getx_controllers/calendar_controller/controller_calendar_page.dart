@@ -7,4 +7,6 @@ import 'package:get/get.dart';
 class CalendarControllerGetxState extends GetxController {
   static CalendarControllerGetxState instance =
       Get.find<CalendarControllerGetxState>();
+
+  String test = 'test calendar';
 }

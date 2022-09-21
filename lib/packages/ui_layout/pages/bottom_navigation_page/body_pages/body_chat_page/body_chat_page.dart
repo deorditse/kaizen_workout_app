@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:kaizen/packages/business_layout/lib/business_layout.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
 import 'package:kaizen/packages/ui_layout/pages/bottom_navigation_page/body_pages/body_chat_page/app_bar_chat.dart';
 
@@ -12,6 +14,12 @@ class BodyChatPage extends StatefulWidget {
 
 class _BodyChatPageState extends State<BodyChatPage> {
   @override
+  void initState() {
+    super.initState();
+    Get.put(ChatControllerGetxState());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
@@ -21,6 +29,7 @@ class _BodyChatPageState extends State<BodyChatPage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Text(ChatControllerGetxState.instance.test),
               SizedBox(
                 height: MediaQuery.of(context).size.height / 2.5,
                 child: Column(
