@@ -163,6 +163,7 @@ class ImplementAppStateGetXController extends GetxController {
     print('exitTheWorkout  $idWorkout');
   }
 
+  //обновление листов после редактирования тренировки
   Future<void> updateDataSportsWorkoutListWhenIAdmin(
       {required int indexInDataSportsWorkoutListWhenIAdmin,
       required SportsWorkoutModel sportWorkoutUpdate}) async {

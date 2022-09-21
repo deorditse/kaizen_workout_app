@@ -13,7 +13,7 @@ import 'widgets/default_dialog_create_key.dart';
 class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
   static CreateAndChangeSportWorkoutControllerGetxState instance =
       Get.find<CreateAndChangeSportWorkoutControllerGetxState>();
-  String idWorkout = "...";
+  String idWorkout = "";
   String nameWorkout = 'тренировка';
   DateTime firstWorkoutDay = DateTime.now();
   DateTime? lastWorkoutDay;
@@ -23,6 +23,13 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
   NameAndPhotoUser? adminWorkout;
   List<String?> descriptionWorkoutListFromCreatePage = [];
   SportsWorkoutModel? _sportWorkoutNewCreate;
+
+  @override
+  void onReady() {
+    super.onReady();
+    _initialized();
+    print('onReady() in CreateAndChangeSportWorkoutControllerGetxState');
+  }
 
   @override
   void onInit() {
@@ -50,6 +57,12 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
     if (idWorkout == '') {
       await _createIdWorkout();
     }
+  }
+
+  Future<void> _createIdWorkout() async {
+    idWorkout = Random().nextInt(9999).toString();
+    nameWorkout = '$nameWorkout $idWorkout';
+    update();
   }
 
   void addFirstDay(DateTime date) {
@@ -148,12 +161,6 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
     }
   }
 
-  Future<void> _createIdWorkout() async {
-    idWorkout = Random().nextInt(9999).toString();
-    nameWorkout = '$nameWorkout $idWorkout';
-    update();
-  }
-
   Future<void> createNewSportWorkoutFromCreateWorkoutPage(
       {required context}) async {
     try {
@@ -206,10 +213,10 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
     toggleDateIsEnd = false;
     isHoliday = false;
     itemCount = null;
-    // adminWorkout = null;
     descriptionWorkoutListFromCreatePage = [];
     _sportWorkoutNewCreate = null;
     idWorkout = '';
+    await _initialized();
     updateNameWorkout(newNameSportWorkout: 'тренировка $idWorkout');
     update();
   }
