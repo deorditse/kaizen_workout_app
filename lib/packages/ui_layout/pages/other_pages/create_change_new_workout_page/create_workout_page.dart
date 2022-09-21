@@ -23,13 +23,14 @@ class _CreateWorkoutPageState extends State<CreateWorkoutPage> {
   void initState() {
     super.initState();
     if (Get.arguments != null) {
+      //получение индекса переданного через getx
       indexInDataSportsWorkoutListWhenIAdmin = Get.arguments;
     }
 
     print('initState');
 
     if (indexInDataSportsWorkoutListWhenIAdmin != null) {
-      //если нажата кнопка редактирования
+      //если нажата кнопка редактирования обновляю данные
       CreateAndChangeSportWorkoutControllerGetxState.instance
           .editSportWorkoutFromEditWorkoutPage(
               indexInDataSportsWorkoutListWhenIAdmin:

@@ -13,7 +13,7 @@ import 'widgets/default_dialog_create_key.dart';
 class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
   static CreateAndChangeSportWorkoutControllerGetxState instance =
       Get.find<CreateAndChangeSportWorkoutControllerGetxState>();
-  String idWorkout = '0000';
+  String idWorkout = '';
   String nameWorkout = 'тренировка';
   DateTime firstWorkoutDay = DateTime.now();
   DateTime? lastWorkoutDay;
@@ -43,16 +43,6 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
     //теперь надо сделать проверку идет ли редактирование или нет
     // initializedCreateNewWorkout();
     print('onInit() in CreateAndChangeSportWorkoutControllerGetxState');
-  }
-
-  //пустая тренировка
-  Future<void> initializedCreateNewWorkout() async {
-    //сразу добавлю id тренировки и пользователя - будет администратором
-    try {
-      await _createIdWorkout(); //присваиваю id
-    } catch (error) {
-      print('error from initializedCreateNewWorkout $error');
-    }
   }
 
   void addFirstDay(DateTime date) {
@@ -154,6 +144,10 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
   Future<void> createNewSportWorkoutFromCreateWorkoutPage(
       {required context}) async {
     try {
+      if (idWorkout == '') {
+        await _createIdWorkout();
+      }
+
       if (lastWorkoutDay == null && !toggleDateIsEnd) {
         mySnackBarButton(
           context: context,
@@ -213,7 +207,6 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
     descriptionWorkoutListFromCreatePage = [];
     _sportWorkoutNewCreate = null;
     idWorkout = '';
-    await _createIdWorkout();
     updateNameWorkout(newNameSportWorkout: 'тренировка $idWorkout');
     update();
   }
@@ -230,8 +223,6 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
         ImplementAppStateGetXController
                 .instance.dataSportsWorkoutListWhenIAdmin[
             indexInDataSportsWorkoutListWhenIAdmin];
-
-
 
     addFirstDay(sportsWorkoutModelForEdit.firstWorkoutDay);
 
