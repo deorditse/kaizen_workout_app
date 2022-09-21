@@ -13,7 +13,7 @@ import 'widgets/default_dialog_create_key.dart';
 class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
   static CreateAndChangeSportWorkoutControllerGetxState instance =
       Get.find<CreateAndChangeSportWorkoutControllerGetxState>();
-  String idWorkout = "";
+  String idWorkout = "...";
   String nameWorkout = 'тренировка';
   DateTime firstWorkoutDay = DateTime.now();
   DateTime? lastWorkoutDay;
