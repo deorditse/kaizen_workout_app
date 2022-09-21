@@ -71,68 +71,65 @@ class ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(right: 8),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.horizontal(
-            right: Radius.circular(25),
-          ),
-          gradient: LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            stops: [0.0, 1.0],
-            colors: [
-              Theme.of(context).primaryColor.withOpacity(0.3),
-              Theme.of(context).primaryColor.withOpacity(1),
-            ],
-            tileMode: TileMode.clamp,
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(10),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(),
-            ListTile(
-              onTap: () {},
-              leading: const CircleAvatar(
-                radius: 30,
-                // backgroundColor: Colors.grey,
-                backgroundImage: NetworkImage('https://picsum.photos/1200/501'),
-                child: Text(''),
-              ),
-              title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  FittedBox(
-                    child: Text(
-                      'Фамилия Имя',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline1!
-                          .copyWith(color: Theme.of(context).cardColor),
-                    ),
-                  ),
-                  FittedBox(
-                    child: Text(
-                      'Управление аккаунтом',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline3!
-                          .copyWith(color: Theme.of(context).cardColor),
-                    ),
-                  ),
-                ],
-              ),
-              trailing: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.arrow_forward_ios,
-                    color: Theme.of(context).cardColor,
-                  )),
-            ),
+        gradient: LinearGradient(
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          stops: [0.0, 1.0],
+          colors: [
+            Theme.of(context).primaryColor.withOpacity(0.3),
+            Theme.of(context).primaryColor.withOpacity(1),
           ],
+          tileMode: TileMode.clamp,
         ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(),
+          ListTile(
+            onTap: () {},
+            leading: const CircleAvatar(
+              radius: 30,
+              // backgroundColor: Colors.grey,
+              backgroundImage: NetworkImage('https://picsum.photos/1200/501'),
+              child: Text(''),
+            ),
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FittedBox(
+                  child: Text(
+                    'Фамилия Имя',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline1!
+                        .copyWith(color: Theme.of(context).cardColor),
+                  ),
+                ),
+                FittedBox(
+                  child: Text(
+                    'Управление аккаунтом',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline3!
+                        .copyWith(color: Theme.of(context).cardColor),
+                  ),
+                ),
+              ],
+            ),
+            trailing: IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.arrow_forward_ios,
+                  color: Theme.of(context).cardColor,
+                )),
+          ),
+        ],
       ),
     );
   }
