@@ -9,10 +9,7 @@ import 'package:business_layout/business_layout.dart';
 class CreateWorkoutPage extends StatefulWidget {
   static const id = '/create_workout_page';
 
-  const CreateWorkoutPage(
-      {super.key, this.indexInDataSportsWorkoutListWhenIAdmin});
-
-  final int? indexInDataSportsWorkoutListWhenIAdmin;
+  const CreateWorkoutPage({super.key});
 
   @override
   State<CreateWorkoutPage> createState() => _CreateWorkoutPageState();
