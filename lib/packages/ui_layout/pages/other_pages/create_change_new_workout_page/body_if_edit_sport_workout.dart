@@ -9,12 +9,10 @@ import 'package:flutter/material.dart';
 
 class IfEditSportWorkout extends StatefulWidget {
   const IfEditSportWorkout({
-    required this.sportsWorkoutModelForEdit,
     required this.indexInDataSportsWorkoutListWhenIAdmin,
     Key? key,
   }) : super(key: key);
 
-  final SportsWorkoutModel sportsWorkoutModelForEdit;
   final int indexInDataSportsWorkoutListWhenIAdmin;
 
   @override
@@ -31,7 +29,8 @@ class _IfEditSportWorkoutState extends State<IfEditSportWorkout> {
     //обновляю данные по тренировке если есть редактирование
     CreateAndChangeSportWorkoutControllerGetxState.instance
         .editSportWorkoutFromEditWorkoutPage(
-            sportsWorkoutModelForEdit: widget.sportsWorkoutModelForEdit);
+            indexInDataSportsWorkoutListWhenIAdmin:
+                widget.indexInDataSportsWorkoutListWhenIAdmin);
   }
 
   @override
@@ -43,6 +42,9 @@ class _IfEditSportWorkoutState extends State<IfEditSportWorkout> {
 
   @override
   Widget build(BuildContext context) {
+    final sportsWorkoutModelForEdit = ImplementAppStateGetXController
+            .instance.dataSportsWorkoutListWhenIAdmin[
+        widget.indexInDataSportsWorkoutListWhenIAdmin];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -51,7 +53,7 @@ class _IfEditSportWorkoutState extends State<IfEditSportWorkout> {
         ),
         nameWorkout(
             context: context,
-            nameSportWorkoutEdit: widget.sportsWorkoutModelForEdit.nameWorkout),
+            nameSportWorkoutEdit: sportsWorkoutModelForEdit.nameWorkout),
         SizedBox(
           height: _sizeBetweenContainer,
         ),
@@ -68,8 +70,7 @@ class _IfEditSportWorkoutState extends State<IfEditSportWorkout> {
           height: _sizeBetweenContainer,
         ),
         Hero(
-          tag:
-              'admin_edit_workout ${widget.sportsWorkoutModelForEdit.idWorkout}',
+          tag: 'admin_edit_workout ${sportsWorkoutModelForEdit.idWorkout}',
           child: Material(
             color: Colors.transparent,
             child: Center(

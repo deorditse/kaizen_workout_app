@@ -175,7 +175,7 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
         //добавляю тренировку в свой лист тренировок и сохраняю в базу данных
         //добавляю тренировку в лист всех тренировок и созданных мною
         ImplementAppStateGetXController.instance
-            .addNewWorkoutInDataSportWorkoutList(
+            .addNewWorkoutInDataSportWorkoutListWhenIAdmin(
                 sportsWorkoutModel: _sportWorkoutNewCreate!);
         //save NewSportWorkoutInDataBase
         await _saveNewSportWorkoutInDataBase(
@@ -225,7 +225,14 @@ class CreateAndChangeSportWorkoutControllerGetxState extends GetxController {
 
   /// для редактирования тренировки
   Future<void> editSportWorkoutFromEditWorkoutPage(
-      {required SportsWorkoutModel sportsWorkoutModelForEdit}) async {
+      {required int indexInDataSportsWorkoutListWhenIAdmin}) async {
+    final SportsWorkoutModel sportsWorkoutModelForEdit =
+        ImplementAppStateGetXController
+                .instance.dataSportsWorkoutListWhenIAdmin[
+            indexInDataSportsWorkoutListWhenIAdmin];
+
+
+
     addFirstDay(sportsWorkoutModelForEdit.firstWorkoutDay);
 
     addLastDay(sportsWorkoutModelForEdit.lastWorkoutDay);

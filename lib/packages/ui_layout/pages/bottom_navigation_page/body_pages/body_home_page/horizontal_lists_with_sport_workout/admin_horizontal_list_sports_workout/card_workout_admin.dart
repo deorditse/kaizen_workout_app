@@ -69,9 +69,13 @@ class AdminWorkoutCard extends StatelessWidget {
       onTap: () {
         Get.toNamed(
           CreateWorkoutPage.id,
-          arguments: [sportWorkout, indexInDataSportsWorkoutListWhenIAdmin],
-          // transition: myTransitionDownToUp(),
+          arguments: indexInDataSportsWorkoutListWhenIAdmin,
         );
+        //     Get.to(
+        //           CreateWorkoutPage(indexInDataSportsWorkoutListWhenIAdmin: indexInDataSportsWorkoutListWhenIAdmin),
+        //
+        // transition: myTransitionDownToUp(),
+        //         );
       },
       child: Hero(
         tag: 'admin_edit_workout ${sportWorkout.idWorkout}',
