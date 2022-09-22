@@ -51,14 +51,14 @@ class DataListRepository {
           adminWorkout: NameAndPhotoUser(
             idUser: 'test id admin',
             name: 'Василий',
-            photoPath: '',
+            photoPath: 'assets/images/user_test_1.jpeg',
             family: 'Олейников $index',
           ),
           usersInWorkout: <NameAndPhotoUser>{
             NameAndPhotoUser(
               idUser: 'test/gNe2AwjMJMVJ8OLvFu1T',
               name: 'Артемка}',
-              photoPath: 'assets/images/user_test_1.jpeg',
+              photoPath: null,
               family: 'Бесфамильный ${index}',
             ),
             NameAndPhotoUser(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:business_layout/business_layout.dart';
+import 'package:kaizen/packages/style_app/lib/style_app.dart';
 import 'package:kaizen/packages/ui_layout/widgets_for_all_pages/end_drawer/end_drawer_app_bar.dart';
 import 'package:model/model.dart';
 
@@ -9,11 +10,8 @@ class MySliverProfileAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(20),
-        ),
-      ),
+      shape: myStyleShapeBorder(),
+
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       // backgroundColor: Colors.transparent,
 

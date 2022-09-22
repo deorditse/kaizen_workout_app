@@ -5,9 +5,11 @@ import 'package:business_layout/business_layout.dart';
 import 'package:kaizen/packages/style_app/lib/style_app.dart';
 
 SliverAppBar mySliverSportsAppBar(context) {
-  ImplementAppStateGetXController controllerApp = ImplementAppStateGetXController.instance;
+  ImplementAppStateGetXController controllerApp =
+      ImplementAppStateGetXController.instance;
 
   return SliverAppBar(
+    shape: myStyleShapeBorder(),
     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
     leading: IconButton(
       icon: FittedBox(

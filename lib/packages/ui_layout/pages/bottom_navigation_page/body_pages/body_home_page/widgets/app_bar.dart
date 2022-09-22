@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kaizen/packages/style_app/lib/style_app.dart';
 import 'package:kaizen/packages/ui_layout/pages/other_pages/news_page/news_page.dart';
 import 'package:kaizen/packages/ui_layout/widgets_for_all_pages/end_drawer/end_drawer_app_bar.dart';
 
@@ -9,6 +10,7 @@ class MySliverHomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      shape: myStyleShapeBorder(),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       leading: TextButton(
         onPressed: () {
