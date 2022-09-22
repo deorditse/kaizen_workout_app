@@ -101,17 +101,6 @@ _photoListUsersInWorkout({
             itemBuilder: (context, index) {
               return Row(
                 children: [
-                  if (usersInWorkout != null && index == 0)
-                    Padding(
-                      padding: const EdgeInsets.only(right: 4.0),
-                      child: CircleAvatar(
-                        radius: constrains.maxHeight / 12,
-                        backgroundImage: AssetImage(
-                          sportsWorkoutModel.adminWorkout.photoPath ??
-                              'assets/images/anonim.png',
-                        ),
-                      ),
-                    ),
                   Padding(
                     padding: const EdgeInsets.only(right: 4.0),
                     child: CircleAvatar(
