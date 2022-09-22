@@ -20,8 +20,10 @@ class HorizontalListSportsWorkout extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: controller.dataSportsWorkoutList.length,
                   itemBuilder: (context, index) {
+                    //проверяю есть ли данные по такому индексу в листе с описанием тренировок и если есть вывожу его
                     int? indexInDescriptionListForWorkout = controller
                         .getDataIndexInDescriptionListForWorkout(index);
+
                     return Row(
                       children: [
                         Padding(
@@ -41,7 +43,7 @@ class HorizontalListSportsWorkout extends StatelessWidget {
                                   flex: 1,
                                   child: Padding(
                                     padding: const EdgeInsets.only(top: 8),
-                                    child: Container(
+                                    child: SizedBox(
                                       width: controller.dataSportsWorkoutList
                                                   .length >
                                               1

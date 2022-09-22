@@ -36,7 +36,6 @@ class DataListRepository {
 
     for (var sportWorkout in sportsWorkoutList) {
       if (sportWorkout.idWorkout == idWorkout) {
-        print('sportWorkout.idWorkout == idWorkout');
         res = sportWorkout;
         break; //выходим из цикла
       }

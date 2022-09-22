@@ -83,16 +83,17 @@ class ImplementAppStateGetXController extends GetxController {
     try {
       final firstWorkoutDay =
           dataSportsWorkoutList[indexWorkoutList]?.firstWorkoutDay;
+
       if (firstWorkoutDay != null && firstWorkoutDay.isBefore(DateTime.now())) {
-        final indexDescript = DateTime.now().difference(firstWorkoutDay).inDays;
-        //проверяю есть ли тренировка на этот день в базе
-        return dataSportsWorkoutList[indexWorkoutList]!
-                    .descriptionWorkoutList[indexDescript] !=
-                null
-            ? indexDescript
-            : null;
-      } else {
-        return null;
+        //проверяю есть ли данные по такому индексу в листе с описанием тренировок и если есть вывожу его
+        final int indexDescription =
+            DateTime.now().difference(firstWorkoutDay).inDays;
+        if (dataSportsWorkoutList[indexWorkoutList]
+                ?.descriptionWorkoutList[indexDescription] !=
+            null) {
+          //проверяю есть задача тренировки на этот день в базе
+          return indexDescription;
+        }
       }
     } catch (error) {
       print('error from getDataIndexInDataSportsWorkoutList $error');

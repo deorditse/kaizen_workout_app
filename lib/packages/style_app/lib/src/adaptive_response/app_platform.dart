@@ -1,6 +1,17 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 
+enum CustomPlatform {
+  linux,
+  macos,
+  windows,
+  ios,
+  android,
+  fuchsia,
+  web,
+  undefined,
+}
+
 class AppPlatform {
   static const Map<String, CustomPlatform> _platformMap = {
     'linux': CustomPlatform.linux,
@@ -23,15 +34,4 @@ class AppPlatform {
 
   static bool get isMobile =>
       platform == CustomPlatform.ios || platform == CustomPlatform.android;
-}
-
-enum CustomPlatform {
-  linux,
-  macos,
-  windows,
-  ios,
-  android,
-  fuchsia,
-  web,
-  undefined,
 }

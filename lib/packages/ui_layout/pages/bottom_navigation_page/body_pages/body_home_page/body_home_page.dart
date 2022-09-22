@@ -67,9 +67,9 @@ class _BodyHomePageState extends State<BodyHomePage> {
                 ),
               ),
 
-              //getBuilder чтобы обновлять данные по мере их получения
+              // //getBuilder чтобы обновлять данные по мере их получения
               GetBuilder<ImplementAppStateGetXController>(
-                builder: (_) => const HorizontalListSportsWorkout(),
+                builder: (_) =>  HorizontalListSportsWorkout(),
               ),
               const SizedBox(
                 height: 30,

@@ -35,8 +35,7 @@ class AdminHorizontalListSportsWorkout extends StatelessWidget {
                               context: context,
                             ),
                             child: AdminWorkoutCard(
-                              indexInDataSportsWorkoutListWhenIAdmin: index,
-                            ),
+                                indexInDataSportsWorkoutListWhenIAdmin: index),
                           ),
                           if (index ==
                               _controller

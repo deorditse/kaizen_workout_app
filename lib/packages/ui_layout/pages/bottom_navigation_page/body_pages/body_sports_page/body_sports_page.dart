@@ -49,14 +49,7 @@ class _BodySportsPageState extends State<BodySportsPage> {
                     controllerApp.dataSportsWorkoutList[
                             controllerApp.indexWorkoutList.value] !=
                         null) {
-                  //отображение задачи на день из листа тренировок - нахождение индекса
-                  int? indexInDescriptionWorkoutListForWorkout =
-                      controllerApp.getDataIndexInDescriptionListForWorkout(
-                          controllerApp.indexWorkoutList.value);
-
                   return _bodyCalendarPage(
-                    indexInDescriptionListForWorkout:
-                        indexInDescriptionWorkoutListForWorkout,
                     indexInSportWorkoutList:
                         controllerApp.indexWorkoutList.value,
                     key: widget.key,
@@ -99,11 +92,16 @@ class _BodySportsPageState extends State<BodySportsPage> {
 
   SizedBox _taskOfTheDay({
     required context,
-    required indexInDescriptionListForWorkout,
     required int indexInSportWorkoutList,
   }) {
     SportsWorkoutModel? sportWorkout = ImplementAppStateGetXController
         .instance.dataSportsWorkoutList[indexInSportWorkoutList];
+
+    //отображение задачи на день из листа тренировок - нахождение индекса
+    int? indexInDescriptionWorkoutListForWorkout =
+        ImplementAppStateGetXController.instance
+            .getDataIndexInDescriptionListForWorkout(indexInSportWorkoutList);
+
     return SizedBox(
       height: 140,
       child: Padding(
@@ -147,12 +145,12 @@ class _BodySportsPageState extends State<BodySportsPage> {
                     ),
                     child: GestureDetector(
                       onTap: () {
-                        if (indexInDescriptionListForWorkout != null) {
+                        if (indexInDescriptionWorkoutListForWorkout != null) {
                           _defaultDialogWithDayProgram(
                             context,
                             sportWorkoutModelDescription:
                                 sportWorkout!.descriptionWorkoutList[
-                                    indexInDescriptionListForWorkout],
+                                    indexInDescriptionWorkoutListForWorkout],
                             firstWorkoutDay: sportWorkout.firstWorkoutDay,
                           );
                         }
@@ -183,9 +181,10 @@ class _BodySportsPageState extends State<BodySportsPage> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8),
                                 child: Text(
-                                  indexInDescriptionListForWorkout != null
+                                  indexInDescriptionWorkoutListForWorkout !=
+                                          null
                                       ? sportWorkout!.descriptionWorkoutList[
-                                          indexInDescriptionListForWorkout]!
+                                          indexInDescriptionWorkoutListForWorkout]!
                                       : 'нет данных',
                                   style: TextStyle(
                                     color: Theme.of(context).primaryColor,
@@ -243,7 +242,6 @@ class _BodySportsPageState extends State<BodySportsPage> {
   }
 
   Widget _bodyCalendarPage({
-    required int? indexInDescriptionListForWorkout,
     required int indexInSportWorkoutList,
     key,
   }) {
@@ -258,8 +256,6 @@ class _BodySportsPageState extends State<BodySportsPage> {
           children: [
             _taskOfTheDay(
               context: context,
-              indexInDescriptionListForWorkout:
-                  indexInDescriptionListForWorkout,
               indexInSportWorkoutList: indexInSportWorkoutList,
             ),
             SizedBox(
