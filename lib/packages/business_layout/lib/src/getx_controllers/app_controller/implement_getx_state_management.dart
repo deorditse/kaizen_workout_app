@@ -79,8 +79,10 @@ class ImplementAppStateGetXController extends GetxController {
   }
 
   //достаю индекс по сегодняшнему дню из листа тренирок
-  int? getDataIndexInDescriptionListForWorkout(int indexWorkoutList) {
+  int? getDataIndexInDescriptionListForWorkout(
+      {required int indexWorkoutList}) {
     try {
+      //первый день тренировок должен быть точно, но на всякий случай проверю на null
       final firstWorkoutDay =
           dataSportsWorkoutList[indexWorkoutList]?.firstWorkoutDay;
 
@@ -88,10 +90,16 @@ class ImplementAppStateGetXController extends GetxController {
         //проверяю есть ли данные по такому индексу в листе с описанием тренировок и если есть вывожу его
         final int indexDescription =
             DateTime.now().difference(firstWorkoutDay).inDays;
-        if (dataSportsWorkoutList[indexWorkoutList]
-                ?.descriptionWorkoutList[indexDescription] !=
-            null) {
-          //проверяю есть задача тренировки на этот день в базе
+
+        final SportsWorkoutModel? sportsWorkoutModel =
+            dataSportsWorkoutList[indexWorkoutList];
+
+        //проверяю есть ли  задача тренировки на этот день в листе тренировок
+        if (sportsWorkoutModel != null &&
+            indexDescription <=
+                sportsWorkoutModel.descriptionWorkoutList.length &&
+            sportsWorkoutModel.descriptionWorkoutList[indexDescription] !=
+                null) {
           return indexDescription;
         }
       }

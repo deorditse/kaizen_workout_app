@@ -22,7 +22,8 @@ class HorizontalListSportsWorkout extends StatelessWidget {
                   itemBuilder: (context, index) {
                     //проверяю есть ли данные по такому индексу в листе с описанием тренировок и если есть вывожу его
                     int? indexInDescriptionListForWorkout = controller
-                        .getDataIndexInDescriptionListForWorkout(index);
+                        .getDataIndexInDescriptionListForWorkout(
+                        indexWorkoutList: index);
 
                     return Row(
                       children: [

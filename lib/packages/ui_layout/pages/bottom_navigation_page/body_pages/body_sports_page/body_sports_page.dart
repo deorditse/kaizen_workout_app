@@ -100,7 +100,8 @@ class _BodySportsPageState extends State<BodySportsPage> {
     //отображение задачи на день из листа тренировок - нахождение индекса
     int? indexInDescriptionWorkoutListForWorkout =
         ImplementAppStateGetXController.instance
-            .getDataIndexInDescriptionListForWorkout(indexInSportWorkoutList);
+            .getDataIndexInDescriptionListForWorkout(
+                indexWorkoutList: indexInSportWorkoutList);
 
     return SizedBox(
       height: 140,
