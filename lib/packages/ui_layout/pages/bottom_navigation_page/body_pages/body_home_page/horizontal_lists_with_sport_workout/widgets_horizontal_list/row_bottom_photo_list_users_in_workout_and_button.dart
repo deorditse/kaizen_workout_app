@@ -41,8 +41,9 @@ rowWithListUsersAndButton({
               ),
               _photoListUsersInWorkout(
                 constrains: constrains,
-                usersInWorkout: usersInWorkout,
                 context: context,
+                index: index,
+                usersInWorkout: usersInWorkout,
               ),
               // Icon(Icons.arrow_forward_ios),
             ],
@@ -77,8 +78,9 @@ rowWithListUsersAndButton({
 
 _photoListUsersInWorkout({
   required constrains,
-  required usersInWorkout,
-  required context,
+  required int index,
+  required BuildContext context,
+  required Set<NameAndPhotoUser>? usersInWorkout,
 }) {
   return SizedBox(
     height: constrains.maxHeight / 7,
@@ -92,8 +94,9 @@ _photoListUsersInWorkout({
                   padding: const EdgeInsets.only(right: 4.0),
                   child: CircleAvatar(
                     radius: constrains.maxHeight / 12,
-                    backgroundImage: const NetworkImage(
-                      'https://picsum.photos/1200/501',
+                    backgroundImage: AssetImage(
+                      usersInWorkout.elementAt(index).photoPath ??
+                          'assets/images/anonim.png',
                     ),
                   ),
                 ),

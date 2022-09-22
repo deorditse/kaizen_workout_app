@@ -27,7 +27,6 @@ class ImplementAppStateGetXController extends GetxController {
     //сначала получаю юзера из базы данных по ID
     getMyUser(idUser: 'test id ___ test').whenComplete(() {
       //получаю листы тренировок где участвует пользователь и где он админ
-      print('пользователь получен');
       getDataSportWorkout();
       // getDataSportWorkoutWhenIAdmin();
     });
@@ -40,6 +39,7 @@ class ImplementAppStateGetXController extends GetxController {
   Future getMyUser({required String idUser}) async {
     //получаю данные пользователя
     myUser = await _servicesDataLayout.getDataUser(idUser: idUser);
+    print('пользователь получен getMyUser ${myUser?.name}');
     update();
   }
 

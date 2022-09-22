@@ -73,14 +73,15 @@ popupWithUsersInWorkout({
                       ),
                       ListTile(
                         style: ListTileStyle.drawer,
-                        leading: const CircleAvatar(
-                          backgroundImage: NetworkImage(
-                            'https://picsum.photos/1200/501',
+                        leading: CircleAvatar(
+                          backgroundImage: AssetImage(
+                            sportWorkout!.adminWorkout.photoPath ??
+                                'assets/images/anonim.png',
                             // fit: BoxFit.cover,
                           ),
                         ),
                         title: Text(
-                            '${sportWorkout!.adminWorkout.name} ${sportWorkout.adminWorkout.family ?? ''}'),
+                            '${sportWorkout.adminWorkout.name} ${sportWorkout.adminWorkout.family ?? ''}'),
                         trailing: Icon(Icons.arrow_forward_ios),
                         onTap: () {
                           print('hello');
@@ -101,9 +102,10 @@ popupWithUsersInWorkout({
                             ? ListTile(
                                 hoverColor: Colors.yellow,
                                 focusColor: Colors.red,
-                                leading: const CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                    'https://picsum.photos/1200/501',
+                                leading: CircleAvatar(
+                                  backgroundImage: AssetImage(
+                                    user.photoPath ??
+                                        'assets/images/anonim.png',
                                     // fit: BoxFit.cover,
                                   ),
                                 ),

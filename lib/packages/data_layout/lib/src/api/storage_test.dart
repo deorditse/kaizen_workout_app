@@ -1,19 +1,17 @@
-import 'dart:math';
-
 import 'package:model/model.dart';
 
 class DataListRepository {
   Future<User> userData({required String idUser}) async {
     //имитация задержки получения данных из базы
-    return await Future.delayed(Duration(seconds: 2)).then(
+    return await Future.delayed(Duration(seconds: 1)).then(
       (_) => const User(
         idUser: 'test id ___ test',
-        name: 'Test name ',
-        email: 'email',
-        photoPath: 'photoPath',
-        age: 123,
-        family: 'family',
-        numberPhone: 'numberPhone',
+        name: 'Дмитрий',
+        email: 'deorditse.d@yandex.ru',
+        photoPath: 'assets/images/photo_test_user.png',
+        age: 25,
+        family: 'Деордице',
+        numberPhone: '89252776324',
         listWorkoutKeys: {
           '4000',
           '4001',
@@ -52,28 +50,28 @@ class DataListRepository {
           nameWorkout: 'Отжимания каждый день $index',
           adminWorkout: NameAndPhotoUser(
             idUser: 'test id admin',
-            name: 'adminWorkout  $index',
-            photoPath: 'photoPath $index',
-            family: 'family $index',
+            name: 'Василий',
+            photoPath: '',
+            family: 'Олейников $index',
           ),
           usersInWorkout: <NameAndPhotoUser>{
             NameAndPhotoUser(
               idUser: 'test/gNe2AwjMJMVJ8OLvFu1T',
-              name: 'user 1 name ${index + index * 3}',
-              photoPath: 'photoPath ${index * index}',
-              family: 'family ${index + index * 3}',
+              name: 'Артемка}',
+              photoPath: 'assets/images/user_test_1.jpeg',
+              family: 'Бесфамильный ${index}',
             ),
             NameAndPhotoUser(
               idUser: 'test/mEFChkM5ME0WhJljfurm',
-              name: 'user 2 name ${index * index}',
-              photoPath: 'photoPath ${index + index}',
-              family: 'family ${index + index}',
+              name: 'Никитич }',
+              photoPath: 'assets/images/user_test_2.jpeg',
+              family: 'Азаров }',
             ),
             NameAndPhotoUser(
               idUser: 'test id admin',
-              name: 'adminWorkout  $index',
-              photoPath: 'photoPath $index',
-              family: 'family $index',
+              name: 'Игнат ',
+              photoPath: 'assets/images/user_test_3.jpeg',
+              family: 'Аськин $index',
             ),
           },
           descriptionWorkoutList: [
@@ -87,9 +85,9 @@ class DataListRepository {
           topUsers: <NameAndPhotoUser>{
             NameAndPhotoUser(
               idUser: 'test id',
-              name: 'name $index',
-              photoPath: 'photoPath $index',
-              family: 'family $index',
+              name: 'Иван',
+              photoPath: 'assets/images/user_test_4.jpeg',
+              family: 'Топюзерович $index',
             ),
           },
         );
